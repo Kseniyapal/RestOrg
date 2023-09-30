@@ -27,13 +27,14 @@ class MenuItemDrink(models.Model):
         'Цена'
     )
 
+
 class Order(models.Model):
     number = models.IntegerField(
         'Номер столика'
     )
 
     comment = models.CharField(
-        'Комментарий', 
+        'Комментарий',
         max_length=255,
         blank=True
     )
@@ -42,4 +43,6 @@ class Order(models.Model):
 
     menu_drink = models.ManyToManyField(MenuItemDrink)
 
-    waiter = models.ForeignKey(User, on_delete=models.PROTECT, related_name='waiter')
+    waiter = models.ForeignKey(User,
+                               on_delete=models.PROTECT,
+                               related_name='waiter')

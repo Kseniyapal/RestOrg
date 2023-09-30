@@ -6,6 +6,8 @@ from .models import User
 
 @register(User)
 class MyUserAdmin(UserAdmin):
-    list_display = ('pk', 'email', 'first_name', 'last_name',
-                    'password')
-    
+    list_display = ('pk',
+                    'email',
+                    'first_name',
+                    'last_name',
+                    'role')

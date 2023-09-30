@@ -1,6 +1,16 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
+WAITER = 'W'
+COOK = 'C'
+BARTENDER = 'B'
+
+ROLE_CHOICES = (
+    (WAITER, 'Waiter'),
+    (COOK, 'Cook'),
+    (BARTENDER, 'Bartender'),
+    ) 
+
 
 class User(AbstractUser):
 
@@ -27,27 +37,13 @@ class User(AbstractUser):
         max_length=150,
         verbose_name='Отчество'
     )
-    
-    WAITER = 'W'
-    COOK = 'C'
-    BARTENDER = 'B'
-
-    ROLE_CHOICES = (
-    (WAITER, 'Waiter'),
-    (COOK, 'Cook'),
-    (BARTENDER, 'Bartender'),
-    ) 
-
-    role = models.CharField(max_length=1, choices=ROLE_CHOICES, default=BARTENDER)
+    role = models.CharField(max_length=1, choices=ROLE_CHOICES)
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username', 'first_name', 'last_name']
+    REQUIRED_FIELDS = ['username', 'role', 'patronymic']
 
     class Meta:
 
         verbose_name = 'Пользователь'
         verbose_name_plural = 'Пользователи'
         ordering = ('id',)
-
-    def str(self):
-        return self.email
