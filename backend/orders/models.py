@@ -2,20 +2,30 @@ from django.db import models
 from users.models import User
 
 
-class MenuItem(models.Model):
+class MenuItemDish(models.Model):
     name = models.CharField(
-        'Наименование',
+        'Наименование блюда',
         max_length=255
     )
+    weight = models.IntegerField(
+        'Вес в граммах')
 
     price = models.IntegerField(
         'Цена'
     )
 
 
-class Menu(models.Model):
-    menu_item = models.ForeignKey(MenuItem, on_delete = models.CASCADE)
+class MenuItemDrink(models.Model):
+    name = models.CharField(
+        'Наименование напитка',
+        max_length=255
+    )
+    volume = models.IntegerField(
+        'Объем в мл')
 
+    price = models.IntegerField(
+        'Цена'
+    )
 
 class Order(models.Model):
     number = models.IntegerField(
@@ -28,8 +38,8 @@ class Order(models.Model):
         blank=True
     )
 
-    menu_dishes = models.ForeignKey(Menu, on_delete = models.CASCADE, related_name='menu_dishes')
+    menu_dishes = models.ManyToManyField(MenuItemDish,)
 
-    menu_drink = models.ForeignKey(Menu, on_delete = models.CASCADE, related_name='menu_drink')
+    menu_drink = models.ManyToManyField(MenuItemDrink)
 
     waiter = models.ForeignKey(User, on_delete=models.PROTECT, related_name='waiter')
