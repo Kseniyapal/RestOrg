@@ -1,6 +1,7 @@
 from django_filters.rest_framework import DjangoFilterBackend
 from orders.models import MenuItemDish, MenuItemDrink, Order
 from rest_framework.viewsets import ModelViewSet
+from rest_framework.permissions import IsAuthenticated, AllowAny
 
 from .serializers import (MenuItemDishSerializer, MenuItemDrinkSerializer,
                           OrderSerializer,  UserGetSerializer)
@@ -14,6 +15,13 @@ class OrderViewSet(ModelViewSet):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
     filter_backends = (DjangoFilterBackend,)
+
+    def get_permissions(self):
+        if self.action == 'list':
+            permission_classes = [IsAuthenticated, ]
+        else:
+            permission_classes = [AllowAny, ]
+        return [permission() for permission in permission_classes]
 
 
 class MenuItemDrinkViewSet(ModelViewSet):
