@@ -7,6 +7,7 @@ from .serializers import (MenuItemDishSerializer, MenuItemDrinkSerializer,
                           OrderSerializer,  UserGetSerializer)
 from djoser.views import UserViewSet
 from users.models import User
+from .filters import OrderFilter
 
 
 class OrderViewSet(ModelViewSet):
@@ -15,6 +16,7 @@ class OrderViewSet(ModelViewSet):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
     filter_backends = (DjangoFilterBackend,)
+    filterset_class = OrderFilter
 
     def get_permissions(self):
         if self.action == 'list':

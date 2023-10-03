@@ -58,9 +58,9 @@ class Order(models.Model):
         blank=True
     )
 
-    menu_dishes = models.ManyToManyField(MenuItemDish,)
+    menu_dishes = models.ManyToManyField(MenuItemDish, blank=True)
 
-    menu_drink = models.ManyToManyField(MenuItemDrink)
+    menu_drinks = models.ManyToManyField(MenuItemDrink, blank=True)
 
     waiter = models.ForeignKey(User,
                                on_delete=models.PROTECT,
