@@ -66,10 +66,17 @@ class Order(models.Model):
                                on_delete=models.PROTECT,
                                related_name='waiter',
                                blank=True,
-                               null='')
+                               null=True)
     status = models.CharField(
         'Статус', max_length=3, choices=STATUS_CHOICES, default='NA'
     )
+
+    def get_drinks(self):
+        return self.menu_drinks
+
+    def get_dishes(self):
+        return self.menu_dishes
+    
 
     """def clean(self):
         if (((self.status == 'DDS' or self.status == 'DDR')
