@@ -68,18 +68,46 @@ class OrderViewSet(ModelViewSet):
             serializer = self.get_serializer(self.filter_queryset(self.queryset), many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
     
+    def perform_create(self, serializer):
+        serializer.save(waiter=self.request.user.waiter)
+
+
     def create(self, request, *args, **kwargs):
         menu_dishes = request.data.get('menu_dishes', [])
         menu_drinks = request.data.get('menu_drinks', [])
-
+       
         if not menu_dishes and not menu_drinks:
             data = {
                 'error' : "Заказ должен содержать хотя бы одно блюдо или напиток.",
                 'form' : OrderSerializer(request.data).data
             }
             return Response(data, status=status.HTTP_400_BAD_REQUEST)
+        waiter_email = request.data.get('waiter', {}).get('email')
+        print(waiter_email)
+        waiter = None
+        if waiter_email:
+            try:
+                waiter = User.objects.get(email=waiter_email)
+                print(type(waiter))
+            except User.DoesNotExist:
+                pass
+        print(waiter)
+        if not waiter:
+            data = {
+                'error': "Указанный официант не существует.",
+                'form': OrderSerializer(request.data).data
+            }
+            return Response(data, status=status.HTTP_400_BAD_REQUEST)
+        print(request.data['waiter'])
+        #request.data['waiter'] = waiter.id
+        
+        #print(waiter.id)
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+
         data = {
-            'form' : OrderSerializer(request.data).data
+            'form': serializer.data
         }
         return Response(data, status=status.HTTP_201_CREATED)
 
