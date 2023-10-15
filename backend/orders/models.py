@@ -58,14 +58,12 @@ class Order(models.Model):
         blank=True
     )
 
-    menu_dishes = models.ManyToManyField(MenuItemDish, blank=True)
+    menu_dishes = models.ManyToManyField(MenuItemDish)
 
-    menu_drinks = models.ManyToManyField(MenuItemDrink, blank=True)
+    menu_drinks = models.ManyToManyField(MenuItemDrink)
 
-    waiter = models.ForeignKey(User,
-                               on_delete=models.PROTECT,
+    waiter = models.ForeignKey(User, on_delete=models.PROTECT,
                                related_name='waiter',
-                               blank=True,
                                null=True)
     status = models.CharField(
         'Статус', max_length=3, choices=STATUS_CHOICES, default='NA'
@@ -77,14 +75,5 @@ class Order(models.Model):
     def get_dishes(self):
         return self.menu_dishes
     
-
-    """def clean(self):
-        if (((self.status == 'DDS' or self.status == 'DDR')
-            and self.pk
-            and self.__class__.objects.filter(pk=self.pk, status='NA').exists()
-            ) or ((self.status == 'NA')
-            and self.pk
-            and (self.__class__.objects.filter(pk=self.pk, status='DDS').exists() or
-                 self.__class__.objects.filter(pk=self.pk, status='DDR').exists()))
-            ):
-            raise ValidationError("Cannot change status")"""
+    class Meta:
+        ordering = ('id',)

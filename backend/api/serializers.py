@@ -1,6 +1,6 @@
 from djoser.serializers import UserCreateSerializer
 from orders.models import MenuItemDish, MenuItemDrink, Order
-from rest_framework.serializers import ModelSerializer, IntegerField, ListSerializer, PrimaryKeyRelatedField, ListField
+from rest_framework.serializers import ModelSerializer, PrimaryKeyRelatedField
 from users.models import User
 
 
@@ -9,7 +9,7 @@ class MenuItemDrinkSerializer(ModelSerializer):
 
     class Meta:
         model = MenuItemDrink
-        fields = '__all__'
+        fields = ('id', 'name')
 
 
 class MenuItemDishSerializer(ModelSerializer):
@@ -17,23 +17,24 @@ class MenuItemDishSerializer(ModelSerializer):
 
     class Meta:
         model = MenuItemDish
-        fields = '__all__'
+        fields = ('id', 'name', 'image')
+
 
 class UserGetSerializer(UserCreateSerializer):
     """Сериализатор получения пользователя"""
     class Meta:
-        fields = ('id', 'email', 'username', 'first_name',
-                  'last_name', 'role')
         model = User
+        fields = '__all__'
+     
 
 class OrderSerializer(ModelSerializer):
     """Сериализер для """
-    #waiter = IntegerField()
-    #menu_dishes = ListField(child = IntegerField())
-    #menu_drinks = ListField(child = IntegerField())
-    waiter = UserGetSerializer(required=False)
-    menu_dishes = MenuItemDishSerializer(many=True)
-    menu_drinks = MenuItemDrinkSerializer(many=True)
+    waiter = PrimaryKeyRelatedField(queryset=User.objects.all())
+    menu_dishes = PrimaryKeyRelatedField(many=True,
+                                         queryset=MenuItemDish.objects.all())
+    menu_drinks = PrimaryKeyRelatedField(many=True,
+                                         queryset=MenuItemDrink.objects.all())
+
     class Meta:
         model = Order
         fields = '__all__'

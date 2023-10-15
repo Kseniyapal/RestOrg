@@ -109,7 +109,7 @@ REST_FRAMEWORK = {
 DJOSER = {
     'LOGIN_FIELD': 'email',
     'PERMISSIONS': {
-        'user_create': ['rest_framework.permissions.IsAdminUser'],
+        'user_create': ['rest_framework.permissions.IsAdminUser', ],
     },
     'HIDE_USERS': False,
     'SERIALIZERS': {
