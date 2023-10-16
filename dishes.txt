@@ -1,0 +1,246 @@
+[{
+  "id": 1,
+  "name":"Салат винегрет",
+  "image" : "http://127.0.0.1:8000/media/images/salat-vinegret.jpg",
+  "weight" : "180г",
+  "price" : "79руб."
+},
+{
+  "id": 2,
+  "name":"Салат из свежих овощей",
+  "image" : "http://127.0.0.1:8000/media/images/821f70dc9e49e8f0c0c92f7dbef1f12b.jpeg",
+  "weight" : "200г",
+  "price" : "149руб."
+},
+{
+  "id": 3,
+  "name":"Салат с водорослями чука",
+  "image" : "http://127.0.0.1:8000/media/images/vp5a5f38no6sbepmfvbaxt9flzofhnf0.jpg",
+  "weight" : "150г",
+  "price" : "99руб."
+},
+{
+  "id": 4,
+  "name":"Салат с водорослями чука",
+  "image" : "http://127.0.0.1:8000/media/images/ochenj-poleznij-i-sitnij-salat-s-avokado-i-cherri.jpg",
+  "weight" : "185г",
+  "price" : "179руб."
+},
+{
+  "id": 5,
+  "name":"Салат с водорослями чука",
+  "image" : "http://127.0.0.1:8000/media/images/b7beaa67.jpg",
+  "weight" : "170г",
+  "price" : "119руб."
+},
+{
+  "id": 6,
+  "name":"Суп овощной минестроне",
+  "image" : "http://127.0.0.1:8000/media/images/minestr.jpg",
+  "weight" : "250г",
+  "price" : "69руб."
+},
+{
+  "id": 7,
+  "name":"Суп лапша грибная",
+  "image" : "http://127.0.0.1:8000/media/images/9d1a0c8c3bf42998b41f4553b5e8ebbd.jpeg",
+  "weight" : "250г",
+  "price" : "59руб."
+},
+{
+  "id": 8,
+  "name":"Суп крем из цветной капусты с брокколи",
+  "image" : "http://127.0.0.1:8000/media/images/41dd3475948055a18d40f146dae9f0e4.jpeg",
+  "weight" : "250г",
+  "price" : "89руб."
+},  
+{
+  "id": 9,
+  "name":"Штрудель с вишней",
+  "image" : "http://127.0.0.1:8000/media/images/vishnevyj-shtrudel.png",
+  "weight" : "120г",
+  "price" : "139руб."
+},
+{
+  "id": 10,
+  "name":"Штрудель с яблоками",
+  "image" : "http://127.0.0.1:8000/media/images/cbbece17ba52e33bd2f7d44278a42ae2.jpeg",
+  "weight" : "130г",
+  "price" : "139руб."
+},
+{
+  "id": 11,
+  "name":"Фруктовый пирог с медом",
+  "image" : "http://127.0.0.1:8000/media/images/KAN_1620-3.jpg",
+  "weight" : "150г",
+  "price" : "139руб."
+},
+{
+  "id": 12,
+  "name":"Тирамису",
+  "image" : "http://127.0.0.1:8000/media/images/1679375344_3-21.jpg",
+  "weight" : "175г",
+  "price" : "250руб."
+},
+{
+  "id": 13,
+  "name":"Картофель жареный с грибами",
+  "image" : "http://127.0.0.1:8000/media/images/thumb.jpg",
+  "weight" : "200г",
+  "price" : "99руб."
+},
+{
+  "id": 14,
+  "name":"Драники картофельные",
+  "image" : "http://127.0.0.1:8000/media/images/8f651705a8597e890ab6ea41f41a39a3.jpeg",
+  "weight" : "150г",
+  "price" : "101руб."
+},
+{
+  "id": 15,
+  "name":"Вареники с вишней",
+  "image" : "http://127.0.0.1:8000/media/images/scale_1200.jpg",
+  "weight" : "120г",
+  "price" : "119руб."
+},
+{
+  "id": 16,
+  "name":"Куриный бульон",
+  "image" : "http://127.0.0.1:8000/media/images/85929f1f2fef0ad8e636d3371317eb62.jpeg",
+  "weight" : "200г",
+  "price" : "169руб."
+},
+{
+  "id": 17,
+  "name":"Блины с яблоками и корицей",
+  "image" : "http://127.0.0.1:8000/media/images/imgpreview.jpg",
+  "weight" : "250г",
+  "price" : "129руб."
+},
+{
+  "id": 18,
+  "name":"Сырники со сгущенным молоком",
+  "image" : "http://127.0.0.1:8000/media/images/1679804354_food-pibig-info-p-sirniki-so-sgushchenkoi-oboi-1.jpg",
+  "weight" : "180г",
+  "price" : "139руб."
+},
+{
+  "id": 19,
+  "name":"Омлет с сыром и ветчиной",
+  "image" : "http://127.0.0.1:8000/media/images/4-8.jpg",
+  "weight" : "180г",
+  "price" : "141руб."
+},
+{
+  "id": 20,
+  "name":"Глазунья",
+  "image" : "http://127.0.0.1:8000/media/images/1644909112_9-fikiwiki-com-p-kartinki-yaichnitsa-glazunya-10.jpg",
+  "weight" : "180г",
+  "price" : "129руб."
+},
+{
+  "id": 21,
+  "name":"Каша овсяная с курагой",
+  "image" : "http://127.0.0.1:8000/media/images/scale_1200 (1).jpg",
+  "weight" : "290г",
+  "price" : "159руб."
+},
+{
+  "id": 22,
+  "name":"Салат оливье с курицей",
+  "image" : "http://127.0.0.1:8000/media/images/ac7a55ca96e26bb44a4dc4793ca21e77.jpeg",
+  "weight" : "140г",
+  "price" : "159руб."
+},
+{
+  "id": 23,
+  "name":"Соус кетчуп",
+  "image" : "http://127.0.0.1:8000/media/images/dhd.jpg",
+  "weight" : "40г",
+  "price" : "30руб."
+},
+{
+  "id": 24,
+  "name":"Майонез",
+  "image" : "http://127.0.0.1:8000/media/images/294ae7c146138c40bdcbd9b95203b018.jpeg",
+  "weight" : "40г",
+  "price" : "30руб."
+},
+{
+  "id": 25,
+  "name":"Хрен",
+  "image" : "http://127.0.0.1:8000/media/images/e41c840c-5b0d-4ea4-a464-c331088281d1.jpg",
+  "weight" : "40г",
+  "price" : "30руб."
+},
+{
+  "id": 26,
+  "name":"Каша рисовая на молоке",
+  "image" : "http://127.0.0.1:8000/media/images/1-16.jpg",
+  "weight" : "210г",
+  "price" : "179руб."
+},
+{
+  "id": 27,
+  "name":"Борщ со сметаной",
+  "image" : "http://127.0.0.1:8000/media/images/1576165302-969776-477527.jpeg",
+  "weight" : "250г",
+  "price" : "233руб."
+},
+{
+  "id": 28,
+  "name":"Солянка сборная",
+  "image" : "http://127.0.0.1:8000/media/images/1679462806_2-1.jpg",
+  "weight" : "250г",
+  "price" : "239руб."
+},
+{
+  "id": 29,
+  "name":"Суп с фрикадельками",
+  "image" : "http://127.0.0.1:8000/media/images/7d86fda156b79eb7892ad08d02ba8f30.jpg",
+  "weight" : "250г",
+  "price" : "243руб."
+},
+{
+  "id": 30,
+  "name":"Пельмени домашние",
+  "image" : "http://127.0.0.1:8000/media/images/f_6254586527ec6.jpg",
+  "weight" : "200г",
+  "price" : "233руб."
+},
+{
+  "id": 31,
+  "name":"Каша пшенная с тыквой",
+  "image" : "http://127.0.0.1:8000/media/images/pshennaya-kasha-s-tykvoj-14-retseptov-2.jpeg",
+  "weight" : "250г",
+  "price" : "273руб."
+},
+{
+  "id": 32,
+  "name":"Горчица",
+  "image" : "http://127.0.0.1:8000/media/images/gorchica-hren_d0b042d2dcb0378_800x600.jpg",
+  "weight" : "40г",
+  "price" : "30руб."
+},
+{
+  "id": 33,
+  "name":"Оливковое масло",
+  "image" : "http://127.0.0.1:8000/media/images/oliva-maslo.jpg",
+  "weight" : "40г",
+  "price" : "30руб."
+},
+{
+  "id": 34,
+  "name":"Картофельное пюре",
+  "image" : "http://127.0.0.1:8000/media/images/9adeca29-c8bf-91fb-878c-1d68f9a7a2af.png",
+  "weight" : "140г",
+  "price" : "137руб."
+},
+{
+  "id": 35,
+  "name":"Летний салат",
+  "image" : "http://127.0.0.1:8000/media/images/Salat-letnij.jpg",
+  "weight" : "135г",
+  "price" : "107руб."
+}
+]

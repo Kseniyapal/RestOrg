@@ -1,0 +1,122 @@
+[
+  {
+    "username": "IvanovVanya",
+    "first_name": "Ivan",
+    "last_name": "Ivanov",
+    "role": "B",
+    "email": "ivanov@ivanov.ru",
+    "password": "wguyhgqdh"
+  },
+  {
+    "username": "PetrovPetr",
+    "first_name": "Petr",
+    "last_name": "Petrov",
+    "role": "B",
+    "email": "petrov@petrov.ru",
+    "password": "bvshdbvjsbhv"
+  },
+  {
+    "username": "KlukinaArina",
+    "first_name": "Arina",
+    "last_name": "Klukina",
+    "role": "W",
+    "email": "klukina@klukina.ru",
+    "password": "fdgvbcjschevdv"
+  },
+  {
+    "username": "GrigorievAnton",
+    "first_name": "Anton",
+    "last_name": "Griroriev",
+    "role": "W",
+    "email": "grigoriev@grigoriev.ru",
+    "password": "fewyfiqegfhhohfv"
+  },
+  {
+    "username": "RomashevAleksandr",
+    "first_name": "Aleksandr",
+    "last_name": "Romashev",
+    "role": "W",
+    "email": "romashev@romashev.ru",
+    "password": "gchdgckgackjhgk"
+  },
+  {
+    "username": "MalkinaKatya",
+    "first_name": "Ekaterina",
+    "last_name": "Malkina",
+    "role": "W",
+    "email": "malkina@malkina.ru",
+    "password": "gufyewgfiweghi"
+  },
+  {
+    "username": "KireevaMaria",
+    "first_name": "Kireeva",
+    "last_name": "Maria",
+    "role": "W",
+    "email": "kireeva@kireeva.ru",
+    "password": "vhcfjvfqefjh"
+  },
+  {
+    "username": "TitovArtem",
+    "first_name": "Artem",
+    "last_name": "Titov",
+    "role": "C",
+    "email": "titov@titov.ru",
+    "password": "qodjqphfugdh"
+  },
+  {
+    "username": "RimovaSonya",
+    "first_name":"Sofia",
+    "last_name": "Rimova",
+    "role": "C",
+    "email": "rimova@rimova.ru",
+    "password": "qpekhvqehfugyr"
+  },
+  {
+    "username": "KarmanovEgor",
+    "first_name": "Egor",
+    "last_name": "Karmanov",
+    "role": "C",
+    "email": "karmanov@karmanov.ru",
+    "password": "fgqigfufhuigfiuwehf"
+  },
+  {
+    "username": "NemovaYulya",
+    "first_name": "Yulia",
+    "last_name": "Nemova",
+    "role": "C",
+    "email": "nemova@nemova.ru",
+    "password": "fighuehfuwhgkwl"
+  },
+  {
+    "username": "LipinaAlisa",
+    "first_name": "Alisa",
+    "last_name": "Lipina",
+    "role": "C",
+    "email": "lipina@lipina.ru",
+    "password": "gfhegfkjhfuh"
+  },
+  {
+    "username": "MalishevSeergey",
+    "first_name": "Sergey",
+    "last_name": "Malishev",
+    "role": "C",
+    "email": "malishev@malishev.ru",
+    "password": "ohiugyftggjm"
+  },
+  {
+    "username": "AntonovaMarina",
+    "first_name": "Marina",
+    "last_name": "Antonova",
+    "role": "C",
+    "email": "antonova@antonova.ru",
+    "password": "tyuwvhwjkgdbq"
+  },
+  {
+    "username": "PortovVasilii",
+    "first_name": "Vasilii",
+    "last_name": "Portov",
+    "role": "C",
+    "email": "portov@portov.ru",
+    "password": "polihgfgthjkgbh"
+  }
+]

@@ -1,0 +1,92 @@
+[{
+  "id": 1,
+  "name":"Лимонад натуральный с мятой",
+  "image" : "http://127.0.0.1:8000/media/images/Limonad-s-myatoj-500x350-1200x800.jpg",
+  "weight" : "250мл",
+  "price" : "59руб."
+},
+{
+  "id": 2,
+  "name":"Мохито",
+  "image" : "http://127.0.0.1:8000/media/images/Mohito-b-a.jpgg",
+  "weight" : "280мл",
+  "price" : "99руб."
+},
+{
+  "id": 3,
+  "name":"Коко Джамбо",
+  "image" : "http://127.0.0.1:8000/media/images/coco-jambo---kak-delayut-karibskiy-napitok-1.jpg",
+  "weight" : "250мл",
+  "price" : "119руб."
+},
+{
+  "id": 4,
+  "name":"Клубнично-банановый смузи",
+  "image" : "http://127.0.0.1:8000/media/images/e82ecf92889962d4afa870b85a547c21.jpeg",
+  "weight" : "250мл",
+  "price" : "99руб."
+},
+{
+  "id": 5,
+  "name":"Ягодный компот натуральный",
+  "image" : "http://127.0.0.1:8000/media/images/7-14.jpg",
+  "weight" : "250мл",
+  "price" : "129руб."
+},
+{
+  "id": 6,
+  "name":"Апельсиновый фреш",
+  "image" : "http://127.0.0.1:8000/media/images/apelsinovij_sok_1.jpg",
+  "weight" : "250мл",
+  "price" : "59руб."
+},
+{
+  "id": 7,
+  "name":"Кофе растворимый",
+  "image" : "http://127.0.0.1:8000/media/images/kofe.jpg",
+  "weight" : "200мл",
+  "price" : "69руб."
+},
+{
+  "id": 8,
+  "name":"Кофе натуральный эспрессо",
+  "image" : "http://127.0.0.1:8000/media/images/Epic-Expresso-5-of-56.jpg",
+  "weight" : "150мл",
+  "price" : "79руб."
+},
+{
+  "id": 9,
+  "name":"Вода питьевая",
+  "image" : "http://127.0.0.1:8000/media/images/ochistka-vody-ozonom-6-1280x851.jpg",
+  "weight" : "150мл",
+  "price" : "49руб."
+},
+{
+  "id": 10,
+  "name":"Чай с лимоном",
+  "image" : "http://127.0.0.1:8000/media/images/1663783283_36-mykaleidoscope-ru-p-chai-s-limonom-yeda-pinterest-57.jpg",
+  "weight" : "200мл",
+  "price" : "67руб."
+},
+{
+  "id": 11,
+  "name":"Латте с халвой",
+  "image" : "http://127.0.0.1:8000/media/images/-__.jpg",
+  "weight" : "200мл",
+  "price" : "157руб."
+},
+{
+  "id": 12,
+  "name":"Морс клюквенный",
+  "image" : "http://127.0.0.1:8000/media/images/mors-klyukv.jpg",
+  "weight" : "200мл",
+  "price" : "47руб."
+},
+{
+  "id": 13,
+  "name":"Шоколадный амаретто",
+  "image" : "http://127.0.0.1:8000/media/images/b36c70ede29c250e56e44a4810eb85e7.jpg",
+  "weight" : "230мл",
+  "price" : "257руб."
+}
+]

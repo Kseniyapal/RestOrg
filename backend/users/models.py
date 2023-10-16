@@ -11,7 +11,7 @@ ROLE_CHOICES = (
     (COOK, 'Cook'),
     (BARTENDER, 'Bartender'),
     (ADMIN, 'Admin')
-    ) 
+    )
 
 
 class User(AbstractUser):
@@ -26,7 +26,6 @@ class User(AbstractUser):
         unique=True,
         db_index=True
     )
-    
     first_name = models.CharField(
         max_length=150,
         verbose_name='Имя'
