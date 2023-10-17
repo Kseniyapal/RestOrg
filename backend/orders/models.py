@@ -1,10 +1,12 @@
 from django.db import models
 from users.models import User
+from django.contrib.postgres.fields import ArrayField
 
 NOT_ACTIVE = 'NA'
 IN_PROCESS = 'IP'
 DONE_DISH = 'DDS'
 DONE_DRINK = 'DDR'
+DONE = 'DONE'
 
 STATUS_CHOICES = (
     (NOT_ACTIVE, 'Not Active'),
@@ -63,9 +65,12 @@ class Order(models.Model):
 
     waiter = models.ForeignKey(User, on_delete=models.PROTECT,
                                related_name='waiter',
-                               null=True)
+                               default = User.objects.get(pk = 1),
+                               null=True,
+                               blank=True,
+                               )
     status = models.CharField(
-        'Статус', max_length=3, choices=STATUS_CHOICES, default='NA'
+        'Статус', max_length=4, choices=STATUS_CHOICES, default='NA'
     )
 
     def get_drinks(self):

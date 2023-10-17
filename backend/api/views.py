@@ -7,7 +7,7 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 from users.models import User
-
+from rest_framework.exceptions import ValidationError
 from .filters import OrderFilter
 from .serializers import (MenuItemDishSerializer, MenuItemDrinkSerializer,
                           OrderSerializer, UserGetSerializer)
@@ -87,12 +87,34 @@ class OrderViewSet(ModelViewSet):
         menu_ds = self.request.data.get('menu_dishes', [])
         menu_dr = self.request.data.get('menu_drinks', [])
         comment_res = self.request.data.get('comment', '')
+        if (len(menu_dr) == 0 and len(menu_ds) == 0):
+            raise ValidationError("Нужно указать хотя бы одно блюдо или напиток в заказе")
         serializer.save(number=data['number'],
                         comment=comment_res,
                         waiter=data['waiter'], menu_drinks=menu_dr,
                         menu_dishes=menu_ds)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
+    def perform_update(self, serializer):
+        instance = serializer.instance
+
+        if instance.status == 'NA' and 'status' in serializer.validated_data and serializer.validated_data['status'] == 'DDR':
+            raise PermissionDenied("Нельзя изменить статус с 'NA' на 'DDR'")
+        elif instance.status == 'NA' and 'status' in serializer.validated_data and serializer.validated_data['status'] == 'DDS':
+            raise PermissionDenied("Нельзя изменить статус с 'NA' на 'DDS'")
+        elif instance.status == 'DDS' and 'status' in serializer.validated_data and serializer.validated_data['status'] == 'DDR':
+            serializer.validated_data['status'] = 'DONE'
+        elif instance.status == 'DDR' and 'status' in serializer.validated_data and serializer.validated_data['status'] == 'DDS':
+            serializer.validated_data['status'] = 'DONE'
+        elif instance.status == 'DDR' and 'status' in serializer.validated_data and serializer.validated_data['status'] == 'NA':
+            raise PermissionDenied("Нельзя изменить статус с 'DDR' на 'NA'")   
+        elif instance.status == 'DDS' and 'status' in serializer.validated_data and serializer.validated_data['status'] == 'NA':
+            raise PermissionDenied("Нельзя изменить статус с 'DDS' на 'NA'")
+        elif instance.status == 'DONE' and 'status' in serializer.validated_data and serializer.validated_data['status'] in ['NA', 'DDR','DDS','IN']:
+            raise PermissionDenied("Нельзя изменить статус с 'DONE' на 'NA','DDR','DDS','IN'")
+        
+
+        super().perform_update(serializer)
 
 class MenuItemDrinkViewSet(ModelViewSet):
     """Вьюсет для ингредиентов"""
