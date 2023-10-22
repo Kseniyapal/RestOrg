@@ -64,8 +64,9 @@ class Order(models.Model):
     menu_drinks = models.ManyToManyField(MenuItemDrink)
 
     waiter = models.ForeignKey(User, on_delete=models.PROTECT,
+                               limit_choices_to={'role':'W'},
                                related_name='waiter',
-                               default = User.objects.get(pk = 1),
+                               default = None,
                                null=True,
                                blank=True,
                                )

@@ -83,9 +83,12 @@ class OrderViewSet(ModelViewSet):
 
     def perform_create(self, serializer):
         data = serializer.validated_data
-        print(data)
         menu_ds = self.request.data.get('menu_dishes', [])
         menu_dr = self.request.data.get('menu_drinks', [])
+        order_waiter = self.request.data.get('waiter', )
+        list_users = User.objects.filter(role = 'W').values_list('id', flat=True)
+        if order_waiter!=None and order_waiter not in list_users:
+            raise ValidationError("Надо указать официанта исполнителем") 
         comment_res = self.request.data.get('comment', '')
         if (len(menu_dr) == 0 and len(menu_ds) == 0):
             raise ValidationError("Нужно указать хотя бы одно блюдо или напиток в заказе")
@@ -97,6 +100,10 @@ class OrderViewSet(ModelViewSet):
 
     def perform_update(self, serializer):
         instance = serializer.instance
+        order_waiter = self.request.data.get('waiter', )
+        list_users = User.objects.filter(role = 'W').values_list('id', flat=True)
+        if order_waiter==None and order_waiter not in list_users:
+            raise ValidationError("Надо указать официанта исполнителем") 
 
         if instance.status == 'NA' and 'status' in serializer.validated_data and serializer.validated_data['status'] == 'DDR':
             raise PermissionDenied("Нельзя изменить статус с 'NA' на 'DDR'")

@@ -1,4 +1,5 @@
-[
+{ "users" :
+  [
   {
     "username": "IvanovVanya",
     "first_name": "Ivan",
@@ -119,4 +120,4 @@
     "email": "portov@portov.ru",
     "password": "polihgfgthjkgbh"
   }
-]
+]}

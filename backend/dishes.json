@@ -1,4 +1,5 @@
-[{
+{"dishes" : [
+{
   "id": 1,
   "name":"Салат винегрет",
   "image" : "http://127.0.0.1:8000/media/images/salat-vinegret.jpg",
@@ -243,4 +244,4 @@
   "weight" : "135г",
   "price" : "107руб."
 }
-]
+]}

@@ -29,7 +29,7 @@ class UserGetSerializer(UserCreateSerializer):
 
 class OrderSerializer(ModelSerializer):
     """Сериализер для """
-    waiter = PrimaryKeyRelatedField(queryset=User.objects.all())
+    waiter = PrimaryKeyRelatedField(allow_null=True, required = False, queryset=User.objects.all())
     menu_dishes = PrimaryKeyRelatedField(many=True,
                                          queryset=MenuItemDish.objects.all())
     menu_drinks = PrimaryKeyRelatedField(many=True,
@@ -37,7 +37,7 @@ class OrderSerializer(ModelSerializer):
 
     class Meta:
         model = Order
-        fields = '__all__'
+        fields = ['id', 'number','waiter', 'menu_dishes', 'menu_drinks']
 
 
 
