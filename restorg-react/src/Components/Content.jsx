@@ -5,9 +5,9 @@ import Container from "./Container";
 const Content = ({children, ...props}) => {
     return (
         <div className="Content">
-            <Container>
-                {children}
-            </Container>
+            
+            {children}
+            
         </div>
     )
 }

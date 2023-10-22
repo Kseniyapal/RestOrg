@@ -1,3 +1,30 @@
 .header__logo{
     display: none;
 }
+
+.main__bg{
+    width: 1920;
+    height: 1080;
+    background: url("../../Styles/image/3321789.png") 0px 0px/1080px auto repeat;
+    min-height: 100vh;
+
+    animation-name: bg__move;
+    animation-duration: 30s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+   
+} 
+
+@keyframes bg__move {
+    0%{
+        background-position: 0px 1080px;
+    }
+    100%{
+        background-position: 1080px 0px;
+    }
+}
+
+.main__logo{
+    display: block;
+    margin: 0 auto;
+}
