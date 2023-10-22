@@ -1,0 +1,40 @@
+.header__flex{
+    display: flex;
+    justify-content: space-between;    
+    align-items: center;
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: 300;
+    height: 47px;
+    
+}
+
+.header__bg{
+    background-color: #272727;
+}
+
+
+.header__nav{
+    flex-basis: 40%;
+    font-size: 14px;
+}
+
+.header__logo{
+    flex-basis: 50%;
+}
+
+.header__nav__flex{
+    display: flex;
+    flex: 1 1 auto;
+    
+}
+
+.header__main{
+    padding-right: 3%;
+    border-right: #ffffff solid 2px;
+}
+
+.header__about{
+    padding-left: 3%;
+}
+

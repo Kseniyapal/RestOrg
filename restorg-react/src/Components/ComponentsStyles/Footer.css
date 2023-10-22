@@ -1,0 +1,56 @@
+.footer__bg{
+    background-color: #454545;
+}
+
+.footer__title{
+    font-weight: 600;
+    font-size: 20px;
+    font-style: normal;
+    padding-bottom: 10px;
+}
+
+.footer_description{
+    font-size: 15px;
+    font-style: normal;
+}
+
+.footer__flex{
+    display: flex;
+    justify-content: space-between;
+    color: #FFF;
+    font-family: Inter;
+    font-size: 20px;
+    font-style: italic;
+    font-weight: 300;
+    line-height: normal;
+    height: 150px;
+    align-items: flex-start;
+    margin-top: 30px;
+    
+}
+
+li{
+    padding-bottom: 10px;
+}
+
+.list__description{
+    padding-bottom: 10px;
+}
+
+a{
+    color: #FFF;
+    text-decoration: none;
+}
+
+a:hover{
+    border-bottom: 1px solid #FFF;
+}
+
+a:visited{
+    color: #cfcfcf;
+}
+
+
+
+
+
