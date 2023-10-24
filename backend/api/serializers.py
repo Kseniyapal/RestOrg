@@ -9,7 +9,7 @@ class MenuItemDrinkSerializer(ModelSerializer):
 
     class Meta:
         model = MenuItemDrink
-        fields = ('id', 'name')
+        fields = '__all__'
 
 
 class MenuItemDishSerializer(ModelSerializer):
@@ -17,7 +17,7 @@ class MenuItemDishSerializer(ModelSerializer):
 
     class Meta:
         model = MenuItemDish
-        fields = ('id', 'name', 'image')
+        fields = '__all__'
 
 
 class UserGetSerializer(UserCreateSerializer):
@@ -37,7 +37,7 @@ class OrderSerializer(ModelSerializer):
 
     class Meta:
         model = Order
-        fields = ['id', 'number','waiter', 'menu_dishes', 'menu_drinks']
+        fields = ['id', 'number','waiter', 'menu_dishes', 'menu_drinks', 'status']
 
 
 
