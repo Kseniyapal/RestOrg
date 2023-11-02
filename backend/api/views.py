@@ -11,6 +11,8 @@ from rest_framework.exceptions import ValidationError
 from .filters import OrderFilter
 from .serializers import (MenuItemDishSerializer, MenuItemDrinkSerializer,
                           OrderSerializer, UserGetSerializer)
+from django.views.decorators.http import require_http_methods
+from django.http import HttpResponse
 
 
 class OrderViewSet(ModelViewSet):
@@ -144,3 +146,7 @@ class CustomUserViewSet(UserViewSet):
 
     queryset = User.objects.all()
     serializer_class = UserGetSerializer
+
+@require_http_methods(["GET"])
+def index(request):
+    return HttpResponse(status=200)
