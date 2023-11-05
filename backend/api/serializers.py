@@ -37,7 +37,7 @@ class OrderSerializer(ModelSerializer):
 
     class Meta:
         model = Order
-        fields = ['id', 'number','waiter', 'menu_dishes', 'menu_drinks', 'status']
+        fields = ['id', 'number','waiter', 'menu_dishes', 'menu_drinks', 'status', 'comment']
 
 
 

@@ -24,7 +24,7 @@ class OrderViewSet(ModelViewSet):
     filterset_class = OrderFilter
 
     def get_permissions(self):
-        if self.action == 'list':
+        if self.action == 'list' or self.action == 'retrieve':
             permission_classes = [IsAuthenticated, ]
         else:
             permission_classes = [AllowAny, ]
