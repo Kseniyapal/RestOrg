@@ -85,6 +85,7 @@ class OrderViewSet(ModelViewSet):
 
     def perform_create(self, serializer):
         data = serializer.validated_data
+        print(data)
         menu_ds = self.request.data.get('menu_dishes', [])
         menu_dr = self.request.data.get('menu_drinks', [])
         order_waiter = self.request.data.get('waiter', )

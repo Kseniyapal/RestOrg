@@ -74,6 +74,13 @@ class Order(models.Model):
         'Статус', max_length=4, choices=STATUS_CHOICES, default='NA'
     )
 
+    """def __init__(self, number, menu_dishes, menu_drinks, waiter, comment):
+        self.number = number
+        self.menu_dishes = menu_dishes
+        self.menu_drinks = menu_drinks
+        self.waiter = waiter
+        self.comment = comment"""
+
     def get_drinks(self):
         return self.menu_drinks
 
