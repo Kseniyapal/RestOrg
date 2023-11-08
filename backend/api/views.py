@@ -148,6 +148,7 @@ class CustomUserViewSet(UserViewSet):
     queryset = User.objects.all()
     serializer_class = UserGetSerializer
 
+
 @require_http_methods(["GET"])
 def index(request):
     return HttpResponse(status=200)

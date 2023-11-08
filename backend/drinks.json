@@ -9,7 +9,7 @@
 {
   "id": 2,
   "name":"Мохито",
-  "image" : "http://127.0.0.1:8000/media/images/Mohito-b-a.jpgg",
+  "image" : "http://127.0.0.1:8000/media/images/Mohito-b-a.jpg",
   "weight" : "280мл",
   "price" : "99руб."
 },
