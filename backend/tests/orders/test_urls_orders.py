@@ -25,13 +25,12 @@ class TestUrlsOrders():
         response = guest_client.get('/api/orders/1/')
         assert response.status_code == 401
 
-    """@pytest.mark.django_db
-    def test_get_order_with_authorized_client(self, get_orders):
-        client = APIClient()
-        user = User.objects.create_user("John")
-        client.force_authenticate(user=user)
-        print(get_orders[0])
-        response = client.get(f'/api/orders/{get_orders[0].id}/')
+    @pytest.mark.django_db
+    def test_get_order_with_authorized_client(self, get_orders, get_users):
+        authenticated_client = APIClient()
+        user = get_users[1]
+        authenticated_client.force_authenticate(user=user)
+        response = authenticated_client.get(f'/api/orders/{get_orders[0].id}/')
         
-        assert response.status_code == 200"""
-        
+        assert response.status_code == 200
+

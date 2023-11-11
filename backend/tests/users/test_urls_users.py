@@ -4,7 +4,7 @@ import pytest
 
 class TestUrlsUsers():
     @pytest.mark.django_db
-    def test_list_users_with_guest_client(self, get_users):
+    def test_list_users_with_guest_client(self):
         guest_client = APIClient()
         response = guest_client.get('/api/users/')
         assert response.status_code == 401
@@ -31,11 +31,10 @@ class TestUrlsUsers():
         response = client.get('/api/users/1/')
         assert response.status_code == 403
 
-    """@pytest.mark.django_db
+    @pytest.mark.django_db
     def test_get_user_with_admin_client(self, get_users):
-        client = APIClient()
         authenticated_client = APIClient()
-        user = User.objects.get(id=2)
+        user = User.objects.get(id=4)
         authenticated_client.force_authenticate(user=user)
-        response = client.get('/api/users/')
-        assert response.status_code == 200"""
+        response = authenticated_client.get('/api/users/1/')
+        assert response.status_code == 200
