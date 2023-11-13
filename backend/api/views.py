@@ -13,6 +13,7 @@ from .serializers import (MenuItemDishSerializer, MenuItemDrinkSerializer,
                           OrderSerializer, UserGetSerializer)
 from django.views.decorators.http import require_http_methods
 from django.http import HttpResponse
+from rest_framework.decorators import api_view, permission_classes
 
 
 class OrderViewSet(ModelViewSet):
@@ -24,7 +25,7 @@ class OrderViewSet(ModelViewSet):
     filterset_class = OrderFilter
 
     def get_permissions(self):
-        if self.action == 'list' or self.action == 'retrieve':
+        if self.action == 'list' or self.action == 'retrieve' or self.action == 'update':
             permission_classes = [IsAuthenticated, ]
         else:
             permission_classes = [AllowAny, ]
@@ -103,11 +104,13 @@ class OrderViewSet(ModelViewSet):
 
     def perform_update(self, serializer):
         instance = serializer.instance
+        user = self.request.user
+        if not user.is_authenticated:
+            raise PermissionDenied("Чтобы редактировать заказ, вы должны быть авторизованы.")
         order_waiter = self.request.data.get('waiter', )
         list_users = User.objects.filter(role = 'W').values_list('id', flat=True)
-        if order_waiter==None and order_waiter not in list_users:
+        if order_waiter==None or order_waiter not in list_users:
             raise ValidationError("Надо указать официанта исполнителем") 
-
         if instance.status == 'NA' and 'status' in serializer.validated_data and serializer.validated_data['status'] == 'DDR':
             raise PermissionDenied("Нельзя изменить статус с 'NA' на 'DDR'")
         elif instance.status == 'NA' and 'status' in serializer.validated_data and serializer.validated_data['status'] == 'DDS':

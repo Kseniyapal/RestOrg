@@ -38,7 +38,7 @@ class User(AbstractUser):
         max_length=150,
         verbose_name='Отчество'
     )
-    role = models.CharField(max_length=1, choices=ROLE_CHOICES)
+    role = models.CharField(max_length=10, choices=ROLE_CHOICES)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username', 'first_name', 'last_name', 'role']

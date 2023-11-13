@@ -27,7 +27,7 @@ class MenuItemDrinkSerializer(ModelSerializer):
 
     class Meta:
         model = MenuItemDrink
-        fields = ['name', 'image', 'volume', 'price']
+        fields = ['id', 'name', 'image', 'volume', 'price']
 
 
 class MenuItemDishSerializer(ModelSerializer):

@@ -38,3 +38,51 @@ class TestUrlsUsers():
         authenticated_client.force_authenticate(user=user)
         response = authenticated_client.get('/api/users/1/')
         assert response.status_code == 200
+
+    @pytest.mark.django_db
+    def test_create_user_with_admin_client(self, get_users):
+        authenticated_client = APIClient()
+        user = get_users[3]
+        authenticated_client.force_authenticate(user=user)
+        response = authenticated_client.post('/api/users/', data={
+            'id': 3,
+            'username': 'Vasya',
+            'first_name': 'Vasya',
+            'last_name': 'Somov',
+            'role': 'C',
+            'email':'v@v.ru',
+            'password': 'geuhihfwhfihifuw'
+        })
+        assert response.status_code == 201
+
+    @pytest.mark.django_db
+    def test_create_user_without_admin_client(self, get_users):
+        authenticated_client = APIClient()
+        user = get_users[2]
+        authenticated_client.force_authenticate(user=user)
+        response = authenticated_client.post('/api/users/', data={
+            'id': 3,
+            'username': 'Vasya',
+            'first_name': 'Vasya',
+            'last_name': 'Somov',
+            'role': 'C',
+            'email':'v@v.ru',
+            'password': 'geuhihfwhfihifuw'
+        })
+        assert response.status_code == 403
+
+    @pytest.mark.django_db
+    def test_create_user_guest_client(self):
+        guest_client = APIClient()
+        response = guest_client.post('/api/users/', data={
+            'id': 3,
+            'username': 'Vasya',
+            'first_name': 'Vasya',
+            'last_name': 'Somov',
+            'role': 'C',
+            'email':'v@v.ru',
+            'password': 'geuhihfwhfihifuw'
+        })
+        assert response.status_code == 401
+
+    
