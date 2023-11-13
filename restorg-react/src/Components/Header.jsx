@@ -10,8 +10,8 @@ const Header = () => {
             <Container>
                 <div className="header__flex">
                     <div className="header__nav__flex">
-                        <div className="header__main"><a href="/main">на главную</a></div>
-                        <div className="header__about"><a href="/main">о сервисе</a></div>
+                        <div className="header__main"><a href="/">на главную</a></div>
+                        <div className="header__about"><a href="/#about">о сервисе</a></div>
                     </div>
                     <div className="header__logo">
                         <img src={logo}/>

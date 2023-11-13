@@ -1,10 +1,8 @@
-.header__logo{
+.main .header__logo {
     display: none;
 }
-
 .main__bg{
-    width: 1920;
-    height: 1080;
+
     background: url("../../Styles/image/3321789.png") 0px 0px/1080px auto repeat;
     min-height: 100vh;
 
@@ -28,3 +26,71 @@
     display: block;
     margin: 0 auto;
 }
+
+.buttonImg {
+    width: 20%;
+}
+
+.info__bg {
+    width: 100%;
+    background-color: #272727;
+
+    min-height: 80vh;
+
+}
+
+.info__flex {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.info__line {
+    padding: 5% 0px;
+}
+
+.info__about__flex {
+    display: flex;
+
+}
+
+.info__about__text{
+    width: 60%;
+
+    color: #FFF;
+    font-family: Inter;
+    font-size: 18px;
+    font-style: italic;
+    font-weight: 300;
+    line-height: normal;
+    margin-bottom: 5%;
+}
+
+.info__about__text span{
+    display: block;
+    color: #FFF;
+    padding-bottom: 5%;
+    font-size: 24px;
+}
+
+.main__info {
+    flex-shrink: 1;
+}
+
+.info__admin_flex{
+    display: flex;
+    justify-content: end;
+    text-align: right;
+}
+
+.main__bg a{
+    text-decoration: none;
+}
+
+.main__bg a:active{
+    background-color: #c1c1c1;
+}
+
+
+
+

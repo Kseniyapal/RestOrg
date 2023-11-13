@@ -1,0 +1,47 @@
+.order{
+    color:black;
+
+    font-family: Inter;
+    font-size: 200%;
+    font-style: italic;
+    font-weight: 800;
+    line-height: normal;
+
+    display:block;
+    text-align: center;
+
+    text-decoration: none;
+
+    
+    
+    
+}
+
+.order__bg{
+
+    margin: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 1%;
+    border-radius: 10px;
+}
+
+.column1__flex .order__bg{
+    background-color: #92B76E;
+
+}
+
+
+.column2__flex .order__bg{
+    background-color: #BBC175;
+
+}
+
+.column3__flex .order__bg{
+    background-color: #C17575;
+
+}
+
+

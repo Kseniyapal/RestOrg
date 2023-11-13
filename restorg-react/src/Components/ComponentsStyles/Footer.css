@@ -1,5 +1,6 @@
 .footer__bg{
     background-color: #454545;
+    height: 20vh;
 }
 
 .footer__title{
@@ -16,7 +17,7 @@
 
 .footer__flex{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     color: #FFF;
     font-family: Inter;
     font-size: 20px;
@@ -37,16 +38,16 @@ li{
     padding-bottom: 10px;
 }
 
-a{
+.footer__bg a{
     color: #FFF;
     text-decoration: none;
 }
 
-a:hover{
+.footer__bg a:hover{
     border-bottom: 1px solid #FFF;
 }
 
-a:visited{
+.footer__bg a:visited{
     color: #cfcfcf;
 }
 

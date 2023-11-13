@@ -1,12 +1,13 @@
 .WindowC{
     border-radius: 10px;
-    opacity: 0.8;
-    background: #272727;
-    backdrop-filter: blur(47.5px);
-    width: 60vh;
+    border-color: #272727bb;
+    background: #272727bb;
+    width: 40%;
     height: 30vh;
-    flex-shrink: 0;
+    flex-shrink: 1;
     margin: 0 auto;
+    padding: 2%;
+
     /* position: relative;
     top: 25vh; */
 }

@@ -38,3 +38,17 @@
     padding-left: 3%;
 }
 
+
+.header__bg a{
+    color: #FFF;
+    text-decoration: none;
+}
+
+.header__bg a:hover{
+    border-bottom: 1px solid #FFF;
+}
+
+.header__bg a:visited{
+    color: #cfcfcf;
+}
+

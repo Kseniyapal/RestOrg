@@ -1,0 +1,93 @@
+.header__logo{
+    display: block;
+}
+
+
+.sign__bg{
+
+    background: url("../../Styles/image/3321789.png") 0px 0px/1080px auto repeat;
+    min-height: 100vh;
+
+    animation-name: bg__move;
+    animation-duration: 30s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+   
+} 
+
+@keyframes bg__move {
+    0%{
+        background-position: 0px 1080px;
+    }
+    100%{
+        background-position: 1080px 0px;
+    }
+}
+
+
+.window__center{
+    padding-top: 20%;
+}
+
+.sign__window {
+    height: 40vh;
+    max-width: 50vh;
+    min-width: 50vh;
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: space-around;
+    border-radius: 10px;
+    border-color: #272727bb;
+    background: #272727bb;
+
+    flex-shrink: 1;
+    margin: 0 auto;
+    padding: 2%;
+
+
+}
+
+.sign__button{
+    width: 200%;
+    height: 80%;
+    border-radius: 10px;
+    display: block;
+    align-items: center;
+    justify-content: space-between;
+    color: #000;
+    text-align: center;
+    font-family: Inter;
+    font-size: 200%;
+    
+    font-weight: 200;
+    border: #ffffff;
+
+    background-color: #ffffff;
+}
+
+.sign__continue__flex{
+    margin-top: auto;
+    justify-self: flex-end;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    
+}
+
+.sign__continue__flex a {
+    padding-top: 10%;
+    color: #FFF;
+    font-size: 25px;
+    font-weight: 300;
+}
+
+.sign__bg a {
+    text-decoration: none;
+}
+.sign__bg a:active {
+    color: #c1c1c1;
+}
