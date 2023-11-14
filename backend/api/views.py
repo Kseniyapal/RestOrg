@@ -3,7 +3,7 @@ from djoser.views import UserViewSet
 from orders.models import MenuItemDish, MenuItemDrink, Order
 from rest_framework import status
 from rest_framework.exceptions import PermissionDenied
-from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 from users.models import User
@@ -25,7 +25,7 @@ class OrderViewSet(ModelViewSet):
     filterset_class = OrderFilter
 
     def get_permissions(self):
-        if self.action == 'list' or self.action == 'retrieve' or self.action == 'update':
+        if self.action == 'list' or self.action == 'retrieve':
             permission_classes = [IsAuthenticated, ]
         else:
             permission_classes = [AllowAny, ]
@@ -86,7 +86,6 @@ class OrderViewSet(ModelViewSet):
 
     def perform_create(self, serializer):
         data = serializer.validated_data
-        print(data)
         menu_ds = self.request.data.get('menu_dishes', [])
         menu_dr = self.request.data.get('menu_drinks', [])
         order_waiter = self.request.data.get('waiter', )
@@ -136,6 +135,25 @@ class MenuItemDrinkViewSet(ModelViewSet):
     serializer_class = MenuItemDrinkSerializer
     filter_backends = (DjangoFilterBackend,)
 
+    def perform_create(self, serializer):
+        user = self.request.user
+        if not user.is_authenticated and not user.is_staff:
+            raise PermissionDenied("Чтобы создать пункт меню, вы должны обладать правами администратора.")
+        data = serializer.validated_data
+        serializer.save(name=data['name'],
+                        image=data['image'],
+                        volume=data['volume'],
+                        price=data['price'])
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    
+    def perform_update(self, serializer):
+        user = self.request.user
+        if not user.is_authenticated or not user.is_staff:
+            raise PermissionDenied("Чтобы редактировать пункт меню, вы должны обладать правами администратора.")
+
+        super().perform_update(serializer)
+
+
 
 class MenuItemDishViewSet(ModelViewSet):
     """Вьюсет для ингредиентов"""
@@ -143,6 +161,24 @@ class MenuItemDishViewSet(ModelViewSet):
     queryset = MenuItemDish.objects.all()
     serializer_class = MenuItemDishSerializer
     filter_backends = (DjangoFilterBackend,)
+
+    def perform_create(self, serializer):
+        user = self.request.user
+        if not user.is_authenticated :
+            raise PermissionDenied("Чтобы создать пункт меню, вы должны обладать правами администратора.")
+        data = serializer.validated_data
+        serializer.save(name=data['name'],
+                        image=data['image'],
+                        weight=data['weight'],
+                        price=data['price'])
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    
+    def perform_update(self, serializer):
+        user = self.request.user
+        if not user.is_authenticated or not user.is_staff:
+            raise PermissionDenied("Чтобы редактировать пункт меню, вы должны обладать правами администратора.")
+
+        super().perform_update(serializer)
 
 
 class CustomUserViewSet(UserViewSet):

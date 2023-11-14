@@ -3,6 +3,17 @@ from users.models import User
 import pytest
 
 class TestUrlsUsers():
+
+    @pytest.mark.dgango_db
+    def test_create_token_login(self, get_users):
+        guest_client = APIClient()
+        data = {
+            "email": "ivan@ivan.ru",
+            "password": "1234"
+        }
+        response = guest_client.post('/api/auth/token/login/', data=data)
+        assert response.status_code == 200
+
     @pytest.mark.django_db
     def test_list_users_with_guest_client(self):
         guest_client = APIClient()

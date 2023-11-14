@@ -335,3 +335,5 @@ class TestUrlsOrders():
         authenticated_client.force_authenticate(user=user)
         response = authenticated_client.get(f'/api/orders/{get_orders[0].id}/')
         assert response.status_code == 200
+
+    
