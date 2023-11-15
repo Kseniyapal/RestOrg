@@ -5,7 +5,9 @@ import pytest
 class TestViewDrinks():
     @pytest.mark.django_db
     def test_num_list_drink(self, get_drinks):
-        assert len(MenuItemDrink.objects.all()) == len(get_drinks)
+        guest_client = APIClient()
+        response = guest_client.get('/api/drinks/')
+        assert len(response.data) == len(get_drinks)
 
     @pytest.mark.django_db
     def test_data_item_drink(self, get_drinks):

@@ -36,7 +36,7 @@ def get_users(django_db_setup, django_db_blocker):
                 last_name='Ivanov',
                 role='B',
                 email='ivan@ivan.ru',
-                password='1234'
+                password='1234dfghjmk,l'
             ),
             User(
                 id=2,
@@ -45,7 +45,7 @@ def get_users(django_db_setup, django_db_blocker):
                 last_name='Ivanov',
                 role='W',
                 email='petr@petr.ru',
-                password='1234'
+                password='1234sxdcfvgbhjk'
             ),
             User(
                 id=3,
@@ -54,7 +54,7 @@ def get_users(django_db_setup, django_db_blocker):
                 last_name='Samsonov',
                 role='C',
                 email='semen@semen.ru',
-                password='1234'
+                password='1234sxdcfvgbhnjmk'
             ),
             User(
                 id=4,
@@ -66,7 +66,7 @@ def get_users(django_db_setup, django_db_blocker):
                 is_staff= True,
                 is_active= True,
                 email='ad@ad.ru',
-                password='1234'
+                password='1234decfvgbhnjm'
             )
         ])
         return User.objects.all()

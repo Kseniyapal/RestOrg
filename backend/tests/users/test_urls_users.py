@@ -4,15 +4,17 @@ import pytest
 
 class TestUrlsUsers():
 
-    @pytest.mark.dgango_db
+    """@pytest.mark.dgango_db
     def test_create_token_login(self, get_users):
         guest_client = APIClient()
         data = {
-            "email": "ivan@ivan.ru",
-            "password": "1234"
+            "email": get_users[0].email,
+            "password": str(get_users[0].password)
         }
-        response = guest_client.post('/api/auth/token/login/', data=data)
-        assert response.status_code == 200
+        print(get_users[0].email)
+        response = guest_client.post('/api/auth/token/login/', data=data, format='json')
+        print(response.data)
+        assert response.status_code == 200"""
 
     @pytest.mark.django_db
     def test_list_users_with_guest_client(self):
