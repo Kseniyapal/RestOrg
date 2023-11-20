@@ -46,11 +46,19 @@ class TestViewUsers():
     @pytest.mark.django_db
     def test_get_token(self, get_users):
         guest_client = APIClient()
-        print(User.objects.all())
         data = {
             "email" : get_users[0].email,
-            "password":f"{get_users[0].password}"
+            "password": "1234dfghjmk,l"
         }
-        response = guest_client.post('/api/auth/token/login', data=data, format='json')
+        response = guest_client.post('/api/auth/token/login', data=data)
         print(response.data)
-        assert response.data == ''
+        assert response.data['auth_token']!= ''
+
+    """@pytest.mark.dgango_db
+    def test_logout_with_authorized(self, get_users):
+        authenticated_client = APIClient()
+        user = get_users[3]
+        authenticated_client.force_authenticate(user=user)
+        authenticated_client.post('/api/auth/token/logout/')
+        response = authenticated_client.get('/api/users/')
+        assert response.data == 'Invalid token'"""

@@ -62,7 +62,7 @@ class TestViewDrinks():
         response= authenticated_client.patch(f'/api/drinks/{get_drinks[0].id}/', data)
         updated_item = MenuItemDrink.objects.get(id=get_drinks[0].id)
         assert response.data['name'] == db_data['name']
-        #assert response.data['image'][] == db_data['image']
+        assert response.data['image'] == db_data['image']
         assert response.data['volume'] == db_data['volume']
         assert response.data['price'] == data['price']
 

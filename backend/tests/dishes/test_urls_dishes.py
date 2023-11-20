@@ -94,7 +94,7 @@ class TestUrlsDishes():
 
     
 
-    """@pytest.mark.django_db
+    @pytest.mark.django_db
     def test_create_item_dish(self):
         guest_client = APIClient()
         #MenuItemDish.objects.create(**data)
@@ -102,4 +102,4 @@ class TestUrlsDishes():
             'image': 'http://127.0.0.1:8000/media/images/salat-vinegret.jpg',
             'weight': 250,
             'price': 12})
-        assert response.status_code == 201"""
+        assert response.status_code == 403

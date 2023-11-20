@@ -28,7 +28,7 @@ def get_drinks(django_db_setup, django_db_blocker):
 @pytest.fixture(scope='session')
 def get_users(django_db_setup, django_db_blocker):
     with django_db_blocker.unblock():
-        User.objects.bulk_create([
+        users = User.objects.bulk_create([
             User(
                 id=1,
                 username='Vanya',
@@ -36,7 +36,7 @@ def get_users(django_db_setup, django_db_blocker):
                 last_name='Ivanov',
                 role='B',
                 email='ivan@ivan.ru',
-                password='1234dfghjmk,l'
+                #password='1234dfghjmk,l'
             ),
             User(
                 id=2,
@@ -69,6 +69,9 @@ def get_users(django_db_setup, django_db_blocker):
                 password='1234decfvgbhnjm'
             )
         ])
+        user = User.objects.get(id=1)
+        user.set_password('1234dfghjmk,l')
+        user.save()
         return User.objects.all()
 
 
@@ -99,7 +102,7 @@ def get_orders(get_users, get_dishes, get_drinks, django_db_setup, django_db_blo
         order = Order.objects.create(number=1234567)
         order.menu_dishes.add(get_dishes[0])
         order.menu_drinks.add(get_drinks[0])
-        order = Order.objects.create(number=1234568)
+        order = Order.objects.create(number=1234568, waiter=get_users[1])
         order.menu_dishes.add(get_dishes[1])
         order = Order.objects.create(number=1234569)
         order.menu_drinks.add(get_drinks[1])

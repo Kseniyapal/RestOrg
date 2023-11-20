@@ -64,7 +64,7 @@ class TestViewDishes():
         response= authenticated_client.patch(f'/api/dishes/{get_dishes[0].id}/', data)
         updated_item = MenuItemDish.objects.get(id=get_dishes[0].id)
         assert response.data['name'] == db_data['name']
-        #assert response.data['image'][] == db_data['image']
+        assert response.data['image'] == db_data['image']
         assert response.data['weight'] == db_data['weight']
         assert response.data['price'] == data['price']
 

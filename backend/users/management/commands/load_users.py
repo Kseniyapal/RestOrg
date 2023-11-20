@@ -23,5 +23,7 @@ class Command(BaseCommand):
                 email = user['email'],
                 password = user['password']
             )
+            item_user.set_password(user['password'])
+            item_user.save()
 
         self.stdout.write(self.style.SUCCESS('Users loaded successfully'))

@@ -4,17 +4,29 @@ import pytest
 
 class TestUrlsUsers():
 
-    """@pytest.mark.dgango_db
+    @pytest.mark.dgango_db
     def test_create_token_login(self, get_users):
         guest_client = APIClient()
         data = {
-            "email": get_users[0].email,
-            "password": str(get_users[0].password)
+            "email" : get_users[0].email,
+            "password": "1234dfghjmk,l"
         }
-        print(get_users[0].email)
         response = guest_client.post('/api/auth/token/login/', data=data, format='json')
-        print(response.data)
-        assert response.status_code == 200"""
+        assert response.status_code == 200
+
+    @pytest.mark.dgango_db
+    def test_logout_with_guest(self, get_users):
+        guest_client = APIClient()
+        response = guest_client.get('/api/auth/token/logout/')
+        assert response.status_code == 401
+    
+    @pytest.mark.dgango_db
+    def test_logout_with_authorized(self, get_users):
+        authenticated_client = APIClient()
+        user = get_users[3]
+        authenticated_client.force_authenticate(user=user)
+        response = authenticated_client.post('/api/auth/token/logout/')
+        assert response.status_code == 204
 
     @pytest.mark.django_db
     def test_list_users_with_guest_client(self):

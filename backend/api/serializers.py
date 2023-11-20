@@ -1,4 +1,4 @@
-from djoser.serializers import UserCreateSerializer
+from djoser.serializers import UserCreateSerializer 
 from orders.models import MenuItemDish, MenuItemDrink, Order
 from rest_framework.serializers import ModelSerializer, PrimaryKeyRelatedField, ImageField
 from users.models import User
@@ -21,9 +21,6 @@ class Base64ImageField(ImageField):
 
 class MenuItemDrinkSerializer(ModelSerializer):
     """Сериализер для """
-    image = Base64ImageField(
-        max_length=None, use_url=True,
-    )
 
     class Meta:
         model = MenuItemDrink
@@ -32,21 +29,19 @@ class MenuItemDrinkSerializer(ModelSerializer):
 
 class MenuItemDishSerializer(ModelSerializer):
     """Сериализер для """
-    image = Base64ImageField(
-        max_length=None, use_url=True,
-    )
 
     class Meta:
         model = MenuItemDish
         fields = ['name', 'image', 'weight', 'price']
 
 
-class UserGetSerializer(UserCreateSerializer):
+class UserGetSerializer(ModelSerializer):
     """Сериализатор получения пользователя"""
     class Meta:
         model = User
-        fields = '__all__'
-     
+        #fields = '__all__'
+        exclude = ['password']
+    
 
 class OrderSerializer(ModelSerializer):
     """Сериализер для """

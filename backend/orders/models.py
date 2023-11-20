@@ -21,9 +21,9 @@ class MenuItemDish(models.Model):
         'Наименование блюда',
         max_length=255
     )
-    image = models.ImageField(
+    image = models.CharField(
         'фото блюда',
-        upload_to='images/')
+        max_length=500)
     weight = models.IntegerField(
         'Вес в граммах')
 
@@ -37,9 +37,9 @@ class MenuItemDrink(models.Model):
         'Наименование напитка',
         max_length=255
     )
-    image = models.ImageField(
+    image = models.CharField(
         'Фото напитка',
-        upload_to='images/')
+        max_length=500)
     volume = models.IntegerField(
         'Объем в мл')
 
@@ -63,7 +63,7 @@ class Order(models.Model):
 
     menu_drinks = models.ManyToManyField(MenuItemDrink)
 
-    waiter = models.ForeignKey(User, on_delete=models.PROTECT,
+    waiter = models.ForeignKey(User, on_delete=models.CASCADE,
                                limit_choices_to={'role':'W'},
                                related_name='waiter',
                                default = None,
