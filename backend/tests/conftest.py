@@ -102,19 +102,25 @@ def get_orders(get_users, get_dishes, get_drinks, django_db_setup, django_db_blo
         order = Order.objects.create(number=1234567)
         order.menu_dishes.add(get_dishes[0])
         order.menu_drinks.add(get_drinks[0])
+
         order = Order.objects.create(number=1234568, waiter=get_users[1])
         order.menu_dishes.add(get_dishes[1])
+
         order = Order.objects.create(number=1234569)
         order.menu_drinks.add(get_drinks[1])
+
         order = Order.objects.create(number=1234570, status='DDR')
         order.menu_dishes.add(get_dishes[0])
         order.menu_drinks.add(get_drinks[0])
+
         order = Order.objects.create(number=1234571, status='DDS')
         order.menu_dishes.add(get_dishes[0])
         order.menu_drinks.add(get_drinks[0])
+
         order = Order.objects.create(number=1234572, status='DONE')
         order.menu_dishes.add(get_dishes[0])
         order.menu_drinks.add(get_drinks[0])
+        
         return Order.objects.all()
     
     
