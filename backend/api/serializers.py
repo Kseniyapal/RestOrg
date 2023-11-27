@@ -32,7 +32,7 @@ class MenuItemDishSerializer(ModelSerializer):
 
     class Meta:
         model = MenuItemDish
-        fields = ['name', 'image', 'weight', 'price']
+        fields = ['id', 'name', 'image', 'weight', 'price']
 
 
 class UserGetSerializer(ModelSerializer):

@@ -99,9 +99,10 @@ def get_dishes(django_db_setup, django_db_blocker):
 @pytest.fixture(scope='session')
 def get_orders(get_users, get_dishes, get_drinks, django_db_setup, django_db_blocker):
     with django_db_blocker.unblock():
-        order = Order.objects.create(number=1234567)
+        order = Order.objects.create(number=1234567,  waiter=get_users[1])
         order.menu_dishes.add(get_dishes[0])
         order.menu_drinks.add(get_drinks[0])
+        
 
         order = Order.objects.create(number=1234568, waiter=get_users[1])
         order.menu_dishes.add(get_dishes[1])

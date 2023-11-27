@@ -53,7 +53,10 @@ class OrderViewSet(ModelViewSet):
                    'drinks': serializer.data['menu_drinks'],
                    'table_number': serializer.data['number'],
                    'status': serializer.data['status'],
-                   'comment': serializer.data['comment']}
+                   'comment': serializer.data['comment'],
+                   'waiter': serializer.data['waiter'],
+                   'id': serializer.data['id']
+                   }
             return Response(data, status=status.HTTP_200_OK)
 
         if role_user == 'C':
@@ -107,8 +110,9 @@ class OrderViewSet(ModelViewSet):
         if not user.is_authenticated:
             raise PermissionDenied("Чтобы редактировать заказ, вы должны быть авторизованы.")
         order_waiter = self.request.data.get('waiter', )
+        db_order_waiter = Order.objects.get(id = instance.id).waiter
         list_users = User.objects.filter(role = 'W').values_list('id', flat=True)
-        if order_waiter==None or order_waiter not in list_users:
+        if (order_waiter==None and db_order_waiter == None) or (order_waiter not in list_users  and order_waiter!=None):
             raise ValidationError("Надо указать официанта исполнителем") 
         if instance.status == 'NA' and 'status' in serializer.validated_data and serializer.validated_data['status'] == 'DDR':
             raise PermissionDenied("Нельзя изменить статус с 'NA' на 'DDR'")
@@ -122,8 +126,8 @@ class OrderViewSet(ModelViewSet):
             raise PermissionDenied("Нельзя изменить статус с 'DDR' на 'NA'")   
         elif instance.status == 'DDS' and 'status' in serializer.validated_data and serializer.validated_data['status'] == 'NA':
             raise PermissionDenied("Нельзя изменить статус с 'DDS' на 'NA'")
-        elif instance.status == 'DONE' and 'status' in serializer.validated_data and serializer.validated_data['status'] in ['NA', 'DDR','DDS','IN']:
-            raise PermissionDenied("Нельзя изменить статус с 'DONE' на 'NA','DDR','DDS','IN'")
+        elif instance.status == 'DONE' and 'status' in serializer.validated_data and serializer.validated_data['status'] in ['NA', 'DDR','DDS','IP']:
+            raise PermissionDenied("Нельзя изменить статус с 'DONE' на 'NA','DDR','DDS','IP'")
         
 
         super().perform_update(serializer)

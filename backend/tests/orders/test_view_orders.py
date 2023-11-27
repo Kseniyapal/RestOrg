@@ -259,6 +259,7 @@ class TestViewsOrders():
         }
         response = authenticated_client.patch('/api/orders/1/', data=data, format='json')
         assert response.status_code ==201
+
     @pytest.mark.django_db
     def test_views_update_order_with_wrong_status_NA_to_DDS(self, get_users):
         authenticated_client = APIClient()
@@ -268,7 +269,7 @@ class TestViewsOrders():
         "status": "DDS"
         }
         response = authenticated_client.patch('/api/orders/1/', data=data, format='json')
-        assert response.status_code == 400
+        assert response.data["detail"] == """Нельзя изменить статус с 'NA' на 'DDS'"""
 
     @pytest.mark.django_db
     def test_views_update_order_with_wrong_status_NA_to_DDR(self, get_users):
@@ -279,7 +280,7 @@ class TestViewsOrders():
         "status": "DDR"
         }
         response = authenticated_client.patch('/api/orders/1/', data=data, format='json')
-        assert response.status_code == 400
+        assert response.data["detail"] == """Нельзя изменить статус с 'NA' на 'DDR'"""
 
     @pytest.mark.django_db
     def test_views_update_order_with_wrong_status_DDR_to_NA(self, get_users):
@@ -287,10 +288,11 @@ class TestViewsOrders():
         user = get_users[1]
         authenticated_client.force_authenticate(user=user)
         data = {
+        "waiter": 2,
         "status": "NA"
         }
         response = authenticated_client.patch('/api/orders/4/', data=data, format='json')
-        assert response.status_code == 400
+        assert response.data["detail"] == """Нельзя изменить статус с 'DDR' на 'NA'"""
 
     @pytest.mark.django_db
     def test_views_update_order_with_wrong_status_DDS_to_NA(self, get_users):
@@ -298,10 +300,11 @@ class TestViewsOrders():
         user = get_users[1]
         authenticated_client.force_authenticate(user=user)
         data = {
+        "waiter": 2,
         "status": "NA"
         }
         response = authenticated_client.patch('/api/orders/5/', data=data, format='json')
-        assert response.status_code == 400
+        assert response.data["detail"] == """Нельзя изменить статус с 'DDS' на 'NA'"""
 
     @pytest.mark.django_db
     def test_views_update_order_with_wrong_status_DONE_to_NA(self, get_users):
@@ -309,10 +312,12 @@ class TestViewsOrders():
         user = get_users[1]
         authenticated_client.force_authenticate(user=user)
         data = {
+        "waiter": 2,
         "status": "NA"
         }
         response = authenticated_client.patch('/api/orders/6/', data=data, format='json')
-        assert response.status_code == 400
+        assert response.data["detail"] == """Нельзя изменить статус с 'DONE' на 'NA','DDR','DDS','IP'"""
+
 
     @pytest.mark.django_db
     def test_views_update_order_with_wrong_status_DONE_to_DDS(self, get_users):
@@ -320,10 +325,11 @@ class TestViewsOrders():
         user = get_users[1]
         authenticated_client.force_authenticate(user=user)
         data = {
+        "waiter": 2,
         "status": "DDS"
         }
         response = authenticated_client.patch('/api/orders/6/', data=data, format='json')
-        assert response.status_code == 400
+        assert response.data["detail"] == """Нельзя изменить статус с 'DONE' на 'NA','DDR','DDS','IP'"""
 
     @pytest.mark.django_db
     def test_views_update_order_with_wrong_status_DONE_to_DDR(self, get_users):
@@ -331,24 +337,26 @@ class TestViewsOrders():
         user = get_users[1]
         authenticated_client.force_authenticate(user=user)
         data = {
+        "waiter": 2,
         "status": "DDR"
         }
         response = authenticated_client.patch('/api/orders/6/', data=data, format='json')
-        assert response.status_code == 400
+        assert response.data["detail"] == """Нельзя изменить статус с 'DONE' на 'NA','DDR','DDS','IP'"""
 
     @pytest.mark.django_db
-    def test_views_update_order_with_wrong_status_DONE_to_IN(self, get_users):
+    def test_views_update_order_with_wrong_status_DONE_to_IN(self, get_users, get_orders):
         authenticated_client = APIClient()
         user = get_users[1]
         authenticated_client.force_authenticate(user=user)
         data = {
-        "status": "IN"
+        "waiter": 2,
+        "status": "IP"
         }
         response = authenticated_client.patch('/api/orders/6/', data=data, format='json')
-        assert response.status_code == 400
+        assert response.data["detail"] == """Нельзя изменить статус с 'DONE' на 'NA','DDR','DDS','IP'"""
 
     @pytest.mark.django_db
-    def test_views_update_order_with_cook_client(self, get_users):
+    def test_views_update_order_with_cook_client(self, get_users, get_orders):
         authenticated_client = APIClient()
         user = get_users[2]
         authenticated_client.force_authenticate(user=user)
@@ -357,32 +365,44 @@ class TestViewsOrders():
         "menu_dishes": [1]
         }
         response = authenticated_client.patch('/api/orders/1/', data=data, format='json')
-        assert response.status_code == 200
+        assert response.data["number"] == get_orders[0].number
+        assert response.data["menu_dishes"] == [1]
+        assert response.data["menu_drinks"] == [1]
+        assert response.data["waiter"] == 2
+        assert response.data["status"] == get_orders[0].status
 
     @pytest.mark.django_db
-    def test_views_update_order_with_bartender_client(self, get_users):
+    def test_views_update_order_with_bartender_client(self, get_users, get_orders):
         authenticated_client = APIClient()
         user = get_users[0]
         authenticated_client.force_authenticate(user=user)
         data = {
         "waiter": 2,
-        "menu_drinks": [1]
+        "menu_drinks": [2]
         }
         response = authenticated_client.patch('/api/orders/1/', data=data, format='json')
-        assert response.status_code == 200
+        assert response.data["number"] == get_orders[0].number
+        assert response.data["menu_dishes"] == [1]
+        assert response.data["menu_drinks"] == [2]
+        assert response.data["waiter"] == 2
+        assert response.data["status"] == get_orders[1].status
 
     @pytest.mark.django_db
-    def test_views_update_order_with_admin_client(self, get_users):
+    def test_views_update_order_with_admin_client(self, get_users, get_orders):
         authenticated_client = APIClient()
         user = get_users[3]
         authenticated_client.force_authenticate(user=user)
         data = {
         "waiter": 2,
-        "menu_dishes": [1],
-        "menu_drinks": [1]
+        "menu_dishes": [2],
+        "menu_drinks": [2]
         }
         response = authenticated_client.patch('/api/orders/1/', data=data, format='json')
-        assert response.status_code == 200
+        assert response.data["number"] == get_orders[0].number
+        assert response.data["menu_dishes"] == [2]
+        assert response.data["menu_drinks"] == [2]
+        assert response.data["waiter"] == 2
+        assert response.data["status"] == get_orders[1].status
 
     @pytest.mark.django_db
     def test_views_update_order_with_guest_client(self):
@@ -393,4 +413,4 @@ class TestViewsOrders():
         "menu_drinks": [1]
         }
         response = guest_client.patch('/api/orders/1/', data=data, format='json')
-        assert response.status_code == 403
+        assert response.data["detail"] == "Чтобы редактировать заказ, вы должны быть авторизованы."

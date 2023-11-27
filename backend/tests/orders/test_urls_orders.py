@@ -158,7 +158,7 @@ class TestUrlsOrders():
         "status": "DDR"
         }
         response = authenticated_client.patch('/api/orders/1/', data=data, format='json')
-        assert response.status_code == 400
+        assert response.status_code == 403
 
     @pytest.mark.django_db
     def test_update_order_with_wrong_status_NA_to_DDS(self, get_users):
@@ -169,18 +169,7 @@ class TestUrlsOrders():
         "status": "DDS"
         }
         response = authenticated_client.patch('/api/orders/1/', data=data, format='json')
-        assert response.status_code == 400
-
-    @pytest.mark.django_db
-    def test_update_order_with_wrong_status_NA_to_DDR(self, get_users):
-        authenticated_client = APIClient()
-        user = get_users[1]
-        authenticated_client.force_authenticate(user=user)
-        data = {
-        "status": "DDR"
-        }
-        response = authenticated_client.patch('/api/orders/1/', data=data, format='json')
-        assert response.status_code == 400
+        assert response.status_code == 403
 
     @pytest.mark.django_db
     def test_update_order_with_wrong_status_DDR_to_NA(self, get_users):
