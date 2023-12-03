@@ -22,7 +22,6 @@
 
 .register__window {
     width: 50%;
-    height: 60vh;
 
     display: flex;
     flex-direction: column;
@@ -33,15 +32,18 @@
     border-color: #272727bb;
     background: #272727bb;
 
-    flex-shrink: 1;
     margin: 0 auto;
-    padding: 2%;
+    padding: 3%;
+}
+
+.register__bg .Container{
+    padding-bottom: 5%;
 }
 
 .register__button{
     display: block;
-    width: 30vh;
-    height: 5vh;
+    width: 35vh;
+    height: 4vh;
     border-radius: 10px;
     
     align-items: center;
@@ -49,7 +51,7 @@
     color: #000;
     text-align: center;
     font-family: Inter;
-    font-size: 24px;
+    font-size: 3vh;
     
     font-weight: 200;
     border: #ffffff;
@@ -58,22 +60,19 @@
 }
 
 .register__continue__flex{
-    margin-top: auto;
+    margin-top: 10%;
     justify-self: flex-end;
     height: auto;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    
-    
+    align-items: center; 
+    justify-content: center;
 }
 
 .register__name__flex {
-    width: 70%;
+    width: 80%;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    
+    margin-bottom: 5%;
 }
 
 .register__name__flex input{
@@ -81,7 +80,6 @@
 }
 
 .register__fatherly{
-    display: flex;
     width: 70%;
     margin-bottom: 5%;
 }
@@ -95,15 +93,16 @@
 }
 
 .register__continue__flex a {
-    padding-top: 10%;
+    padding-top: 5%;
     color: #FFF;
-    font-size: 24px;
     font-weight: 300;
 }
 
 .register__bg a {
     text-decoration: none;
+    font-size: 3vh;
 }
+
 .register__bg a:active {
     color: #c1c1c1;
 }

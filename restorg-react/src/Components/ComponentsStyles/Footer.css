@@ -1,6 +1,6 @@
 .footer__bg{
     background-color: #454545;
-    height: 20vh;
+    word-wrap: break-word;
 }
 
 .footer__title{

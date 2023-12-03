@@ -1,16 +1,16 @@
 .main .header__logo {
     display: none;
 }
+
+
 .main__bg{
 
     background: url("../../Styles/image/3321789.png") 0px 0px/1080px auto repeat;
-    min-height: 100vh;
-
     animation-name: bg__move;
     animation-duration: 30s;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
-   
+    padding-bottom: 15%;
 } 
 
 @keyframes bg__move {

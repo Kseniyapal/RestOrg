@@ -20,22 +20,24 @@
 }
 
 .header__logo{
-    flex-basis: 50%;
+    flex-basis: 40%;
 }
 
 .header__nav__flex{
+    width: 40%;
     display: flex;
-    flex: 1 1 auto;
-    
+    flex: 0 0 auto;
 }
 
 .header__main{
     padding-right: 3%;
+    white-space: nowrap;
     border-right: #ffffff solid 2px;
 }
 
 .header__about{
     padding-left: 3%;
+    white-space: nowrap;
 }
 
 

@@ -15,6 +15,7 @@ import "./PagesStyles/Register.css";
 const Register = () => {
     return (
         <Wrapper>
+            <Header/>
             <Content>
                 <div className="register__bg">
                     <Container>
@@ -35,9 +36,7 @@ const Register = () => {
                                     <UserField name="логин"/>
                                     <UserField type="password" name="пароль"/>
                                 </div>
-                               
-                                
-                                
+                                            
                                 <div className="register__continue__flex">
                                     <button className="register__button">Зарегистрироваться</button>
                                     <a href="/" className="a__back">Назад</a>
