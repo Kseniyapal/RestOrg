@@ -38,7 +38,7 @@
 }
 
 .menu__list{
-    
+    height: 100%;
     width: 90%;
     overflow: auto;
     display: flex;
@@ -73,7 +73,7 @@
 }
 
 .menu__search input{
-    width: 95%;
+    width: 97.5%;
 }
 
 .menu__drink, .menu__hot, .menu__water {
@@ -84,14 +84,14 @@
     display: grid;
     margin: 0 auto;
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(2, 150px); 
+    grid-template-rows: repeat(2, 2fr); 
   
 }
 
 .grid__item{
     border-color: #FFF;
-    width: 10px;
-    height: 10px;
+    width: auto;
+    height: auto;
 }
 
 .menu__head {
@@ -104,10 +104,15 @@
 
     text-align: center;
     font-family: Inter;
-    font-size: 24px;
+    font-size: 20px;
     font-style: normal;
     font-weight: 300;
     line-height: normal;
+}
+
+.menu__head span {
+    align-self: flex-end;
+    margin-left: 5%;
 }
 
 .menu__search input::placeholder {
@@ -117,5 +122,10 @@
     font-weight: 300;
     color: rgb(126, 126, 126);
   }
+
+
+  .menuItem a:visited{
+    text-decoration: none;
+}
 
 

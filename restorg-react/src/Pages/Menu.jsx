@@ -4,6 +4,7 @@ import Header from "../Components/Header";
 import Footer from "../Components/Footer";
 import Content from "../Components/Content";
 import Wrapper from "../Components/Wrapper";
+import MenuItem from "../Components/MenuItem";
 import WindowC from "../Components/UI/WindowC";
 import AcceptButton from "../Components/UI/Buttons/AcceptButton"
 import UserField from "../Components/UI/Fields/UserField";
@@ -11,14 +12,15 @@ import "./PagesStyles/Menu.css";
 import SearchIco from "../Styles/icons/search_ico.svg"
 import WaterIco from "../Styles/icons/Water.png"
 import HotIco from "../Styles/icons/Hot.png"
+import ImgSource from "../Styles/image/m70eedf8 2.png"
 
 
 
 
 
-const Register = () => {
+const Menu = () => {
     return (
-        <Wrapper>
+        <Wrapper> 
             <Header/>
             <Content>
                 <div className="menu__bg">
@@ -35,22 +37,6 @@ const Register = () => {
 
                                     <div className="menu__water">
                                         <div className="menu__head">
-                                            <img src={WaterIco}></img>
-                                            <span>Напитки</span>
-                                        </div>
-                                        
-                                        <hr></hr>
-
-                                        <div className="menu__grid">
-                                            <div className="grid__item">
-
-                                            </div>
-                                        </div>
-                                        
-                                    </div>
-
-                                    <div className="menu__water">
-                                        <div className="menu__head">
                                             <img src={HotIco}></img>
                                             <span>Горячее</span>
                                         </div>
@@ -58,9 +44,35 @@ const Register = () => {
                                         <hr></hr>
 
                                         <div className="menu__grid">
-                                            <div className="grid__item">
+                                            <MenuItem link="/menu_position" name="Название" imgSource={ImgSource} mass="350г" time="10мин" cost="700₽"></MenuItem>
 
-                                            </div>
+                                            <MenuItem link="/menu_position" name="Название" imgSource={ImgSource} mass="350г" time="10мин" cost="700₽"></MenuItem>
+                                            <MenuItem link="/menu_position" name="Название" imgSource={ImgSource} mass="350г" time="10мин" cost="700₽"></MenuItem>
+                                            <MenuItem link="/menu_position" name="Название" imgSource={ImgSource} mass="350г" time="10мин" cost="700₽"></MenuItem>
+                                            <MenuItem link="/menu_position" name="Название" imgSource={ImgSource} mass="350г" time="10мин" cost="700₽"></MenuItem>
+
+
+
+                                        </div>
+                                        
+                                    </div>
+
+                                    <div className="menu__hot">
+                                        <div className="menu__head">
+                                            <img src={WaterIco}></img>
+                                            <span>Напитки</span>
+                                        </div>
+                                        
+                                        <hr></hr>
+
+                                        <div className="menu__grid">
+                                            
+                                        <MenuItem link="/menu_position" name="Название" imgSource={ImgSource} mass="350г" time="10мин" cost="700₽"></MenuItem>
+                                        <MenuItem link="/menu_position" name="Название" imgSource={ImgSource} mass="350г" time="10мин" cost="700₽"></MenuItem>
+                                        <MenuItem link="/menu_position" name="Название" imgSource={ImgSource} mass="350г" time="10мин" cost="700₽"></MenuItem>
+                                        <MenuItem link="/menu_position" name="Название" imgSource={ImgSource} mass="350г" time="10мин" cost="700₽"></MenuItem>
+
+                                            
                                         </div>
                                         
                                     </div>
@@ -91,4 +103,4 @@ const Register = () => {
     );
 }
 
-export default Register;
+export default Menu;
