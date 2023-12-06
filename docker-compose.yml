@@ -1,24 +1,26 @@
 version: '3'
 
 volumes:
-  sqlite_data:
+  pg_data:
   static:
   media:
 
 services:
   db:
-    image: sqlite:latest
-    container_name: db-sqlite
+    image: postgres:13
+    env_file: .env
     volumes:
-      - sqlite_data
+      - pg_data:/var/lib/postgres/data
   backend:
     image: kseniyapal/restorg_backend
+    env_file: .env
     volumes:
       - static:/static/
       - media:/app/media/
 
   gateway:
     image: kseniyapal/restorg_nginx
+    env_file: .env
     ports:
       - 8088:80
     volumes:
@@ -27,6 +29,7 @@ services:
 
   frontend: 
     image: d0kshin/restorg_react
+    env_file: .env
     volumes:
       - static:/static/
     
