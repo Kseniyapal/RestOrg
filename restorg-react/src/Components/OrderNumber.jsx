@@ -3,10 +3,11 @@ import "../Components/ComponentsStyles/OrderNumber.css"
 
 const OrderNumber = ({children, ...props}) => {
     return (
-        <div className="order__bg">
-            <a {...props} className="order">{children}</a>
-        </div>    
-    
+            <a {...props} className="order">
+                <div className="order__bg">
+                    {children}
+                </div>    
+            </a>
     )
 }
 

@@ -28,8 +28,8 @@ const Main = () => {
                         <img  src={bigLogo} className="main__logo"></img>
         
                         <WindowC>   
-                            <AcceptButton href='/order' className="AcceptButton" >Заказ Блюд</AcceptButton>
-                            <AcceptButton href='/order' className="AcceptButton">Заказ На Баре</AcceptButton>                      
+                            <AcceptButton href='/menu' className="AcceptButton" >Заказ Блюд</AcceptButton>
+                            <AcceptButton href='/menu' className="AcceptButton">Заказ На Баре</AcceptButton>                      
                         </WindowC>
                         
                         <AcceptButtonMini href='/menu' className='AcceptButtonMini1'>

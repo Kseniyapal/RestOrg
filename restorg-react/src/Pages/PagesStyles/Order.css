@@ -70,6 +70,7 @@
 }
 
 .role__info__flex{
+    font-size: 3vh;
     width: 40%;
     display: flex;
     flex-direction: column;
@@ -81,15 +82,20 @@
     margin-bottom: 3%;
 }
 
+.table__info{
+    font-size: 4vh;
+
+}
+
 .oreder__number{
     color: #FFF;
     font-family: Inter;
-    font-size: 128px;
+    font-size: 15vh;
     font-weight: 800;
 }
 
 .order__time{
-    font-size: 40px;
+    font-size: 5vh;
 }
 
 .order__status{
@@ -125,8 +131,9 @@
     height: 8vh;
     border-radius: 10px;
     color: #000;
-    font-size: 36px;
+    font-size: 4vh;
     font-weight: 200;
+    border: none;
 }
 
 

@@ -25,6 +25,13 @@
     text-decoration: none;
 }
 
+.item__link{
+    height: 100%;
+    display: block;
+    text-decoration: none;
+    color: #FFF;
+}
+
 .item__img{
     width: 50%;
     height: 100%;
@@ -37,7 +44,7 @@
 .item__img img{
     min-width: 100%;
     min-height: 100%;
-    flex-shrink: 0;
+    flex-shrink: 1;
 }
 
 .item__name {

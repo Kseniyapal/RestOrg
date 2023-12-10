@@ -2,7 +2,7 @@
     color:black;
 
     font-family: Inter;
-    font-size: 250%;
+    font-size: 5vh;
     font-weight: 800;
     line-height: normal;
     display:block;
@@ -13,14 +13,17 @@
 }
 
 .order__bg{
-
-    margin: 10px;
+    margin: 5%;
     display: flex;
     align-items: center;
     justify-content: center;
-
+    width: 15vh;
     margin-bottom: 1%;
-    border-radius: 10px;
+    border-radius: 1vh;
+}
+
+.order{
+    display: block;
 }
 
 .column1__flex .order__bg{
