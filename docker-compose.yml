@@ -30,6 +30,8 @@ services:
   frontend: 
     image: d0kshin/restorg_react
     env_file: .env
+    ports:
+      - 30:3000
     volumes:
       - static:/static/
     
