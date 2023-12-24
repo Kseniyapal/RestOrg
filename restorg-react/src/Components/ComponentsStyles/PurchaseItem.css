@@ -1,0 +1,40 @@
+.purchase__flex{
+    display: flex;
+    flex-direction: column;
+    width: 15vh;
+    margin-right: 2%;
+    justify-content: space-between;
+    color: #FFF;
+}
+
+.purchase__img{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 10vh;
+    width: 15vh;
+    margin-bottom: 0.5vh;
+    background-color: black;
+
+}
+
+.purchase__counter__flex{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.purchase__img img{
+    width: 15vh;
+    height: 100%;
+    object-fit: cover;
+}
+
+.purchase__counter__flex button{
+    width: 3vh;
+    height: 3vh;
+    font-size: 2vh;
+    background-color: #272727;
+    border: 1px solid #cccccc;
+    color: #cccccc;
+}
