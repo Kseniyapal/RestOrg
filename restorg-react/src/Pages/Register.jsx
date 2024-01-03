@@ -13,6 +13,13 @@ import "./PagesStyles/Register.css";
 
 
 const Register = () => {
+    const registerUser = () => {
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ title: 'React POST Request Example' })
+        };
+    }
     return (
         <Wrapper>
             <Header/>

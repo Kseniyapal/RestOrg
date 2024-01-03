@@ -3,9 +3,19 @@ import Header from "../Components/Header";
 import darkTriangle from "../Styles/icons/black_triangle.svg"
 import lightTriangle from "../Styles/icons/light_triangle.svg"
 import OrderNumber from "../Components/OrderNumber.jsx"
+import { useEffect } from "react";
 
 
 const Board = () => {
+    const fetchOrders = () => {
+        fetch("http://localhost:8088/api/orders/")
+        .then(response => response.json())
+        .then(data => console.log(data))
+    }  
+
+    useEffect(() => {
+        fetchOrders()
+    }, [])
     return (
         <div className="board">
             <Header></Header>
@@ -24,113 +34,20 @@ const Board = () => {
                         <div className="column1__flex">
                             <div className="board__orders">
                             <OrderNumber href="/order">105</OrderNumber>
-                            <OrderNumber href="/order">105</OrderNumber>
-                            <OrderNumber href="/order">105</OrderNumber>
-                            <OrderNumber href="/order">105</OrderNumber>
-                            <OrderNumber href="/order">105</OrderNumber>
-                            <OrderNumber href="/order">105</OrderNumber>
-                            <OrderNumber href="/order">105</OrderNumber>
-                            <OrderNumber href="/order">105</OrderNumber>
-                            <OrderNumber href="/order">105</OrderNumber>
-                            <OrderNumber href="/order">105</OrderNumber>
-                            <OrderNumber href="/order">105</OrderNumber>
-                            <OrderNumber href="/order">105</OrderNumber>
-                            <OrderNumber href="/order">105</OrderNumber>
-                            <OrderNumber href="/order">105</OrderNumber>
-                            <OrderNumber href="/order">105</OrderNumber>
-                            <OrderNumber href="/order">105</OrderNumber>
-                            <OrderNumber href="/order">105</OrderNumber>
-                            <OrderNumber href="/order">105</OrderNumber>
-                            <OrderNumber href="/order">105</OrderNumber>
-                            <OrderNumber href="/order">105</OrderNumber>
-                            <OrderNumber href="/order">105</OrderNumber>
-                            <OrderNumber href="/order">105</OrderNumber>
-                            <OrderNumber href="/order">105</OrderNumber>
-                            <OrderNumber href="/order">105</OrderNumber>
-                            <OrderNumber href="/order">105</OrderNumber>
-                            <OrderNumber href="/order">105</OrderNumber>
-                            <OrderNumber href="/order">105</OrderNumber>
-                            <OrderNumber href="/order">105</OrderNumber>
-                            <OrderNumber href="/order">105</OrderNumber>
-                            <OrderNumber href="/order">105</OrderNumber>
-                            <OrderNumber href="/order">105</OrderNumber>
-                            <OrderNumber href="/order">105</OrderNumber>
 
                             </div>
                         </div>
 
                         <div className="column2__flex">
                             <div className="board__orders">
-                                <OrderNumber href="/order">105</OrderNumber>
-                                <OrderNumber href="/order">105</OrderNumber>
-                                <OrderNumber href="/order">105</OrderNumber>
-                                <OrderNumber href="/order">105</OrderNumber>
-                                <OrderNumber href="/order">105</OrderNumber>
-                                <OrderNumber href="/order">105</OrderNumber>
-                                <OrderNumber href="/order">105</OrderNumber>
-                                <OrderNumber href="/order">105</OrderNumber>
-                                <OrderNumber href="/order">105</OrderNumber>
-                                <OrderNumber href="/order">105</OrderNumber>
-                                <OrderNumber href="/order">105</OrderNumber>
-                                <OrderNumber href="/order">105</OrderNumber>
-                                <OrderNumber href="/order">105</OrderNumber>
-                                <OrderNumber href="/order">105</OrderNumber>
-                                <OrderNumber href="/order">105</OrderNumber>
-                                <OrderNumber href="/order">105</OrderNumber>
-                                <OrderNumber href="/order">105</OrderNumber>
-                                <OrderNumber href="/order">105</OrderNumber>
-                                <OrderNumber href="/order">105</OrderNumber>
-                                <OrderNumber href="/order">105</OrderNumber>
-                                <OrderNumber href="/order">105</OrderNumber>
-                                <OrderNumber href="/order">105</OrderNumber>
-                                <OrderNumber href="/order">105</OrderNumber>
-                                <OrderNumber href="/order">105</OrderNumber>
-                                <OrderNumber href="/order">105</OrderNumber>
-                                <OrderNumber href="/order">105</OrderNumber>
-                                <OrderNumber href="/order">105</OrderNumber>
-                                <OrderNumber href="/order">105</OrderNumber>
-                                <OrderNumber href="/order">105</OrderNumber>
-                                <OrderNumber href="/order">105</OrderNumber>
-                                <OrderNumber href="/order">105</OrderNumber>
-                                <OrderNumber href="/order">105</OrderNumber>
-                                </div>
+
+                            </div>
                         </div>
 
                         <div className="column3__flex">
                             <div className="board__orders">
-                                <OrderNumber href="/order">105</OrderNumber>
-                                <OrderNumber href="/order">105</OrderNumber>
-                                <OrderNumber href="/order">105</OrderNumber>
-                                <OrderNumber href="/order">105</OrderNumber>
-                                <OrderNumber href="/order">105</OrderNumber>
-                                <OrderNumber href="/order">105</OrderNumber>
-                                <OrderNumber href="/order">105</OrderNumber>
-                                <OrderNumber href="/order">105</OrderNumber>
-                                <OrderNumber href="/order">105</OrderNumber>
-                                <OrderNumber href="/order">105</OrderNumber>
-                                <OrderNumber href="/order">105</OrderNumber>
-                                <OrderNumber href="/order">105</OrderNumber>
-                                <OrderNumber href="/order">105</OrderNumber>
-                                <OrderNumber href="/order">105</OrderNumber>
-                                <OrderNumber href="/order">105</OrderNumber>
-                                <OrderNumber href="/order">105</OrderNumber>
-                                <OrderNumber href="/order">105</OrderNumber>
-                                <OrderNumber href="/order">105</OrderNumber>
-                                <OrderNumber href="/order">105</OrderNumber>
-                                <OrderNumber href="/order">105</OrderNumber>
-                                <OrderNumber href="/order">105</OrderNumber>
-                                <OrderNumber href="/order">105</OrderNumber>
-                                <OrderNumber href="/order">105</OrderNumber>
-                                <OrderNumber href="/order">105</OrderNumber>
-                                <OrderNumber href="/order">105</OrderNumber>
-                                <OrderNumber href="/order">105</OrderNumber>
-                                <OrderNumber href="/order">105</OrderNumber>
-                                <OrderNumber href="/order">105</OrderNumber>
-                                <OrderNumber href="/order">105</OrderNumber>
-                                <OrderNumber href="/order">105</OrderNumber>
-                                <OrderNumber href="/order">105</OrderNumber>
-                                <OrderNumber href="/order">105</OrderNumber>
-                                    </div>
+
+                            </div>
                         </div>
 
                     </div>

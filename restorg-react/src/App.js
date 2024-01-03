@@ -9,6 +9,7 @@ import Board from "./Pages/Board.jsx"
 import Menu from "./Pages/Menu.jsx"
 import Order from './Pages/Order.jsx';
 import Dish from './Pages/DIsh.jsx';
+import Payment from './Pages/Payment.jsx'
 
 
 function App() {
@@ -21,7 +22,8 @@ function App() {
         <Route path="/sign" element={<Sign/>}/>
         <Route path="/order" element={<Order/>}/>
         <Route path="/board" element={<Board/>}/>
-        <Route path="/menu_Position" element={<Dish/>}/>
+        <Route path="/menu_position/:id/:type" element={<Dish/>}/>
+        <Route path="/payment" element={<Payment/>}/>
         <Route path="*" element={<NotFound/>}/>
       </Routes>
     </BrowserRouter>

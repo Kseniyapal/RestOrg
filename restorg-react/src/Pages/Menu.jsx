@@ -1,4 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useAsyncError, useLocation } from "react-router"
+import { useNavigate } from "react-router"
 import  Container  from "../Components/Container";
 import Header from "../Components/Header";
 import Footer from "../Components/Footer";
@@ -13,12 +15,24 @@ import "./PagesStyles/Menu.css";
 import SearchIco from "../Styles/icons/search_ico.svg"
 import WaterIco from "../Styles/icons/Water.png"
 import HotIco from "../Styles/icons/Hot.png"
+import { Link } from "react-router-dom";
+import PriceAmount from "../Components/PriceAmount";
+import { isDisabled } from "@testing-library/user-event/dist/utils";
 // import ImgSource from "../../public/images/1644909112_9-fikiwiki-com-p-kartinki-yaichnitsa-glazunya-10.jpg"
 
 const Menu = () => {
-    const [purchases, setPurchases] = useState([])
+    const [purchases, setPurchases] = useState(() => {
+        if (localStorage.getItem("purchases") == ""){
+            return []
+        }
+        const saved = localStorage.getItem("purchases")
+        const initialValue = JSON.parse(saved)
+        return initialValue
+    })
     const [drinks, setDrinks] = useState([])
     const [dishes, setDishes] = useState([])
+    const [priceAmount, setPriceAmount] = useState(0)
+    const [orderButton, setOrderButton] = useState("disabled")
 
     const fetchDishes = () => {
         fetch("http://localhost:8088/api/dishes/")
@@ -32,22 +46,83 @@ const Menu = () => {
         .then(data => setDrinks(data))
     }  
 
-    const deleteItem = (purchase) => {
+    // const reIdDrinks = () => {
+    //     const newDrinks = drinks
+    //     newDrinks.forEach(el => el.id += dishes.length)
+    //     setDrinks(newDrinks)
+    //     console.log(newDrinks)
+
+    // }
+
+    const deletePurchase = (purchase) => {
         const index = purchases.indexOf(purchase)
         purchases.splice(index, 1)
         setPurchases([...purchases])
+        return index
     } 
-    
-    useEffect(() => {
-        fetchDishes()
-        fetchDrinks()
-    }, [])
+
+    const insertPurchase = (index, purchase) => {
+        purchases.splice(index, 0, purchase)
+        setPurchases([...purchases])
+    }
+
+    const changePurchaseById = (purchase) => {
+        const oldPurchase = purchases.filter(el => el.id == purchase.id && el.type == purchase.type)[0]
+        const index = deletePurchase(oldPurchase)
+        insertPurchase(index, purchase)
+    }
 
     const addPurchase = (purchase) => {
-        if(purchases.filter(el => el.id == purchase.id).length == 0)
-        setPurchases([...purchases, purchase])
+        if(purchases.filter(el => el.id == purchase.id && el.type == purchase.type).length == 0){
+            setPurchases([...purchases, purchase])
+        }
+        console.log(localStorage.getItem("purchases"))
+        //  пытался сделать добавление по кнопке из меню (сложно)
+        // else{
+        //     const newPurchase = purchases.filter(el => el.id == purchase.id && el.type == purchase.type)[0]
+        //     newPurchase.count += 1
+        //     console.log(newPurchase)
+        //     changePurchaseById(newPurchase)
+        //     setPurchases([...purchases])
+        // }
     }
-    
+
+    const countAmountOfPrice = () => {
+        let amount = 0
+        JSON.parse(localStorage.getItem("purchases")).forEach(element => {
+            const price = element.price
+            const count = element.count
+            amount += price * count
+        });
+        setPriceAmount(amount)
+    } 
+
+    const setOrderButtonActive = (purchases) => {
+        if (purchases.length > 0){
+            setOrderButton("")
+        }
+        else{
+            setOrderButton("disabled")
+        }
+    }
+
+    useEffect(() => {
+        fetchDishes()
+        // reIdDrinks()
+        fetchDrinks()
+        console.log(localStorage.getItem("purchases"))
+        localStorage.setItem("purchases", JSON.stringify([]))
+
+    }, [])
+
+    useEffect(() => {
+        localStorage.setItem("purchases", JSON.stringify(purchases))
+        countAmountOfPrice()
+        setOrderButtonActive(purchases)
+    }, [purchases])
+
+    const nav = useNavigate()
+    const location = useLocation()    
     return (
         <Wrapper> 
             <Header/>
@@ -55,81 +130,64 @@ const Menu = () => {
                 <div className="menu__bg">
                     <Container>
                         <div className="menu__window__flex">
-
                             <div className="menu__search">
-                                <img src={SearchIco}></img>
-                                <input placeholder="Поиск по названию..."></input>
+                                <a href={location.pathname + "#dishes"} className="search__drink">
+                                    <img src={HotIco}></img>
+                                    <span>Блюда</span>
+                                </a>
+                                <a href={location.pathname + "#drinks"} className="search__drink">
+                                    <img src={WaterIco}></img>
+                                    <span>Напитки</span>
+                                </a>
                             </div>
-
                             <div className="menu__list__flex">
                                 <div className="menu__hot">
                                     <div className="menu__head">
                                         <img src={HotIco}></img>
-                                        <span>Блюда</span>
+                                        <span >Блюда</span>
                                     </div>
-                                    
-                                    <hr></hr>
-
+                                    <hr id="dishes"></hr>
                                     <div className="menu__grid">
                                         {dishes.map((dish) => 
-                                            <MenuItem addPurch={() =>addPurchase(dish)} key={dish.id} link="/menu_position" name={dish.name} imgSource={dish.image} mass={dish.weight + "г"} cost={dish.price + "₽"}></MenuItem>
+                                            <MenuItem type={"dish"} addPurch={addPurchase} key={dish.id} id={dish.id} name={dish.name} imgSource={dish.image} mass={dish.weight + "г"} price={dish.price + "₽"}></MenuItem>
                                         )}
-                                    </div>
-                                    
+                                    </div>                                  
                                 </div>
-
-
-                                <div className="menu__water">
+                                <div  className="menu__water">
                                     <div className="menu__head">
                                         <img src={WaterIco}></img>
                                         <span>Напитки</span>
-                                    </div>
-                                    
-                                    <hr></hr>
-
+                                    </div>               
+                                    <hr id="drinks" ></hr>
                                     <div className="menu__grid">
                                         {drinks.map((dish) => 
-                                            <MenuItem addPurch={addPurchase} key={dish.id} id={dish.id} link="/menu_position" name={dish.name} imgSource={dish.image} cost={dish.price + "₽"}></MenuItem>
+                                            <MenuItem type={"drink"} addPurch={addPurchase} key={dish.id} id={dish.id} name={dish.name} imgSource={dish.image} price={dish.price + "₽"}></MenuItem>
                                         )}
                                     </div>
-                                    
                                 </div>
-                                
                             </div>
-
-
-
-
-                            
                         </div>
-                            
-                
                     </Container>
                 </div>
                 <div className="menu__order">
                     <Container>
                         <div className="order__flex">
-
                             <div className="order__list__flex">
                                 {purchases.map((purchase) => 
-                                    <PurchaseItem id={purchase.id} purchase={purchase} delete={deleteItem} key={purchase.id} imgSource={purchase.image}/>
+                                      <PurchaseItem count={purchase.count} name={purchase.name} id={purchase.id} purchase={purchase} change={changePurchaseById} delete={deletePurchase} key={purchase.type + purchase.id} imgSource={purchase.image}/>
                                 )}
-
                             </div>
-
                             <div className="order__button">
-                                <button>Оформить заказ</button>
+                                <button onClick={() => {
+                                    nav("/payment")
+                                }} disabled={orderButton}>Оформить заказ</button>                                     
+                                <PriceAmount className="order__price" amount={priceAmount}></PriceAmount>
+                                
                             </div>
-
                         </div>
-                        
                     </Container>
                 </div>
-                
             </Content>
-
-
-            <Footer/>
         </Wrapper>
         
         

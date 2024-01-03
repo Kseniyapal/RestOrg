@@ -5,7 +5,6 @@ import Footer from "../Components/Footer";
 import Content from "../Components/Content";
 import Wrapper from "../Components/Wrapper";
 import "./PagesStyles/Main.css";
-import background from "../Styles/image/3321789.png";
 import WindowC from "../Components/UI/WindowC";
 import menuLogo from "../Styles/icons/Group 28.png"
 import userLogo from "../Styles/icons/User.png"
@@ -32,12 +31,12 @@ const Main = () => {
                             <AcceptButton href='/menu' className="AcceptButton">Заказ На Баре</AcceptButton>                      
                         </WindowC>
                         
-                        <AcceptButtonMini href='/menu' className='AcceptButtonMini1'>
+                        <AcceptButtonMini href='/board' className='AcceptButtonMini'>
                             <img src={menuLogo} className="buttonImg"></img>
-                            Меню
+                            Таблица<br/> Заказов
                         </AcceptButtonMini>
                     
-                        <AcceptButtonMini href='/sign' className='AcceptButtonMini2'>
+                        <AcceptButtonMini href='/sign' className='AcceptButtonMini'>
                             <img src={userLogo} className="buttonImg"></img>
                             Войти как<br/> работник
                         </AcceptButtonMini>

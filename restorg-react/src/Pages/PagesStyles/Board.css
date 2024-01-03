@@ -120,8 +120,8 @@
     margin: 5% auto;
 
     display: grid;
-    grid-template-columns: repeat(2, 47%);
-    grid-template-rows: repeat(15, 10%); 
+    grid-template-columns: repeat(2, 49%);
+    grid-template-rows: repeat(10, 10%); 
 
 }
 
