@@ -168,7 +168,7 @@ class MenuItemDishViewSet(ModelViewSet):
 
     def perform_create(self, serializer):
         user = self.request.user
-        if not user.is_authenticated :
+        if not user.is_authenticated and not user.is_staff:
             raise PermissionDenied("Чтобы создать пункт меню, вы должны обладать правами администратора.")
         data = serializer.validated_data
         serializer.save(name=data['name'],

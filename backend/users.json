@@ -119,5 +119,13 @@
     "role": "C",
     "email": "portov@portov.ru",
     "password": "polihgfgthjkgbh"
+  },
+  {
+    "username": "admin",
+    "first_name": "admin",
+    "last_name": "admin",
+    "role": "A",
+    "email": "ad@ad.ru",
+    "password": "sedrftgybh567jn"
   }
 ]}
