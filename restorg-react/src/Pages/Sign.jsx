@@ -13,6 +13,7 @@ import { useNavigate } from "react-router";
 const Sign = () => {
     const [email, setEmail] = useState()
     const [pass, setPass] = useState()
+    const [errorMessage, setErrorMessage] = useState("")
     const nav = useNavigate()
 
     const loadUser = (token) => {
@@ -21,10 +22,15 @@ const Sign = () => {
             headers: { "Authorization": "Token "+ token,
             'Content-Type': 'application/json'} 
         })
-            .then(response => response.json())
-            .then(data => localStorage.setItem("user", JSON.stringify(data.filter(el => el.email == email)[0])))  
+        .then(response => response.json())
+        .then(data => {
+            console.log(data)
+            localStorage.setItem("user", JSON.stringify(data.filter(el => el.email == email)[0]))
+            nav("/")  
+        })
+
     }
-    const signIn = () => {
+    const signIn = () => {        
         const requestOptions = {
             method: "POST",
             headers: { 'Content-Type': 'application/json' },
@@ -34,14 +40,35 @@ const Sign = () => {
             }) 
         }
         fetch("http://127.0.0.1:8088/api/auth/token/login", requestOptions)
-            .then(response => response.json())
-            .then(data => {
-                console.log(data.auth_token)
-                const token = data.auth_token
-                localStorage.setItem("token", JSON.stringify(data))
-                loadUser(token)
-            })
-            nav("/")   
+        .then(response => {
+            if(!response.ok){
+                throw Error("Почта или пароль указаны неверно")
+            }
+            else{
+                return response.json()
+            }
+        })
+        .then(data => {
+            if(JSON.parse(localStorage.getItem("token")) != ""){
+                //если токен есть - разлогиниваем пользователя
+                const token = JSON.parse(localStorage.getItem("token")).auth_token
+                fetch("http://localhost:8088/api/auth/token/logout/", {
+                    method: "POST",
+                    headers: { "Authorization": "Token " + token,
+                    'Content-Type': 'application/json'} 
+                })
+                localStorage.setItem("token", JSON.stringify([]))
+                localStorage.setItem("user", JSON.stringify([]))
+            }
+            const token = data.auth_token
+            localStorage.setItem("token", JSON.stringify(data))
+            loadUser(token)
+        })
+        .catch(err =>{
+            setErrorMessage(err.message)
+            console.log(err.message)
+        })
+             
     }
 
     return (
@@ -64,6 +91,7 @@ const Sign = () => {
                                 value={pass} 
                                 onChange={e => setPass(e.target.value)}
                                 />
+                                <div className="sign__err">{errorMessage == ""? "" : errorMessage}</div>
                                 <div className="sign__continue__flex">
                                     <button onClick={signIn} className="sign__button">Войти</button>
                                     <a href="/" className="a__back">Назад</a>

@@ -11,8 +11,6 @@ import bigLogo from "../Styles/image/bigLogo.png"
 import PaymentItem from "../Components/PaymentItem";
 import PriceAmount from "../Components/PriceAmount"
 
-
-
 const Payment = () => {
     const nav = useNavigate()
     const [purchases, setPurchases] = useState(() => {
@@ -23,6 +21,7 @@ const Payment = () => {
         const initialValue = JSON.parse(saved)
         return initialValue
     })
+    const [additionalMessage, setAdditionalMessage] = useState("")
     const [priceAmount, setPriceAmount] = useState(0)
     const [orderButton, setOrderButton] = useState("disabled")
 
@@ -66,6 +65,13 @@ const Payment = () => {
     const payPurchase = () => {
         postOrder()
         localStorage.setItem("purchases", JSON.stringify([]))
+        const user = JSON.parse(localStorage.getItem("user"))
+        if(user != ""){
+            nav("/board")
+        }
+        else{
+            nav("/")
+        }
     }
 
     useEffect(() => {
@@ -77,16 +83,43 @@ const Payment = () => {
     }, [purchases])
 
     const postOrder = () => {
+        const user = JSON.parse(localStorage.getItem("user"))
+        let waiter = null
+        const purchases = JSON.parse(localStorage.getItem("purchases"))
+        const dishesList = []
+        const drinksList = []
+        console.log(JSON.parse(localStorage.getItem("purchases")))
+        purchases.forEach(el => {
+            if(el.type == "dish"){
+                let count = el.count
+                while(count > 0){
+                    count -= 1
+                    dishesList.push(el.id)
+                    console.log(dishesList)
+                }         
+            }
+            else{
+                let count = el.count
+                while(count > 0){
+                    count -= 1
+                    drinksList.push(el.id)
+                }   
+            }
+        })
+        if(user != "" && user.role == "W"){
+            waiter = user.id
+        }
         const requestOptions = {
             method: "POST",
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                id: 1,
-                waiter: null,
+                waiter: waiter,
                 number: 1,
-                menu_dishes: [1],
-                menu_drinks: [1],
+                menu_dishes: dishesList,
+                menu_drinks: drinksList,
                 status: "NA",
+                comment: additionalMessage
+                
             })
         }
         fetch("http://127.0.0.1:8088/api/orders/", requestOptions)
@@ -110,18 +143,18 @@ const Payment = () => {
                             <div className="payment__additionat__column">
                                 <img  src={bigLogo} className="payment__logo"></img>
                                 <div className="payment__additiopnal__label">Примечание к заказу:</div>
-                                <textarea maxLength={450} className="payment__additiopnal"></textarea>
+                                <textarea onChange={e => setAdditionalMessage(e.target.value)} maxLength={450} className="payment__additiopnal"></textarea>
                             </div>
                             <div className="payment__pricelist__flex">
                                 <div className="payment__purchase">Ваш Заказ:</div>
                                 {purchases.map(purchase => 
                                     <PaymentItem purchase={purchase} name={purchase.name} price={purchase.price} count={purchase.count} key={purchase.id + purchase.type} change={changePurchaseById} delete={deletePurchase}></PaymentItem>
                                 )}
+                                <input onChange={() => {}} placeholder="Номер столика" className="payment__table"></input>
                                 <PriceAmount className="order__price" amount={priceAmount}></PriceAmount>
                                 <div className="payment__button">
                                     <button disabled={orderButton} onClick={() => {
                                         payPurchase()
-                                        nav("/board")
                                     }}>Оплатить</button>
                                 </div>
                             </div>

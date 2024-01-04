@@ -3,22 +3,57 @@ import Header from "../Components/Header";
 import darkTriangle from "../Styles/icons/black_triangle.svg"
 import lightTriangle from "../Styles/icons/light_triangle.svg"
 import OrderNumber from "../Components/OrderNumber.jsx"
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 
 const Board = () => {
+    let [dishes, setDishes] = useState([])
+    let [NADishes, setNADishes] = useState([])
+    let [IPDishes, setIPDishes] = useState([])
+    let [DoneDishes, setDoneDishes] = useState([])
+
     const fetchOrders = () => {
-        fetch("http://localhost:8088/api/orders/")
+        const token = JSON.parse(localStorage.getItem("token")).auth_token
+        fetch("http://localhost:8088/api/orders/",{
+            method: "GET",
+            headers: { "Authorization": "Token "+ token,
+            'Content-Type': 'application/json'} 
+        })
         .then(response => response.json())
-        .then(data => console.log(data))
+        .then(data => setDishes(data))
     }  
+
+
+    const splitDishes = () => {
+        dishes.forEach(element => {
+            if(element.status == "NA"){
+                NADishes.push(element)
+                setNADishes([...NADishes])
+            }
+            else if(element.status == "IP" || element.status == "DDS" || element.status == "DDK"){
+                IPDishes.push(element)
+                setIPDishes([...IPDishes])            
+            }
+            else{
+                DoneDishes.push(element)
+                setDoneDishes([...DoneDishes])
+            }
+        });
+    }
 
     useEffect(() => {
         fetchOrders()
     }, [])
+
+    useEffect(() => {
+        splitDishes()
+        console.log(IPDishes)
+    }, [dishes]) 
+
+
     return (
         <div className="board">
-            <Header></Header>
+            <Header></Header> 
 
             <img src={darkTriangle} className="dark__triangle1"></img>
             <img src={lightTriangle} className="light__triangle1"></img>
@@ -33,47 +68,52 @@ const Board = () => {
 
                         <div className="column1__flex">
                             <div className="board__orders">
-                            <OrderNumber href="/order">105</OrderNumber>
-
+                                {NADishes.map((el) => 
+                                    <OrderNumber element={el} colorStyle="column1__flex" key={el.id}  elementId={el.id}>{el.id}</OrderNumber>
+                                )}
                             </div>
                         </div>
 
                         <div className="column2__flex">
                             <div className="board__orders">
-
+                                {IPDishes.map((el) => 
+                                    <OrderNumber element={el} colorStyle="column2__flex" key={el.id} elementId={el.id} >{el.id}</OrderNumber>
+                                )}
                             </div>
                         </div>
-
+   
                         <div className="column3__flex">
                             <div className="board__orders">
-
+                                {DoneDishes.map(el => 
+                                    <OrderNumber element={el} colorStyle="column3__flex" key={el.id} elementId={el.id} >{el.id}</OrderNumber>
+                                )}
                             </div>
                         </div>
 
                     </div>
 
                 </div>
-                <div className="checkboxes">
-                    <form>
+                <div className="checkboxes">    
+                    {/* <form>
                         <div className="checkboxes__button">
                             <button>показать заказы</button>
                         </div>
                         <div className="checkboxes__flex">
                             <div className="checkbox__flex">
                                 <input type="radio" id="sort" name="waiter" />
-                                <label for="scales">официант</label>
+                                <label form="scales">официант</label>
                             </div>
                             <div className="checkbox__flex">
                                 <input type="radio" id="sort" name="cook" />
-                                <label for="scales">повар</label>
+                                <label form="scales">повар</label>
                             </div>
                             <div className="checkbox__flex">
                                 <input type="radio" id="sort" name="bartender" />
-                                <label for="scales">бармен</label>
+                                <label form="scales">бармен</label>
                             </div>
                         </div>
                    
-                    </form>
+                    </form> */}
                 </div>
             </div>
         </div>

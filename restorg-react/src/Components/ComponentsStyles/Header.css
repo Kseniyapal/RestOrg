@@ -26,7 +26,7 @@
 
 .menu__item, .menu__label{
     position: relative;
-    top: 8.5vh;
+    top: 7.1vh;
     right: 12vh;
     font-size: 2vh;
     width: 30vh;
@@ -49,11 +49,11 @@
 }
 
 .header__menu img{
-    width: 4vh;
+    width: 3vh;
 }
 
 .header__menu{
-    width: 4vh;
+    width: 3vh;
 }
 
 .header__menu img:hover{

@@ -105,6 +105,19 @@
     text-align: center;
 }
 
+.back__button img{
+    width: 6vh;
+}
+
+.orders__list__grid{
+    width: 100%;
+    height: auto;
+    display: grid;
+    height: auto;
+    grid-template-columns: repeat(auto-fill,minmax(15vh, 8fr));
+    grid-column-start:auto;
+}
+
 .table__number{
     font-weight: 800;
 }

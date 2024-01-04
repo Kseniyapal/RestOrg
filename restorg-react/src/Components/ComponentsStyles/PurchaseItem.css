@@ -46,9 +46,19 @@
 
 .purchase__name{
     height: auto;
-    font-size: 10px;
+    font-size: 12px;
     text-align: center;
     margin-bottom: 0.5vh;
+}
+
+.purchase__worked button{
+    width: 10vh;
+    border: none;
+    height: 3vh;
+    color: #000;
+    border-radius: 1vh;
+    font-size: 1.5vh;
+    
 }
 
 

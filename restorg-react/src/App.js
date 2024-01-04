@@ -20,7 +20,7 @@ function App() {
         <Route path="/menu" element={<Menu/>}/>
         <Route path="/register" element={<Register/>}/>
         <Route path="/sign" element={<Sign/>}/>
-        <Route path="/order" element={<Order/>}/>
+        <Route path="/order/:id" element={<Order/>}/>
         <Route path="/board" element={<Board/>}/>
         <Route path="/menu_position/:id/:type" element={<Dish/>}/>
         <Route path="/payment" element={<Payment/>}/>

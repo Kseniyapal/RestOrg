@@ -31,10 +31,10 @@ const Main = () => {
                             <AcceptButton href='/menu' className="AcceptButton">Заказ На Баре</AcceptButton>                      
                         </WindowC>
                         
-                        <AcceptButtonMini href='/board' className='AcceptButtonMini'>
+                        {/* <AcceptButtonMini href='/board' className='AcceptButtonMini'>
                             <img src={menuLogo} className="buttonImg"></img>
                             Таблица<br/> Заказов
-                        </AcceptButtonMini>
+                        </AcceptButtonMini> */}
                     
                         <AcceptButtonMini href='/sign' className='AcceptButtonMini'>
                             <img src={userLogo} className="buttonImg"></img>

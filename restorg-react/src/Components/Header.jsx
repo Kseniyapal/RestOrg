@@ -21,6 +21,8 @@ const Header = () => {
         localStorage.setItem("token", JSON.stringify([]))
         localStorage.setItem("user", JSON.stringify([]))
         nav("/")
+        setMenuItems([])
+        setmenuImgStyle({})
     }
 
     const mouseEnter = () => {
@@ -53,7 +55,7 @@ const Header = () => {
                         <img src={logo}/>
                     </div>
                     <div onClick={mouseEnter} onMouseLeave={mouseLeave} className="header__menu">
-                        <img style={menuImgStyle} src={menuIco} />
+                        <img src={menuIco} />
                         <div className="menu__flex">
                             {menuItems.map(el => 
                                 <div key={el.text} onClick={el.click} className={el.className}>{el.text}</div>
