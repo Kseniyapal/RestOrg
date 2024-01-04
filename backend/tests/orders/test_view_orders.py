@@ -33,7 +33,7 @@ class TestViewsOrders():
         user = get_users[0]
         authenticated_client.force_authenticate(user=user)
         response = authenticated_client.get('/api/orders/')
-        assert len(response.data) == 5
+        assert len(response.data) == 7
 
     @pytest.mark.django_db
     def test_views_get_list_order_with_cook(self, get_orders, get_users):
@@ -41,7 +41,7 @@ class TestViewsOrders():
         user = get_users[2]
         authenticated_client.force_authenticate(user=user)
         response = authenticated_client.get('/api/orders/')
-        assert len(response.data) == 5
+        assert len(response.data) == 7
 
     @pytest.mark.django_db
     def test_views_get_order_with_cook(self, get_orders, get_users, get_dishes):
@@ -122,7 +122,7 @@ class TestViewsOrders():
         "waiter": 2
         }
         response = guest_client.post('/api/orders/', data=data, format='json')
-        order = Order.objects.get_or_create(id=7)
+        order = Order.objects.get_or_create(id=10)
         assert order[0].number == data['number']
         assert list(order[0].menu_dishes.all())[0] == MenuItemDish.objects.get(id=data['menu_dishes'][0])
         assert list(order[0].menu_drinks.all())[0] == MenuItemDrink.objects.get(id=data['menu_drinks'][0])
@@ -140,7 +140,7 @@ class TestViewsOrders():
         "waiter": 2
         }
         response = authenticated_client.post('/api/orders/', data=data, format='json')
-        order = Order.objects.get_or_create(id=7)
+        order = Order.objects.get_or_create(id=10)
         assert order[0].number == data['number']
         assert list(order[0].menu_dishes.all())[0] == MenuItemDish.objects.get(id=data['menu_dishes'][0])
         assert list(order[0].menu_drinks.all())[0] == MenuItemDrink.objects.get(id=data['menu_drinks'][0])
@@ -158,7 +158,7 @@ class TestViewsOrders():
         "waiter": 2
         }
         response = authenticated_client.post('/api/orders/', data=data, format='json')
-        order = Order.objects.get_or_create(id=7)
+        order = Order.objects.get_or_create(id=10)
         assert order[0].number == data['number']
         assert list(order[0].menu_dishes.all())[0] == MenuItemDish.objects.get(id=data['menu_dishes'][0])
         assert list(order[0].menu_drinks.all())[0] == MenuItemDrink.objects.get(id=data['menu_drinks'][0])
@@ -176,7 +176,7 @@ class TestViewsOrders():
         "waiter": 2
         }
         response = authenticated_client.post('/api/orders/', data=data, format='json')
-        order = Order.objects.get_or_create(id=7)
+        order = Order.objects.get_or_create(id=10)
         assert order[0].number == data['number']
         assert list(order[0].menu_dishes.all())[0] == MenuItemDish.objects.get(id=data['menu_dishes'][0])
         assert list(order[0].menu_drinks.all())[0] == MenuItemDrink.objects.get(id=data['menu_drinks'][0])
@@ -194,7 +194,7 @@ class TestViewsOrders():
         "waiter": 2
         }
         response = authenticated_client.post('/api/orders/', data=data, format='json')
-        order = Order.objects.get_or_create(id=7)
+        order = Order.objects.get_or_create(id=10)
         assert order[0].number == data['number']
         assert list(order[0].menu_dishes.all())[0] == MenuItemDish.objects.get(id=data['menu_dishes'][0])
         assert list(order[0].menu_drinks.all())[0] == MenuItemDrink.objects.get(id=data['menu_drinks'][0])
@@ -382,7 +382,7 @@ class TestViewsOrders():
         }
         response = authenticated_client.patch('/api/orders/1/', data=data, format='json')
         assert response.data["number"] == get_orders[0].number
-        assert response.data["menu_dishes"] == [1]
+        assert response.data["menu_dishes"] == [1, 2]
         assert response.data["menu_drinks"] == [2]
         assert response.data["waiter"] == 2
         assert response.data["status"] == get_orders[1].status

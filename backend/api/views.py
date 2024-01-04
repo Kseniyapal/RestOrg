@@ -71,7 +71,19 @@ class OrderViewSet(ModelViewSet):
             }
             return Response(data, status=status.HTTP_200_OK)
 
-    def list(self, request,  *args, **kwargs):
+    def list(self, request, *args, **kwargs):
+        role_user = request.user.role
+
+        if role_user == 'B':
+            queryset = self.queryset.filter(menu_drinks__isnull=False).distinct()
+        elif role_user == 'C':
+            queryset = self.queryset.filter(menu_dishes__isnull=False).distinct()
+        else:
+            queryset = self.queryset
+
+        serializer = OrderSerializer(queryset, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    """def list(self, request,  *args, **kwargs):
         role_user = request.user.role
 
         if role_user == 'B':
@@ -85,7 +97,7 @@ class OrderViewSet(ModelViewSet):
             serializer = self.get_serializer(
                 self.filter_queryset(self.queryset), many=True
             )
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.data, status=status.HTTP_200_OK)"""
 
     def perform_create(self, serializer):
         data = serializer.validated_data
@@ -116,18 +128,22 @@ class OrderViewSet(ModelViewSet):
             raise ValidationError("Надо указать официанта исполнителем") 
         if instance.status == 'NA' and 'status' in serializer.validated_data and serializer.validated_data['status'] == 'DDR':
             raise PermissionDenied("Нельзя изменить статус с 'NA' на 'DDR'")
-        elif instance.status == 'NA' and 'status' in serializer.validated_data and serializer.validated_data['status'] == 'DDS':
+        if instance.status == 'NA' and 'status' in serializer.validated_data and serializer.validated_data['status'] == 'DDS':
             raise PermissionDenied("Нельзя изменить статус с 'NA' на 'DDS'")
-        elif instance.status == 'DDS' and 'status' in serializer.validated_data and serializer.validated_data['status'] == 'DDR':
+        if instance.status == 'DDS' and 'status' in serializer.validated_data and serializer.validated_data['status'] == 'DDR':
             serializer.validated_data['status'] = 'DONE'
-        elif instance.status == 'DDR' and 'status' in serializer.validated_data and serializer.validated_data['status'] == 'DDS':
+        if instance.status == 'DDR' and 'status' in serializer.validated_data and serializer.validated_data['status'] == 'DDS':
             serializer.validated_data['status'] = 'DONE'
-        elif instance.status == 'DDR' and 'status' in serializer.validated_data and serializer.validated_data['status'] == 'NA':
+        if instance.status == 'DDR' and 'status' in serializer.validated_data and serializer.validated_data['status'] == 'NA':
             raise PermissionDenied("Нельзя изменить статус с 'DDR' на 'NA'")   
-        elif instance.status == 'DDS' and 'status' in serializer.validated_data and serializer.validated_data['status'] == 'NA':
+        if instance.status == 'DDS' and 'status' in serializer.validated_data and serializer.validated_data['status'] == 'NA':
             raise PermissionDenied("Нельзя изменить статус с 'DDS' на 'NA'")
-        elif instance.status == 'DONE' and 'status' in serializer.validated_data and serializer.validated_data['status'] in ['NA', 'DDR','DDS','IP']:
+        if instance.status == 'DONE' and 'status' in serializer.validated_data and serializer.validated_data['status'] in ['NA', 'DDR','DDS','IP']:
             raise PermissionDenied("Нельзя изменить статус с 'DONE' на 'NA','DDR','DDS','IP'")
+        if len(instance.menu_drinks.all()) == 0 and serializer.validated_data['status'] == 'DDS':
+            serializer.validated_data['status'] = 'DONE'
+        if len(instance.menu_dishes.all()) == 0 and serializer.validated_data['status'] == 'DDR':
+            serializer.validated_data['status'] = 'DONE'
         
 
         super().perform_update(serializer)

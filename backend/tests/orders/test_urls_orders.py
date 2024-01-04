@@ -170,6 +170,76 @@ class TestUrlsOrders():
         }
         response = authenticated_client.patch('/api/orders/1/', data=data, format='json')
         assert response.status_code == 403
+    
+    @pytest.mark.django_db
+    def test_update_order_with_status_IP_to_DDR(self, get_users):
+        authenticated_client = APIClient()
+        user = get_users[1]
+        authenticated_client.force_authenticate(user=user)
+        data = {
+        "status": "DDR"
+        }
+        response = authenticated_client.patch('/api/orders/7/', data=data, format='json')
+        assert response.status_code == 200
+
+    @pytest.mark.django_db
+    def test_update_order_with_status_IP_to_DDS(self, get_users):
+        authenticated_client = APIClient()
+        user = get_users[1]
+        authenticated_client.force_authenticate(user=user)
+        data = {
+        "status": "DDS"
+        }
+        response = authenticated_client.patch('/api/orders/7/', data=data, format='json')
+        assert response.status_code == 200
+
+    @pytest.mark.django_db
+    def test_update_order_with_status_DONE_without_drinks(self, get_users):
+        authenticated_client = APIClient()
+        user = get_users[1]
+        authenticated_client.force_authenticate(user=user)
+        data = {
+        "status": "DDS"
+        }
+        response = authenticated_client.patch('/api/orders/8/', data=data, format='json')
+        assert response.status_code == 200
+        assert response.data["status"] == 'DONE'
+
+    @pytest.mark.django_db
+    def test_update_order_with_status_DONE_without_dishes(self, get_users):
+        authenticated_client = APIClient()
+        user = get_users[1]
+        authenticated_client.force_authenticate(user=user)
+        data = {
+        "status": "DDR"
+        }
+        response = authenticated_client.patch('/api/orders/9/', data=data, format='json')
+        assert response.status_code == 200
+        assert response.data["status"] == 'DONE'
+
+    @pytest.mark.django_db
+    def test_update_order_with_status_DONE_after_DDS(self, get_users):
+        authenticated_client = APIClient()
+        user = get_users[1]
+        authenticated_client.force_authenticate(user=user)
+        data = {
+        "status": "DDR"
+        }
+        response = authenticated_client.patch('/api/orders/5/', data=data, format='json')
+        assert response.status_code == 200
+        assert response.data["status"] == 'DONE'
+
+    @pytest.mark.django_db
+    def test_update_order_with_status_DONE_after_DDR(self, get_users):
+        authenticated_client = APIClient()
+        user = get_users[1]
+        authenticated_client.force_authenticate(user=user)
+        data = {
+        "status": "DDS"
+        }
+        response = authenticated_client.patch('/api/orders/4/', data=data, format='json')
+        assert response.status_code == 200
+        assert response.data["status"] == 'DONE'
 
     @pytest.mark.django_db
     def test_update_order_with_wrong_status_DDR_to_NA(self, get_users):
@@ -180,7 +250,7 @@ class TestUrlsOrders():
         "status": "NA"
         }
         response = authenticated_client.patch('/api/orders/4/', data=data, format='json')
-        assert response.status_code == 400
+        assert response.status_code == 403
 
     @pytest.mark.django_db
     def test_update_order_with_wrong_status_DDS_to_NA(self, get_users):
@@ -191,7 +261,7 @@ class TestUrlsOrders():
         "status": "NA"
         }
         response = authenticated_client.patch('/api/orders/5/', data=data, format='json')
-        assert response.status_code == 400
+        assert response.status_code == 403
 
     @pytest.mark.django_db
     def test_update_order_with_wrong_status_DONE_to_NA(self, get_users):
@@ -227,7 +297,7 @@ class TestUrlsOrders():
         assert response.status_code == 400
 
     @pytest.mark.django_db
-    def test_update_order_with_wrong_status_DONE_to_IN(self, get_users):
+    def test_update_order_with_wrong_status_DONE_to_IP(self, get_users):
         authenticated_client = APIClient()
         user = get_users[1]
         authenticated_client.force_authenticate(user=user)

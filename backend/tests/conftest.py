@@ -101,6 +101,7 @@ def get_orders(get_users, get_dishes, get_drinks, django_db_setup, django_db_blo
     with django_db_blocker.unblock():
         order = Order.objects.create(number=1234567,  waiter=get_users[1])
         order.menu_dishes.add(get_dishes[0])
+        order.menu_dishes.add(get_dishes[1])
         order.menu_drinks.add(get_drinks[0])
         
 
@@ -110,16 +111,26 @@ def get_orders(get_users, get_dishes, get_drinks, django_db_setup, django_db_blo
         order = Order.objects.create(number=1234569)
         order.menu_drinks.add(get_drinks[1])
 
-        order = Order.objects.create(number=1234570, status='DDR')
+        order = Order.objects.create(number=1234570, status='DDR', waiter=get_users[1])
         order.menu_dishes.add(get_dishes[0])
         order.menu_drinks.add(get_drinks[0])
 
-        order = Order.objects.create(number=1234571, status='DDS')
+        order = Order.objects.create(number=1234571, status='DDS', waiter=get_users[1])
         order.menu_dishes.add(get_dishes[0])
         order.menu_drinks.add(get_drinks[0])
 
         order = Order.objects.create(number=1234572, status='DONE')
         order.menu_dishes.add(get_dishes[0])
+        order.menu_drinks.add(get_drinks[0])
+
+        order = Order.objects.create(number=1239551, status='IP', waiter=get_users[1])
+        order.menu_dishes.add(get_dishes[0])
+        order.menu_drinks.add(get_drinks[0])
+
+        order = Order.objects.create(number=1239552, status='IP', waiter=get_users[1])
+        order.menu_dishes.add(get_dishes[0])
+
+        order = Order.objects.create(number=1239553, status='IP', waiter=get_users[1])
         order.menu_drinks.add(get_drinks[0])
         
         return Order.objects.all()
