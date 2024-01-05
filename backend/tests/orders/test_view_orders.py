@@ -137,14 +137,15 @@ class TestViewsOrders():
         "number": 101,
         "menu_dishes": [1],
         "menu_drinks": [1],
-        "waiter": 2
+        "waiter": None
         }
-        response = authenticated_client.post('/api/orders/', data=data, format='json')
+        authenticated_client.post('/api/orders/', data=data, format='json')
+        response = authenticated_client.get('/api/orders/')
         order = Order.objects.get_or_create(id=10)
         assert order[0].number == data['number']
         assert list(order[0].menu_dishes.all())[0] == MenuItemDish.objects.get(id=data['menu_dishes'][0])
         assert list(order[0].menu_drinks.all())[0] == MenuItemDrink.objects.get(id=data['menu_drinks'][0])
-        assert order[0].waiter == get_users[1]
+        assert len(response.data) == 10
 
     @pytest.mark.django_db
     def test_views_create_order_with_bartender_client(self, get_users):
@@ -414,3 +415,136 @@ class TestViewsOrders():
         }
         response = guest_client.patch('/api/orders/1/', data=data, format='json')
         assert response.data["detail"] == "Чтобы редактировать заказ, вы должны быть авторизованы."
+
+    @pytest.mark.django_db
+    def test_views_update_order_and_get_list_by_waiter_in_order(self, get_users, get_orders):
+        authenticated_client = APIClient()
+        user = get_users[1]
+        authenticated_client.force_authenticate(user=user)
+        data = {
+        "waiter": 2,
+        "status": "IP"
+        }
+        authenticated_client.patch('/api/orders/3/', data=data, format='json')
+        response = authenticated_client.get('/api/orders/3/')
+        assert response.data["table_number"] == get_orders[2].number
+        assert response.data["dishes"] == []
+        assert response.data["drinks"] == [2]
+        assert response.data["waiter"] == 2
+        assert response.data["status"] == "IP"
+
+    @pytest.mark.django_db
+    def test_views_update_order_and_get_list_by_waiter_in_list_orders(self, get_users, get_orders):
+        authenticated_client = APIClient()
+        user = get_users[1]
+        authenticated_client.force_authenticate(user=user)
+        data = {
+        "waiter": 2,
+        "status": "IP"
+        }
+        authenticated_client.patch('/api/orders/3/', data=data, format='json')
+        response = authenticated_client.get('/api/orders/')
+        assert len(response.data) == len(get_orders)
+        assert response.data[2]["number"] == get_orders[2].number
+        assert response.data[2]["waiter"] == 2
+        assert response.data[2]["status"] == "IP"
+        assert response.data[2]["menu_dishes"] == []
+        assert response.data[2]["menu_drinks"] == [2]
+
+    @pytest.mark.django_db
+    def test_views_update_order_and_get_list_by_waiter_in_order(self, get_users, get_orders):
+        authenticated_client = APIClient()
+        user = get_users[1]
+        authenticated_client.force_authenticate(user=user)
+        data = {
+        "waiter": 2,
+        "status": "IP"
+        }
+        authenticated_client.patch('/api/orders/3/', data=data, format='json')
+        response = authenticated_client.get('/api/orders/3/')
+        assert response.data["table_number"] == get_orders[2].number
+        assert response.data["dishes"] == []
+        assert response.data["drinks"] == [2]
+        assert response.data["waiter"] == 2
+        assert response.data["status"] == "IP"
+
+    @pytest.mark.django_db
+    def test_views_update_order_and_get_list_by_waiter_in_list_orders(self, get_users, get_orders):
+        authenticated_client = APIClient()
+        user = get_users[1]
+        authenticated_client.force_authenticate(user=user)
+        data = {
+        "waiter": 2,
+        "status": "IP"
+        }
+        authenticated_client.patch('/api/orders/3/', data=data, format='json')
+        response = authenticated_client.get('/api/orders/')
+        assert len(response.data) == len(get_orders)
+        assert response.data[2]["number"] == get_orders[2].number
+        assert response.data[2]["waiter"] == 2
+        assert response.data[2]["status"] == "IP"
+        assert response.data[2]["menu_dishes"] == []
+        assert response.data[2]["menu_drinks"] == [2]
+
+
+    @pytest.mark.django_db
+    def test_views_update_order_and_get_list_by_cook_in_order(self, get_users, get_orders):
+        authenticated_client = APIClient()
+        user = get_users[2]
+        authenticated_client.force_authenticate(user=user)
+        data = {
+        "status": "IP"
+        }
+        authenticated_client.patch('/api/orders/1/', data=data, format='json')
+        response = authenticated_client.get('/api/orders/1/')
+        assert response.data["table_number"] == get_orders[0].number
+        assert response.data["dishes"] == [1, 2]
+        assert response.data["status"] == "IP"
+        assert response.data["comment"] == get_orders[0].comment
+
+    @pytest.mark.django_db
+    def test_views_update_order_and_get_list_by_cook_in_list_orders(self, get_users, get_orders):
+        authenticated_client = APIClient()
+        user = get_users[2]
+        authenticated_client.force_authenticate(user=user)
+        data = {
+        "status": "IP"
+        }
+        authenticated_client.patch('/api/orders/1/', data=data, format='json')
+        response = authenticated_client.get('/api/orders/')
+        assert len(response.data) == 7
+        assert response.data[0]["number"] == get_orders[0].number
+        assert response.data[0]["status"] == "IP"
+        assert response.data[0]["menu_dishes"] == [1, 2]
+        assert response.data[0]["comment"] == get_orders[0].comment
+
+    @pytest.mark.django_db
+    def test_views_update_order_and_get_list_by_bartender_in_order(self, get_users, get_orders):
+        authenticated_client = APIClient()
+        user = get_users[0]
+        authenticated_client.force_authenticate(user=user)
+        data = {
+        "status": "IP"
+        }
+        authenticated_client.patch('/api/orders/1/', data=data, format='json')
+        response = authenticated_client.get('/api/orders/1/')
+        assert response.data["table_number"] == get_orders[0].number
+        assert response.data["drinks"] == [1]
+        assert response.data["status"] == "IP"
+        assert response.data["comment"] == get_orders[0].comment
+
+    @pytest.mark.django_db
+    def test_views_update_order_and_get_list_by_bartender_in_list_orders(self, get_users, get_orders):
+        authenticated_client = APIClient()
+        user = get_users[0]
+        authenticated_client.force_authenticate(user=user)
+        data = {
+        "status": "IP"
+        }
+        authenticated_client.patch('/api/orders/1/', data=data, format='json')
+        response = authenticated_client.get('/api/orders/')
+        assert len(response.data) == 7
+        assert response.data[0]["number"] == get_orders[0].number
+        assert response.data[0]["status"] == "IP"
+        assert response.data[0]["menu_drinks"] == [1]
+        assert response.data[0]["comment"] == get_orders[0].comment

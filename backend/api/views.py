@@ -44,7 +44,9 @@ class OrderViewSet(ModelViewSet):
             data = {
                    'drinks': serializer.data['menu_drinks'],
                    'table_number': serializer.data['number'],
-                   'status': serializer.data['status']}
+                   'status': serializer.data['status'],
+                   'comment': serializer.data['comment']
+                   }
             return Response(data, status=status.HTTP_200_OK)
 
         if role_user == 'W' or role_user == 'A':
@@ -68,6 +70,7 @@ class OrderViewSet(ModelViewSet):
                    'dishes': serializer.data['menu_dishes'],
                    'table_number': serializer.data['number'],
                    'status': serializer.data['status'],
+                   'comment': serializer.data['comment']
             }
             return Response(data, status=status.HTTP_200_OK)
 
@@ -75,13 +78,13 @@ class OrderViewSet(ModelViewSet):
         role_user = request.user.role
 
         if role_user == 'B':
-            queryset = self.queryset.filter(menu_drinks__isnull=False).distinct()
+            self.queryset = self.queryset.filter(menu_drinks__isnull=False).distinct()
         elif role_user == 'C':
-            queryset = self.queryset.filter(menu_dishes__isnull=False).distinct()
+            self.queryset = self.queryset.filter(menu_dishes__isnull=False).distinct()
         else:
-            queryset = self.queryset
+            self.queryset = Order.objects.all()
 
-        serializer = OrderSerializer(queryset, many=True)
+        serializer = OrderSerializer(self.queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
     """def list(self, request,  *args, **kwargs):
         role_user = request.user.role
@@ -147,6 +150,7 @@ class OrderViewSet(ModelViewSet):
         
 
         super().perform_update(serializer)
+        self.queryset = Order.objects.all()
 
 class MenuItemDrinkViewSet(ModelViewSet):
     """Вьюсет для ингредиентов"""
