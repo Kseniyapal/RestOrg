@@ -25,11 +25,13 @@ const OrderNumber = ({children, elementId, ...props}) => {
             }
         }
         else if(user.role == "C"){
-            if(props.element.status == "IP" || props.element.status == "DDK"){
+            if(props.element.status == "IP" || props.element.status == "DDR"){
                 if(props.element.menu_dishes.length != 0){
                     setDisabled("")
                 }
             }
+        }else{
+            setDisabled("")
         }
     }
 

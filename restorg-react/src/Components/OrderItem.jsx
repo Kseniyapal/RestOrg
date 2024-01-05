@@ -12,7 +12,7 @@ const OrderItem = ({...props}) => {
     return (
         <div className="purchase__flex">    
             <div className="purchase__img">
-                    <img src={props.imgSource}alt={props.imgSource}></img>
+                    <img src={"/" + props.imgSource}alt={props.imgSource}></img>
             </div>
             <div className="purchase__name order__name">{props.name}</div>
             {/* <div  className="purchase__worked"><button onClick={changeColor} style={buttonStyle} >отработано</button></div> */}

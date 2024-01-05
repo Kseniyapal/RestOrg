@@ -1,20 +1,13 @@
 import React, { useEffect, useState } from "react";
 import  Container  from "../Components/Container";
-import Header from "../Components/Header";
-import Footer from "../Components/Footer";
 import Content from "../Components/Content";
 import Wrapper from "../Components/Wrapper";
-import MenuItem from "../Components/MenuItem";
-import WindowC from "../Components/UI/WindowC";
-import AcceptButton from "../Components/UI/Buttons/AcceptButton"
-import UserField from "../Components/UI/Fields/UserField";
 import "./PagesStyles/Dish.css";
 import AroowIco from "../Styles/icons/arrow_left.svg"
 import {useNavigate} from "react-router"
 import {Link} from "react-router-dom"
 import {useParams} from "react-router-dom"
 import Image from "../Components/Image"
-import cal from "../Styles/image/dish_img.jpeg"
 
 const Dish = () => {
     let [dish, setDish] = useState({})
@@ -83,11 +76,11 @@ const Dish = () => {
                                             {dish.name}
                                         </div>
                                         <div className="dish__add__row__flex">
-                                            <div className="dish__cost">
+                                            <div style={params.type == "drink"? {display: "none"}: {}} className="dish__mass">
                                                     Масса:<br></br>
                                                     {dish.weight} гр.
                                             </div>
-                                            <div className="dish__mass">
+                                            <div className="dish__cost">
                                                     Цена:<br></br>
                                                     {dish.price} ₽
                                             </div>

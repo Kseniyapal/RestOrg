@@ -20,7 +20,16 @@ const Board = () => {
             'Content-Type': 'application/json'} 
         })
         .then(response => response.json())
-        .then(data => setDishes(data))
+        .then(data => {
+            console.log(data)
+            if(data.detail == undefined){
+                setDishes(data)
+            }
+            else{
+                return
+            }
+        })
+
     }  
 
 
@@ -30,7 +39,7 @@ const Board = () => {
                 NADishes.push(element)
                 setNADishes([...NADishes])
             }
-            else if(element.status == "IP" || element.status == "DDS" || element.status == "DDK"){
+            else if(element.status == "IP" || element.status == "DDS" || element.status == "DDR"){
                 IPDishes.push(element)
                 setIPDishes([...IPDishes])            
             }
@@ -47,7 +56,6 @@ const Board = () => {
 
     useEffect(() => {
         splitDishes()
-        console.log(IPDishes)
     }, [dishes]) 
 
 

@@ -24,10 +24,14 @@ const PurchaseItem = ({...props}) => {
         }
     }
 
+    useEffect(() => {
+        console.log(props.imgSource)
+    }, [])
+
     return (
         <div className="purchase__flex">    
             <div className="purchase__img">
-                    <img src={props.imgSource}alt="картинка не загрузилась("></img>
+                    <img src={props.imgSource} alt="картинка не загрузилась("></img>
             </div>
             <div className="purchase__name">{props.name}</div>
             <div className="purchase__counter__flex">

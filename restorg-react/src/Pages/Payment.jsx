@@ -118,13 +118,25 @@ const Payment = () => {
                 menu_dishes: dishesList,
                 menu_drinks: drinksList,
                 status: "NA",
-                comment: additionalMessage
+                comment: addCountToAdditionalMessage()
                 
             })
         }
         fetch("http://127.0.0.1:8088/api/orders/", requestOptions)
             .then(data => console.log(data))
     }
+
+    const addCountToAdditionalMessage = () => {
+        let additionalInfo = ""
+        purchases.forEach(el => {
+            additionalInfo += el.name +" - в количестве "+ el.count + " штук." + "\n"
+        })
+        return (additionalInfo + "\n") + additionalMessage
+    }
+
+    useEffect(() => {
+        addCountToAdditionalMessage()
+    }, [])
 
     return (
         <Wrapper>

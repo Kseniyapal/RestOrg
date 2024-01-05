@@ -11,8 +11,8 @@ import "./PagesStyles/Sign.css";
 import { useNavigate } from "react-router";
 
 const Sign = () => {
-    const [email, setEmail] = useState()
-    const [pass, setPass] = useState()
+    const [email, setEmail] = useState("")
+    const [pass, setPass] = useState("")
     const [errorMessage, setErrorMessage] = useState("")
     const nav = useNavigate()
 
