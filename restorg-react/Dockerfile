@@ -1,0 +1,10 @@
+FROM node
+
+COPY ./ /restorf_frontend
+
+EXPOSE 3000
+
+WORKDIR /restorf_frontend
+ 
+CMD ["npm", "start"]
+

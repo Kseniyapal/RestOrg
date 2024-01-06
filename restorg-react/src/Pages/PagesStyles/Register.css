@@ -1,0 +1,144 @@
+
+.register__bg{
+
+    background: url("../../Styles/image/3321789.png") 0px 0px/1080px auto repeat;
+    min-height: 100vh;
+
+    animation-name: bg__move;
+    animation-duration: 30s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+   
+} 
+
+@keyframes bg__move {
+    0%{
+        background-position: 0px 1080px;
+    }
+    100%{
+        background-position: 1080px 0px;
+    }
+}
+
+.window__center{
+    padding-top: 10%;
+}
+
+.register__window {
+    width: 50%;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 10px;
+    border-color: #272727bb;
+    background: #272727bb;
+
+    margin: 0 auto;
+    padding: 3%;
+}
+
+.register__bg .Container{
+    padding-bottom: 5%;
+}
+
+.register__button{
+    display: block;
+    width: 35vh;
+    height: 4vh;
+    border-radius: 10px;
+    align-items: center;
+    justify-content: space-between;
+    color: #000;
+    text-align: center;
+    font-family: Inter;
+    font-size: 3vh;
+    font-weight: 200;
+    border: #ffffff;
+    background-color: #ffffff;
+}
+
+.register__continue__flex{
+    margin-top: 10%;
+    justify-self: flex-end;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center;
+}
+
+.register__name__flex {
+    width: 80%;
+    display: flex;
+}
+
+.register__name__flex input{
+    width: 90%;
+}
+
+.register__fatherly{
+    width: 70%;
+}
+
+.register__fatherly input{
+    width: 64%;
+}
+
+.register__main {
+    width: 70%;
+}
+
+.register__continue__flex a {
+    padding-top: 5%;
+    color: #FFF;
+    font-weight: 300;
+}
+
+.register__bg a {
+    text-decoration: none;
+    font-size: 3vh;
+}
+
+.register__bg a:active {
+    color: #c1c1c1;
+}
+
+.register__role{
+    font-size: 16px;
+    color: #D4D4D4;
+    font-weight: 400;
+    margin-left: 5px;
+}
+
+.register__select{
+    width: 60%;
+    font-size: 18px;
+    color: #000000;
+    font-weight: 300;
+    margin: 1vh 1vh 1vh 0;
+}
+
+.register__select__item{
+    font-weight: 200;
+
+}
+
+.register__role{
+    width: auto;
+}
+
+.registration__dish__label{
+    color:#D4D4D4;
+    font-size: 30px;
+    font-weight: 300;
+    margin-bottom: 14%;
+}
+
+.register__message{
+    margin-top: 5%;
+    font-size: 18px;
+    color: #FFF;
+}

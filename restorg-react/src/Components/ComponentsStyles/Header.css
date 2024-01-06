@@ -1,0 +1,126 @@
+.header__flex{
+    display: flex;
+    justify-content: space-between;    
+    align-items: center;
+    color: #ffffff;
+    font-size: 2vh;
+    font-weight: 400;
+    height: 5vh;
+    
+}
+
+
+.header__bg{
+    background-color: #272727;
+}
+
+.header__logo{
+    flex-basis: 40%;
+    
+}
+
+.menu__flex{
+    display: flex;
+    flex-direction: column;
+}
+
+.menu__item, .menu__label{
+    position: relative;
+    top: 8.5vh;
+    font-size: 2vh;
+    width: 30vh;
+    height: 4vh;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #FFF;
+    font-weight: 300;
+    background-color: #272727;
+}
+
+.menu__label__admin, .menu__item__adminn{
+    position: relative;
+    top: 12.5vh;
+    font-size: 2vh;
+    width: 30vh;
+    height: 4vh;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #FFF;
+    font-weight: 300;
+    background-color: #272727;
+}
+
+.menu__item__noRole, .menu__label__noRole{
+    position: relative;
+    top: 4.2vh;
+    font-size: 2vh;
+    width: 30vh;
+    height: 4vh;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #FFF;
+    font-weight: 300;
+    background-color: #272727;
+}
+
+.menu__item__noRole:hover, .menu__item:hover, .menu__item__adminn:hover {
+    cursor: pointer;
+    border: 2px solid #4e4e4e;
+}
+
+.header__menu img{
+    width: 3vh;
+
+}
+
+.header__menu{
+    width: 5vh;
+    display: flex;
+    justify-content: center;
+}
+
+.header__menu img:hover{
+    cursor: pointer;
+}
+
+.header__logo img{
+    width: 4vh;
+}
+
+.header__nav__flex{
+    width: 40%;
+    display: flex;
+    flex: 0 0 auto;
+}
+
+.header__main{
+    padding-right: 3%;
+    white-space: nowrap;
+    /* border-right: #ffffff solid 2px; */
+}
+
+.header__about{
+    padding-left: 3%;
+    white-space: nowrap;
+}
+
+
+.header__bg a{
+    color: #FFF;
+    text-decoration: none;
+}
+
+.header__bg a:hover{
+    border-bottom: 1px solid #FFF;
+}
+
+.header__bg a:visited{
+    color: #cfcfcf;
+}
+

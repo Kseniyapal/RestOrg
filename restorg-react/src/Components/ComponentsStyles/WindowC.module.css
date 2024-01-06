@@ -1,0 +1,13 @@
+.WindowC{
+    border-radius: 10px;
+    border-color: #272727bb;
+    background: #272727bb;
+    width: 40%;
+    height: 30vh;
+    flex-shrink: 1;
+    margin: 0 auto;
+    padding: 2%;
+
+    /* position: relative;
+    top: 25vh; */
+}
