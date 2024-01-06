@@ -1,0 +1,88 @@
+.item__flex {
+    display: flex;
+    justify-content: space-between;
+    width: 95%;
+    height: 22vh;
+    margin: 0 0 8% 0;
+    font-size: 1.8vh;
+}
+
+.item__column__flex{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.item__info__flex{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: #FFF;
+    font-family: Inter;
+    font-weight: 200;
+    background: linear-gradient(to right, #363636 0%, rgba(0, 0, 0, 0.1) 100%);
+    height: auto;
+    height: 70%;
+    width: 15vh;
+    padding: 5%;
+    text-decoration: none;
+}
+
+.item__link{
+    height: 100%;
+    display: block;
+    text-decoration: none;
+    color: #FFF;
+}
+
+.item__img{
+    max-width: 50%;
+    min-height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;  
+}
+
+.item__img img{
+    width: 125%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.item__name {
+    text-align: left;
+}
+
+.item__mass {
+    text-align: right;
+}
+
+.item__cost {
+    justify-self: flex-end;
+    text-align: right;
+    font-size: 3vh;
+}
+
+.item__add {
+    width: 100%;
+}
+
+.item__add img{
+    height: 4vh;
+}
+
+.item__add button{
+    height: 6vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    text-align: center;
+    font-size: 5vh;
+    border-radius: 3%;
+}
+
+.item__add button:active{
+    background-color: #bbbbbb;
+}
