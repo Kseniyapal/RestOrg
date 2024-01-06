@@ -1,0 +1,29 @@
+input:active, :hover, :focus {
+    outline: 0;
+    outline-offset: 0;
+}
+
+.input{
+    margin-bottom: 25px;
+    width: 70%;
+}
+
+.input input{
+    width: 100%;
+    font-size: 16px;
+    font-weight: 300;
+}
+
+.input__name{
+    margin: 10px 5px;
+    color: #D4D4D4;
+    text-align: center;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 1.6px;
+    text-transform: lowercase;
+    text-align: left;
+}

@@ -1,0 +1,36 @@
+.notFound__bg{
+    background: #272727;
+    min-height: 100vh;
+}
+
+.notfound__flex{
+    display: flex;
+}
+
+.notfound__info{
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.notfound__404{
+    font-size: 20vh;
+    color: #A5A5A5;
+    font-weight: 900;
+}
+
+.notfound__message{
+    color: #A5A5A5;
+    font-size: 3vh;
+}
+
+.notFound__bg .header__bg{
+    background: #898989;
+}
+
+.notFound__bg .header__logo{
+    display: none;
+}
+
