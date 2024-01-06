@@ -1,0 +1,59 @@
+.payment__item{
+    color: #000;
+    font-weight: 300;
+    margin-left: 3vh;
+    margin-bottom: 5vh;
+}
+
+.payment__item__name{
+    font-size: 20px;
+    margin-bottom: 1vh;
+}
+
+.payment__item__price{
+    font-size: 25px;
+    font-weight: 200;
+}
+
+.payment__item__count{
+    font-size: 20px;
+}
+
+.payment__item__count__flex{
+    width: 30%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.payment__item__numbers__flex{
+    display: flex;
+    justify-content: space-between;
+}
+
+.payment__item__count__flex button{
+    background-color: #D9D9D9;
+    border: none;
+    color: none;
+}
+
+.payment__item__count__flex img{
+    width: auto;
+}
+
+.payment__additionat__column{
+    display: flex;
+    flex-direction: column;
+}
+
+.payment__additionat__column textarea{
+    width: 500px;
+    height: 250px;
+    resize: none;
+    font-size: 20px;
+    padding: 1vh;
+    background: #5a5a5a;
+    font-weight: 300;
+    border: none;
+    color: #fff;
+}
+
