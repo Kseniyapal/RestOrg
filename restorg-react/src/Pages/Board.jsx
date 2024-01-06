@@ -7,7 +7,6 @@ import { useEffect, useState } from "react";
 
 
 const Board = () => {
-    let [dishes, setDishes] = useState([])
     let [NADishes, setNADishes] = useState([])
     let [IPDishes, setIPDishes] = useState([])
     let [DoneDishes, setDoneDishes] = useState([])
@@ -23,7 +22,7 @@ const Board = () => {
         .then(data => {
             console.log(data)
             if(data.detail == undefined){
-                setDishes(data)
+                splitDishes(data)
             }
             else{
                 return
@@ -33,7 +32,7 @@ const Board = () => {
     }  
 
 
-    const splitDishes = () => {
+    const splitDishes = (dishes) => {
         dishes.forEach(element => {
             if(element.status == "NA"){
                 NADishes.push(element)
@@ -53,10 +52,6 @@ const Board = () => {
     useEffect(() => {
         fetchOrders()
     }, [])
-
-    useEffect(() => {
-        splitDishes()
-    }, [dishes]) 
 
 
     return (

@@ -135,6 +135,10 @@
     font-weight: 500;
 }
 
+.table__info{
+    width:40vh;
+}
+
 .order__done__button{
     margin: 5% auto;
 }

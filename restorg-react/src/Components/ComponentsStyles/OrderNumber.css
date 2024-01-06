@@ -25,18 +25,15 @@
 
 .column1__flex .order{
     background-color: #92B76E;
-
 }
 
 
 .column2__flex .order{
     background-color: #BBC175;
-
 }
 
 .column3__flex .order{
-    background-color: #C17575;
-
+    background-color: #cc7575;
 }
 
 .column1__flex button:disabled{

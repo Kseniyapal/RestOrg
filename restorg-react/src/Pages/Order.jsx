@@ -29,6 +29,10 @@ const Order = () => {
         .then(response => response.json())
         .then(data => {
             console.log(data)
+            if(data.detail == "Not found."){
+                nav("not found")
+                return
+            }
             if(data.drinks == undefined){
                 fetchDishes(data)
             }
@@ -113,6 +117,7 @@ const Order = () => {
         })
         .then(response => response.json())
         .then(data => {
+            console.log(data)
             setWaiterName(data.first_name +" "+ data.last_name)
         })   
     }
@@ -216,7 +221,6 @@ const Order = () => {
         }
         else if(user.role == "A"){
             if(order.status == "NA"){
-                console.log(123123)
                 newStatus = "IP"
             }
             else if(order.status == "IP"){
@@ -282,7 +286,7 @@ const Order = () => {
                                     <div className="order__header__flex">
                                         <div className="number__info__flex">
                                             <div className="oreder__number">
-                                                205
+                                                {order.id}
                                             </div>
                                             <div className="table__info">
                                                 номер стола <span className="table__number">{order.table_number}</span>

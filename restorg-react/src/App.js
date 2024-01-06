@@ -10,6 +10,7 @@ import Menu from "./Pages/Menu.jsx"
 import Order from './Pages/Order.jsx';
 import Dish from './Pages/DIsh.jsx';
 import Payment from './Pages/Payment.jsx'
+import DishRegistration from './Pages/DishRegistration.jsx';
 
 
 function App() {
@@ -17,8 +18,10 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Main/>}/>
+        <Route path="/menu/:drinks" element={<Menu/>}/>
         <Route path="/menu" element={<Menu/>}/>
         <Route path="/register" element={<Register/>}/>
+        <Route path="/register_dish" element={<DishRegistration/>}/>
         <Route path="/sign" element={<Sign/>}/>
         <Route path="/order/:id" element={<Order/>}/>
         <Route path="/board" element={<Board/>}/>

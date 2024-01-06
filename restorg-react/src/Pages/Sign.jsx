@@ -81,13 +81,13 @@ const Sign = () => {
                             <div className="sign__window">
                                 <UserField 
                                     type="text"
-                                    name="mail"
+                                    name="почта"
                                     value={email}
                                     onChange={e => setEmail(e.target.value)}
                                 />
                                 <UserField 
                                 type="password" 
-                                name="password"
+                                name="пароль"
                                 value={pass} 
                                 onChange={e => setPass(e.target.value)}
                                 />
@@ -101,11 +101,8 @@ const Sign = () => {
                     </Container>
                 </div>
             </Content>
-
             <Footer/>
         </Wrapper>
-        
-        
     );
 }
 

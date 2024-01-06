@@ -12,14 +12,14 @@ const MenuItem = ({children, imgSource, addPurch, ...props}) => {
                 <div className="item__flex">
                         <div  className="item__img">
                             <Link to={"/menu_position/" + props.id + "/" + props.type} className="item__link">
-                                <img src={imgSource} alt = "Здесь должна быть картинка, но она не загрузилась)"></img>
+                                <img src={"/" + imgSource} alt = "Здесь должна быть картинка, но она не загрузилась)"></img>
                             </Link> 
                         </div>
                         <div className="item__column__flex">
                             <Link to={"/menu_position/" + props.id + "/" + props.type} className="item__info__flex">
                                 <div className="item__name"> {props.name} </div>
                                 <div className="item__numbers">
-                                    <div className="item__mass"> {props.mass} </div>
+                                    <div className="item__mass"> {props.mass}{props.volume} </div>
                                     <div className="item__cost"> {props.price} </div>
                                 </div>
                             </Link>

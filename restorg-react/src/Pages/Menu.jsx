@@ -1,26 +1,19 @@
-import React, { useEffect, useRef, useState } from "react";
-import { useAsyncError, useLocation } from "react-router"
+import React, { useEffect, useState } from "react";
+import { useLocation, useParams } from "react-router"
 import { useNavigate } from "react-router"
 import  Container  from "../Components/Container";
 import Header from "../Components/Header";
-import Footer from "../Components/Footer";
 import Content from "../Components/Content";
 import Wrapper from "../Components/Wrapper";
 import MenuItem from "../Components/MenuItem";
 import PurchaseItem from "../Components/PurchaseItem"
-import WindowC from "../Components/UI/WindowC";
-import AcceptButton from "../Components/UI/Buttons/AcceptButton"
-import UserField from "../Components/UI/Fields/UserField";
 import "./PagesStyles/Menu.css";
-import SearchIco from "../Styles/icons/search_ico.svg"
 import WaterIco from "../Styles/icons/Water.png"
 import HotIco from "../Styles/icons/Hot.png"
-import { Link } from "react-router-dom";
 import PriceAmount from "../Components/PriceAmount";
-import { isDisabled } from "@testing-library/user-event/dist/utils";
-// import ImgSource from "../../public/images/1644909112_9-fikiwiki-com-p-kartinki-yaichnitsa-glazunya-10.jpg"
 
 const Menu = () => {
+    const params = useParams()
     const [purchases, setPurchases] = useState(() => {
         if (localStorage.getItem("purchases") == ""){
             return []
@@ -46,14 +39,6 @@ const Menu = () => {
         .then(data => setDrinks(data))
     }  
 
-    // const reIdDrinks = () => {
-    //     const newDrinks = drinks
-    //     newDrinks.forEach(el => el.id += dishes.length)
-    //     setDrinks(newDrinks)
-    //     console.log(newDrinks)
-
-    // }
-
     const deletePurchase = (purchase) => {
         const index = purchases.indexOf(purchase)
         purchases.splice(index, 1)
@@ -77,14 +62,6 @@ const Menu = () => {
             setPurchases([...purchases, purchase])
         }
         console.log(localStorage.getItem("purchases"))
-        //  пытался сделать добавление по кнопке из меню (сложно)
-        // else{
-        //     const newPurchase = purchases.filter(el => el.id == purchase.id && el.type == purchase.type)[0]
-        //     newPurchase.count += 1
-        //     console.log(newPurchase)
-        //     changePurchaseById(newPurchase)
-        //     setPurchases([...purchases])
-        // }
     }
 
     const countAmountOfPrice = () => {
@@ -107,13 +84,39 @@ const Menu = () => {
     }
 
     useEffect(() => {
-        fetchDishes()
-        // reIdDrinks()
-        fetchDrinks()
-        console.log(localStorage.getItem("purchases"))
+        if(params.drinks == undefined || params.drinks == "drinks"){
+            fetchDishes()
+            fetchDrinks()
+        }
+        else{
+            nav("/notFound")
+        }
         localStorage.setItem("purchases", JSON.stringify([]))
 
     }, [])
+
+    const menuDIsh = () => {
+        if(params.drinks == "drinks"){
+            console.log(1312321)
+            return <div></div>
+        }
+        else{
+            return (
+            <div className="menu__hot">
+                <div className="menu__head">
+                    <img src={HotIco}></img>
+                    <span >Блюда</span>
+                </div>
+                <hr id="dishes"></hr>
+                <div className="menu__grid">
+                    {dishes.map((dish) => 
+                        <MenuItem type={"dish"} addPurch={addPurchase} key={dish.id} id={dish.id} name={dish.name} imgSource={dish.image} mass={dish.weight + "г"} price={dish.price + "₽"}></MenuItem>
+                    )}
+                </div>                                  
+            </div>
+            )
+        }
+    }
 
     useEffect(() => {
         localStorage.setItem("purchases", JSON.stringify(purchases))
@@ -141,18 +144,7 @@ const Menu = () => {
                                 </a>
                             </div>
                             <div className="menu__list__flex">
-                                <div className="menu__hot">
-                                    <div className="menu__head">
-                                        <img src={HotIco}></img>
-                                        <span >Блюда</span>
-                                    </div>
-                                    <hr id="dishes"></hr>
-                                    <div className="menu__grid">
-                                        {dishes.map((dish) => 
-                                            <MenuItem type={"dish"} addPurch={addPurchase} key={dish.id} id={dish.id} name={dish.name} imgSource={dish.image} mass={dish.weight + "г"} price={dish.price + "₽"}></MenuItem>
-                                        )}
-                                    </div>                                  
-                                </div>
+                                {menuDIsh()}
                                 <div  className="menu__water">
                                     <div className="menu__head">
                                         <img src={WaterIco}></img>
@@ -161,7 +153,7 @@ const Menu = () => {
                                     <hr id="drinks" ></hr>
                                     <div className="menu__grid">
                                         {drinks.map((dish) => 
-                                            <MenuItem type={"drink"} addPurch={addPurchase} key={dish.id} id={dish.id} name={dish.name} imgSource={dish.image} price={dish.price + "₽"}></MenuItem>
+                                            <MenuItem type={"drink"} volume={dish.volume + "мл."} addPurch={addPurchase} key={dish.id} id={dish.id} name={dish.name} imgSource={dish.image} price={dish.price + "₽"}></MenuItem>
                                         )}
                                     </div>
                                 </div>

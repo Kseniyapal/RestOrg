@@ -17,7 +17,7 @@ const OrderNumber = ({children, elementId, ...props}) => {
                 setDisabled("")
             }
         }
-        else if(user.role == "B"){
+        else if(user.role == "B"){  
             if(props.element.status == "IP" || props.element.status == "DDS"){
                 if(props.element.menu_drinks.length != 0){
                     setDisabled("")

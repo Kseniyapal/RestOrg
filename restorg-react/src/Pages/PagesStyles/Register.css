@@ -73,7 +73,6 @@
 .register__name__flex {
     width: 80%;
     display: flex;
-    margin-bottom: 5%;
 }
 
 .register__name__flex input{
@@ -82,7 +81,6 @@
 
 .register__fatherly{
     width: 70%;
-    margin-bottom: 5%;
 }
 
 .register__fatherly input{
@@ -108,3 +106,39 @@
     color: #c1c1c1;
 }
 
+.register__role{
+    font-size: 16px;
+    color: #D4D4D4;
+    font-weight: 400;
+    margin-left: 5px;
+}
+
+.register__select{
+    width: 60%;
+    font-size: 18px;
+    color: #000000;
+    font-weight: 300;
+    margin: 1vh 1vh 1vh 0;
+}
+
+.register__select__item{
+    font-weight: 200;
+
+}
+
+.register__role{
+    width: auto;
+}
+
+.registration__dish__label{
+    color:#D4D4D4;
+    font-size: 30px;
+    font-weight: 300;
+    margin-bottom: 14%;
+}
+
+.register__message{
+    margin-top: 5%;
+    font-size: 18px;
+    color: #FFF;
+}

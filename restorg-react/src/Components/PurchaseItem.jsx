@@ -1,7 +1,6 @@
 import React, { Children, useState, useCallback, useEffect } from "react";
 import "../Components/ComponentsStyles/PurchaseItem.css"
-import PlusIco from "../Styles/icons/plus.svg"
-import Menu from "../Pages/Menu";
+
 
 const PurchaseItem = ({...props}) => {
 
@@ -31,7 +30,7 @@ const PurchaseItem = ({...props}) => {
     return (
         <div className="purchase__flex">    
             <div className="purchase__img">
-                    <img src={props.imgSource} alt="картинка не загрузилась("></img>
+                    <img src={"/" + props.imgSource} alt="картинка не загрузилась("></img>
             </div>
             <div className="purchase__name">{props.name}</div>
             <div className="purchase__counter__flex">

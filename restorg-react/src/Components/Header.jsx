@@ -26,8 +26,20 @@ const Header = () => {
     }
 
     const mouseEnter = () => {
-        if(JSON.parse(localStorage.getItem("user")).id == undefined){
+        const user = JSON.parse(localStorage.getItem("user"))
+        if(user.id == undefined){
             setmenuImgStyle({display: "none"})
+            setMenuItems([
+                {className:"menu__item__noRole", text:"войти как работник", click: () => nav("/sign")}])
+        }
+        else if(user.role == "A"){
+            const email = JSON.parse(localStorage.getItem("user")).email 
+            setmenuImgStyle({display: "none"})
+            setMenuItems([{className:"menu__label__admin", text:email},
+            {className:"menu__item__adminn", text:"к заказам", click: () => nav("/board")},
+            {className:"menu__item__adminn", text:"регистрация работника", click: () => nav("/register")},
+            {className:"menu__item__adminn", text:"добавить блюдо", click: () => nav("/register_dish")},
+            {className:"menu__item__adminn", text:"выйти", click: logOut}])
         }
         else {
             const email = JSON.parse(localStorage.getItem("user")).email 
@@ -48,14 +60,14 @@ const Header = () => {
             <Container>
                 <div className="header__flex">
                     <div className="header__nav__flex">
-                        <div className="header__main"><a href="/">на главную</a></div>
+                        <div className="header__main"><a href="/">На главную</a></div>
                         {/* <div className="header__about"><a href="/#about">о сервисе</a></div> */}
                     </div>
                     <div className="header__logo">
                         <img src={logo}/>
                     </div>
                     <div onClick={mouseEnter} onMouseLeave={mouseLeave} className="header__menu">
-                        <img src={menuIco} />
+                        <img style={menuImgStyle} src={menuIco} />
                         <div className="menu__flex">
                             {menuItems.map(el => 
                                 <div key={el.text} onClick={el.click} className={el.className}>{el.text}</div>

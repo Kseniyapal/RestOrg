@@ -28,13 +28,8 @@ const Main = () => {
         
                         <WindowC>   
                             <AcceptButton href='/menu' className="AcceptButton" >Заказ Блюд</AcceptButton>
-                            <AcceptButton href='/menu' className="AcceptButton">Заказ На Баре</AcceptButton>                      
+                            <AcceptButton href='/menu/drinks' className="AcceptButton">Заказ На Баре</AcceptButton>                      
                         </WindowC>
-                        
-                        {/* <AcceptButtonMini href='/board' className='AcceptButtonMini'>
-                            <img src={menuLogo} className="buttonImg"></img>
-                            Таблица<br/> Заказов
-                        </AcceptButtonMini> */}
                     
                         <AcceptButtonMini href='/sign' className='AcceptButtonMini'>
                             <img src={userLogo} className="buttonImg"></img>

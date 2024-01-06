@@ -19,7 +19,10 @@ const Dish = () => {
         .then(response => response.json())
         .then(data => {
             data.type = "dish"
-            setDish(data)
+            if(data.detail == "Not found."){
+                nav("/notFound")
+            } 
+           setDish(data)
         })        
     }  
 
@@ -27,7 +30,11 @@ const Dish = () => {
         fetch("http://localhost:8088/api/drinks/" + params.id + "/")
         .then(response => response.json())
         .then(data => {
+            console.log(data)
             data.type = "drink"
+            if(data.detail == "Not found."){
+                nav("/notFound")
+            }
             setDish(data)
         })        
     }  
@@ -39,18 +46,40 @@ const Dish = () => {
             purchaseList.push(dish)
             localStorage.setItem("purchases", JSON.stringify(purchaseList))
         }
-        nav(-1)
+        nav("/menu")
     }
 
     useEffect(() => {
         if(params.type == "dish"){
             fetchDish()
         }
-        else{
+        else if(params.type == "drink"){
             fetchDrink()
+        }
+        else{
+            nav("/notFound")
         }
     }, [])
 
+    const insertTypeOfWeigth = () => {
+        if(params.type == "dish")
+        {
+            return (
+                <div className="dish__mass">
+                    Масса:<br></br>
+                    {dish.weight} гр.
+                </div>
+            )
+        }
+        else{
+            return(
+                <div className="dish__mass">
+                    Объём:<br></br>
+                    {dish.volume} мл.
+                </div>
+            )
+        }
+    }
 
     return (
         <Wrapper> 
@@ -76,10 +105,7 @@ const Dish = () => {
                                             {dish.name}
                                         </div>
                                         <div className="dish__add__row__flex">
-                                            <div style={params.type == "drink"? {display: "none"}: {}} className="dish__mass">
-                                                    Масса:<br></br>
-                                                    {dish.weight} гр.
-                                            </div>
+                                            {insertTypeOfWeigth()}
                                             <div className="dish__cost">
                                                     Цена:<br></br>
                                                     {dish.price} ₽

@@ -21,6 +21,7 @@ const Payment = () => {
         const initialValue = JSON.parse(saved)
         return initialValue
     })
+    let [tableNumber, setTableNumber] = useState("")
     const [additionalMessage, setAdditionalMessage] = useState("")
     const [priceAmount, setPriceAmount] = useState(0)
     const [orderButton, setOrderButton] = useState("disabled")
@@ -109,6 +110,9 @@ const Payment = () => {
         if(user != "" && user.role == "W"){
             waiter = user.id
         }
+        if(tableNumber == ""){
+            tableNumber=1
+        }
         const requestOptions = {
             method: "POST",
             headers: { 'Content-Type': 'application/json' },
@@ -118,7 +122,8 @@ const Payment = () => {
                 menu_dishes: dishesList,
                 menu_drinks: drinksList,
                 status: "NA",
-                comment: addCountToAdditionalMessage()
+                comment: addCountToAdditionalMessage(),
+                number: tableNumber
                 
             })
         }
@@ -162,7 +167,11 @@ const Payment = () => {
                                 {purchases.map(purchase => 
                                     <PaymentItem purchase={purchase} name={purchase.name} price={purchase.price} count={purchase.count} key={purchase.id + purchase.type} change={changePurchaseById} delete={deletePurchase}></PaymentItem>
                                 )}
-                                <input onChange={() => {}} placeholder="Номер столика" className="payment__table"></input>
+                                <input value={tableNumber} onChange={e => {
+                                    if(e.target.value.slice(-1).match(/[0-9]/)|| e.target.value == ""){
+                                        setTableNumber(e.target.value)
+                                    }
+                                    }} placeholder="Номер столика" className="payment__table"></input>
                                 <PriceAmount className="order__price" amount={priceAmount}></PriceAmount>
                                 <div className="payment__button">
                                     <button disabled={orderButton} onClick={() => {
