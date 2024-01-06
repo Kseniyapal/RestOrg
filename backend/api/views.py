@@ -127,7 +127,7 @@ class OrderViewSet(ModelViewSet):
         order_waiter = self.request.data.get('waiter', )
         db_order_waiter = Order.objects.get(id = instance.id).waiter
         list_users = User.objects.filter(role = 'W').values_list('id', flat=True)
-        if (order_waiter==None and db_order_waiter == None) or (order_waiter not in list_users  and order_waiter!=None):
+        if (order_waiter==None and db_order_waiter == None) or (order_waiter not in list_users and order_waiter!=None):
             raise ValidationError("Надо указать официанта исполнителем") 
         if instance.status == 'NA' and 'status' in serializer.validated_data and serializer.validated_data['status'] == 'DDR':
             raise PermissionDenied("Нельзя изменить статус с 'NA' на 'DDR'")
@@ -161,7 +161,7 @@ class MenuItemDrinkViewSet(ModelViewSet):
 
     def perform_create(self, serializer):
         user = self.request.user
-        if not user.is_authenticated and not user.is_staff:
+        if not user.is_authenticated or not user.is_staff:
             raise PermissionDenied("Чтобы создать пункт меню, вы должны обладать правами администратора.")
         data = serializer.validated_data
         serializer.save(name=data['name'],
@@ -188,7 +188,7 @@ class MenuItemDishViewSet(ModelViewSet):
 
     def perform_create(self, serializer):
         user = self.request.user
-        if not user.is_authenticated and not user.is_staff:
+        if not user.is_authenticated or not user.is_staff:
             raise PermissionDenied("Чтобы создать пункт меню, вы должны обладать правами администратора.")
         data = serializer.validated_data
         serializer.save(name=data['name'],
