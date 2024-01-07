@@ -302,7 +302,7 @@ class TestUrlsOrders():
         user = get_users[1]
         authenticated_client.force_authenticate(user=user)
         data = {
-        "status": "IN"
+        "status": "IP"
         }
         response = authenticated_client.patch('/api/orders/6/', data=data, format='json')
         assert response.status_code == 400
@@ -310,7 +310,7 @@ class TestUrlsOrders():
     @pytest.mark.django_db
     def test_update_order_with_cook_client(self, get_users):
         authenticated_client = APIClient()
-        user = get_users[2]
+        user = get_users[3]
         authenticated_client.force_authenticate(user=user)
         data = {
         "waiter": 2,
@@ -318,6 +318,17 @@ class TestUrlsOrders():
         }
         response = authenticated_client.patch('/api/orders/1/', data=data, format='json')
         assert response.status_code == 200
+
+    @pytest.mark.django_db
+    def test_update_order_without_waiter(self, get_users):
+        authenticated_client = APIClient()
+        user = get_users[3]
+        authenticated_client.force_authenticate(user=user)
+        data = {
+        "menu_dishes": [1]
+        }
+        response = authenticated_client.patch('/api/orders/6/', data=data, format='json')
+        assert response.status_code == 400
 
     @pytest.mark.django_db
     def test_update_order_with_bartender_client(self, get_users):
@@ -395,4 +406,58 @@ class TestUrlsOrders():
         response = authenticated_client.get(f'/api/orders/{get_orders[0].id}/')
         assert response.status_code == 200
 
-    
+    @pytest.mark.django_db
+    def test_get_order_with_dishes_by_admin(self, get_orders, get_users):
+        authenticated_client = APIClient()
+        user = get_users[3]
+        authenticated_client.force_authenticate(user=user)
+        response = authenticated_client.get(f'/api/orders/{get_orders[0].id}/')
+        assert response.status_code == 200
+
+    @pytest.mark.django_db
+    def test_get_order_with_empty_drinks_by_admin(self, get_orders, get_users):
+        authenticated_client = APIClient()
+        user = get_users[3]
+        authenticated_client.force_authenticate(user=user)
+        response = authenticated_client.get(f'/api/orders/{get_orders[1].id}/')
+        assert response.status_code == 200
+
+    @pytest.mark.django_db
+    def test_get_order_with_empty_dishes_by_admin(self, get_orders, get_users):
+        authenticated_client = APIClient()
+        user = get_users[3]
+        authenticated_client.force_authenticate(user=user)
+        response = authenticated_client.get(f'/api/orders/{get_orders[2].id}/')
+        assert response.status_code == 200
+
+    @pytest.mark.django_db
+    def test_get_order_with_drinks_by_waiter(self, get_orders, get_users):
+        authenticated_client = APIClient()
+        user = get_users[1]
+        authenticated_client.force_authenticate(user=user)
+        response = authenticated_client.get(f'/api/orders/{get_orders[0].id}/')
+        assert response.status_code == 200
+
+    @pytest.mark.django_db
+    def test_get_order_with_dishes_by_waiter(self, get_orders, get_users):
+        authenticated_client = APIClient()
+        user = get_users[1]
+        authenticated_client.force_authenticate(user=user)
+        response = authenticated_client.get(f'/api/orders/{get_orders[0].id}/')
+        assert response.status_code == 200
+
+    @pytest.mark.django_db
+    def test_get_order_with_empty_drinks_by_waiter(self, get_orders, get_users):
+        authenticated_client = APIClient()
+        user = get_users[1]
+        authenticated_client.force_authenticate(user=user)
+        response = authenticated_client.get(f'/api/orders/{get_orders[1].id}/')
+        assert response.status_code == 200
+
+    @pytest.mark.django_db
+    def test_get_order_with_empty_dishes_by_waiter(self, get_orders, get_users):
+        authenticated_client = APIClient()
+        user = get_users[1]
+        authenticated_client.force_authenticate(user=user)
+        response = authenticated_client.get(f'/api/orders/{get_orders[2].id}/')
+        assert response.status_code == 200

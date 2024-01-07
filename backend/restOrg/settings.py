@@ -17,8 +17,8 @@ SECRET_KEY = 'django-insecure-9#3(b=_w)+-ikznr-ju!x5)#+n%mtm2a(gp=a$2rk3$jazm#7l
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['backend', 'localhost', '127.0.0.1', '[::1]']
-#ALLOWED_HOSTS = ['*']
+#ALLOWED_HOSTS = ['backend', 'localhost', '127.0.0.1', '[::1]']
+ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -103,7 +103,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'restOrg.wsgi.application'
 
 
-DATABASES = {
+"""DATABASES = {
      'default': {
         "ENGINE": "django.db.backends.postgresql",
         "NAME": os.getenv("POSTGRES_DB", "django"),
@@ -113,7 +113,7 @@ DATABASES = {
         "PORT": os.getenv("DB_PORT", 5432)
      }
     
-}
+}"""
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',

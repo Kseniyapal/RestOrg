@@ -27,7 +27,7 @@ class TestUrlsDrinks():
         assert response.status_code == 200
 
     @pytest.mark.django_db
-    def test_get_menu_item_drink_with_guest_client(self, get_drinks):
+    def test_get_menu_item_drink_with_guest_client(self):
         guest_client = APIClient()
         response = guest_client.get('/api/drinks/1/')
         assert response.status_code == 200
@@ -86,7 +86,7 @@ class TestUrlsDrinks():
         assert response.status_code == 200
 
     @pytest.mark.django_db
-    def test_create_item_drink(self):
+    def test_create_item_drink_by_guest_client(self):
         guest_client = APIClient()
         response = guest_client.post('/api/drinks/', data={'name': 'Мохито',
             'image': 'http://127.0.0.1:8000/media/images/Mohito-b-a.jpg',
@@ -117,7 +117,7 @@ class TestUrlsDrinks():
         assert response.status_code == 201
 
     @pytest.mark.django_db
-    def test_create_item_drink_without_name_by_authorized_client(self, get_users):
+    def test_create_item_drink_without_name_by_admin(self, get_users):
         authorized_client = APIClient()
         user = get_users[3]
         authorized_client.force_authenticate(user=user)
@@ -128,7 +128,7 @@ class TestUrlsDrinks():
         assert response.status_code == 400
 
     @pytest.mark.django_db
-    def test_create_item_drink_without_image_by_authorized_client(self, get_users):
+    def test_create_item_drink_without_image_by_admin(self, get_users):
         authorized_client = APIClient()
         user = get_users[3]
         authorized_client.force_authenticate(user=user)
@@ -138,7 +138,7 @@ class TestUrlsDrinks():
         assert response.status_code == 400
 
     @pytest.mark.django_db
-    def test_create_item_drink_without_weight_by_authorized_client(self, get_users):
+    def test_create_item_drink_without_volume_by_admin(self, get_users):
         authorized_client = APIClient()
         user = get_users[3]
         authorized_client.force_authenticate(user=user)
@@ -148,7 +148,7 @@ class TestUrlsDrinks():
         assert response.status_code == 400
 
     @pytest.mark.django_db
-    def test_create_item_dish_without_price_by_authorized_client(self, get_users):
+    def test_create_item_dish_without_price_by_admin(self, get_users):
         authorized_client = APIClient()
         user = get_users[3]
         authorized_client.force_authenticate(user=user)
