@@ -8,9 +8,6 @@ import UserField from "../Components/UI/Fields/UserField";
 import "./PagesStyles/Register.css";
 import { useNavigate } from "react-router";
 
-
-
-
 const Register = () => {
     const nav = useNavigate()
     const [role, setSelect] = useState("W")
@@ -24,39 +21,40 @@ const Register = () => {
     const [messageStyle, setMessageStyle] = useState({})
 
     const registerUser = () => {
-        const token = JSON.parse(localStorage.getItem("token")).auth_token
-        const requestOptions = {
-            method: "POST",
-            headers: { "Authorization": "Token "+ token,
-            'Content-Type': 'application/json'}, 
-            body: JSON.stringify({
-                email: email,
-                first_name: name,
-                last_name: surname,
-                patronymic: patronymic,
-                role: role,
-                username: login,
-                password: pass
-            })
+        if(JSON.parse(localStorage.getItem("token")) != null ){
+            const token = JSON.parse(localStorage.getItem("token")).auth_token
+            const requestOptions = {
+                method: "POST",
+                headers: { "Authorization": "Token "+ token,
+                'Content-Type': 'application/json'}, 
+                body: JSON.stringify({
+                    email: email,
+                    first_name: name,
+                    last_name: surname,
+                    patronymic: patronymic,
+                    role: role,
+                    username: login,
+                    password: pass
+                })
+            }
+            fetch("http://127.0.0.1:8088/api/users/", requestOptions)
+            .then(response => {
+                if(response.ok){
+                    setName("")
+                    setSurname("")
+                    setPatronymic("")
+                    setEmail("")
+                    setLogin("")
+                    setPass("")
+                    setMessage("Работник добавлен")
+                    setMessageStyle({color: "#92B76E"})
+                }
+                else{
+                    setMessage("Данные не верны")
+                    setMessageStyle({color: "#cc7575"})
+                }
+            })    
         }
-        fetch("http://127.0.0.1:8088/api/users/", requestOptions)
-        .then(response => {
-            if(response.ok){
-                setName("")
-                setSurname("")
-                setPatronymic("")
-                setEmail("")
-                setLogin("")
-                setPass("")
-                setMessage("Работник добавлен")
-                setMessageStyle({color: "#92B76E"})
-            }
-            else{
-                console.log(response)
-                setMessage("Данные не верны")
-                setMessageStyle({color: "#cc7575"})
-            }
-        })    
     }
 
     return (
@@ -88,6 +86,9 @@ const Register = () => {
                                 <div style={messageStyle} className="register__message">{message}</div>            
                                 <div className="register__continue__flex">
                                     <button onClick={registerUser} className="register__button">Зарегистрировать</button>
+                                    <div className="register__toWorkers">
+                                        <a href="/workers">к зарегистрированным работникам...</a>
+                                    </div>
                                 </div>
                             </div>
                         </div> 

@@ -30,6 +30,7 @@
 }
 
 .purchase__img img{
+    border-radius: 0.5vh;
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -41,6 +42,7 @@
     font-size: 2vh;
     background-color: #272727;
     border: 1px solid #747474;
+    border-radius: 0.5vh;
     color: #cccccc;
 }
 
@@ -60,5 +62,28 @@
     font-size: 1.5vh;
     
 }
+
+.purchase__delete{
+    display: flex;
+    justify-content: center;
+}
+
+.purchase__delete button{
+    width: 11vh;
+    font-size: 2.5vh;
+    height: 4vh;
+    max-height: 50px;
+    font-weight: 200;
+    border: none;
+    background-color: #9b4c4c;
+    color: #ffc7c7;
+    border-radius: 0.5vh;
+}
+
+.purchase__delete button:active{
+    background-color: #6a3535;
+
+}
+
 
 

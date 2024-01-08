@@ -8,8 +8,6 @@ import UserField from "../Components/UI/Fields/UserField";
 import "./PagesStyles/Register.css";
 
 
-
-
 const DishRegistration = () => {
     const [dishType, setSelect] = useState("dish")
     const [name, setName] = useState("")
@@ -20,64 +18,67 @@ const DishRegistration = () => {
     const [messageStyle, setMessageStyle] = useState({})
 
     const registerDish = () => {
-        const token = JSON.parse(localStorage.getItem("token")).auth_token
-        const requestOptions = {
-            method: "POST",
-            headers: { "Authorization": "Token "+ token,
-            'Content-Type': 'application/json'}, 
-            body: JSON.stringify({
-                name: name,
-                weight: mass,
-                price: price,
-                image: "images/" + image
+        if(JSON.parse(localStorage.getItem("token")) != null){
+            const token = JSON.parse(localStorage.getItem("token")).auth_token
+            const requestOptions = {
+                method: "POST",
+                headers: { "Authorization": "Token "+ token,
+                'Content-Type': 'application/json'}, 
+                body: JSON.stringify({
+                    name: name,
+                    weight: mass,
+                    price: price,
+                    image: "images/" + image
+                })
+            }
+            fetch("http://127.0.0.1:8088/api/dishes/ ", requestOptions)
+            .then(response => {
+                if(response.ok){
+                    setName("")
+                    setMass("")
+                    setPrice("")
+                    setImage("")
+                    setMessage("Блюдо добавлено")
+                    setMessageStyle({color: "#92B76E"})
+                }
+                else{
+                    setMessage("Данные не верны")
+                    setMessageStyle({color: "#cc7575"})
+                }
             })
         }
-        fetch("http://127.0.0.1:8088/api/dishes/ ", requestOptions)
-        .then(response => {
-            if(response.ok){
-                setName("")
-                setMass("")
-                setPrice("")
-                setImage("")
-                setMessage("Блюдо добавлено")
-                setMessageStyle({color: "#92B76E"})
-            }
-            else{
-                setMessage("Данные не верны")
-                setMessageStyle({color: "#cc7575"})
-            }
-        })
     }
 
     const registerDrink = () => {
-        const token = JSON.parse(localStorage.getItem("token")).auth_token
-        const requestOptions = {
-            method: "POST",
-            headers: { "Authorization": "Token "+ token,
-            'Content-Type': 'application/json'}, 
-            body: JSON.stringify({
-                name: name,
-                volume: mass,
-                price: price,
-                image: "images/" + image
+        if(JSON.parse(localStorage.getItem("token")) != null){
+            const token = JSON.parse(localStorage.getItem("token")).auth_token
+            const requestOptions = {
+                method: "POST",
+                headers: { "Authorization": "Token "+ token,
+                'Content-Type': 'application/json'}, 
+                body: JSON.stringify({
+                    name: name,
+                    volume: mass,
+                    price: price,
+                    image: "images/" + image
+                })
+            }
+            fetch("http://127.0.0.1:8088/api/drinks/ ", requestOptions)
+            .then(response => {
+                if(response.ok){
+                    setName("")
+                    setMass("")
+                    setPrice("")
+                    setImage("")
+                    setMessage("Напиток добавлен")
+                    setMessageStyle({color: "#92B76E"})
+                }
+                else{
+                    setMessage("Данные не верны")
+                    setMessageStyle({color: "#cc7575"})
+                }
             })
         }
-        fetch("http://127.0.0.1:8088/api/drinks/ ", requestOptions)
-        .then(response => {
-            if(response.ok){
-                setName("")
-                setMass("")
-                setPrice("")
-                setImage("")
-                setMessage("Напиток добавлен")
-                setMessageStyle({color: "#92B76E"})
-            }
-            else{
-                console.log(response)
-                setMessage("Данные не верны")
-                setMessageStyle({color: "#cc7575"})
-            }
-        })
     }
 
     const registration = () => {
@@ -110,7 +111,7 @@ const DishRegistration = () => {
 
                                 <div style={messageStyle} className="register__message">{message}</div>            
                                 <div className="register__continue__flex">
-                                    <button style={{height: "5vh"}} onClick={registration} className="register__button">Добавить блюдо</button>
+                                    <button style={{height: "50px", width: "200px"}} onClick={registration} className="register__button">Добавить</button>
                                 </div>
                                 
                             </div>

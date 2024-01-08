@@ -6,7 +6,6 @@ import Content from "../Components/Content";
 import Wrapper from "../Components/Wrapper";
 import "./PagesStyles/Main.css";
 import WindowC from "../Components/UI/WindowC";
-import menuLogo from "../Styles/icons/Group 28.png"
 import userLogo from "../Styles/icons/User.png"
 import bigLogo from "../Styles/image/bigLogo.png"
 import AcceptButton from "../Components/UI/Buttons/AcceptButton"
@@ -54,7 +53,7 @@ const Main = () => {
                                 <div className="info__about__text">
                                     <span> О Сервисе</span>
                                     <div>
-                                    Сайт рыбатекст поможет дизайнеру, верстальщику, вебмастеру сгенерировать
+                                    Пример - как бы выглядело описание сервиса
                                     несколько абзацев более менее осмысленного текста рыбы на русском языке,а начинающему оратору отточить навык публичных выступлений в домашних условиях. 
                                     При создании генератора мы использовали небезизвестный универсальный код речей. 
                                     Текст генерируется абзацами случайным образом от двух до десяти предложений в абзаце, что позволяет сделать текст более привлекательным и живым для визуально-слухового восприятия.
@@ -67,7 +66,7 @@ const Main = () => {
                         
                                 <div className="info__about__text"> 
                                     <span> Администратор </span>
-                                    По своей сути рыбатекст является альтернативой традиционному 
+                                    Пример - как бы выглядело описание роли админа
                                     lorem ipsum, который вызывает у некторых людей недоумение при попытках прочитать рыбу текст. В отличии от lorem ipsum, текст 
                                     рыба на русском языке наполнит любой макет непонятнымсмыслом и придаст неповторимый колорит советских времен.
                                 </div>

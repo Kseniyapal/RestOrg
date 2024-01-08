@@ -1,7 +1,5 @@
 import React, { Children, useState, useCallback, useEffect } from "react";
 import "../Components/ComponentsStyles/PurchaseItem.css"
-import PlusIco from "../Styles/icons/plus.svg"
-import Menu from "../Pages/Menu";
 
 const OrderItem = ({...props}) => {
     const [buttonStyle, setButtonStyle] = useState({background: "#FFF"})
@@ -9,14 +7,26 @@ const OrderItem = ({...props}) => {
     const changeColor = () => {
         setButtonStyle({background: "#747474"})
     }
+
+    const deleteButton = () => {
+        if(props.deleteButton){
+            return (<div className="purchase__delete">
+                <button>Удалить</button>
+            </div>
+            )
+        }
+        else{
+            return <div></div>
+        }
+    }
+
     return (
         <div className="purchase__flex">    
             <div className="purchase__img">
                     <img src={"/" + props.imgSource}alt={props.imgSource}></img>
             </div>
-            <div className="purchase__name order__name">{props.name}</div>
-            {/* <div  className="purchase__worked"><button onClick={changeColor} style={buttonStyle} >отработано</button></div> */}
-            
+            <div className="purchase__name order__name">{props.name}</div>     
+            {deleteButton()}        
     </div>                                
     )
 }

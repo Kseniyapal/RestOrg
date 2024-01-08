@@ -10,19 +10,20 @@ import {useParams} from "react-router-dom"
 import { useEffect } from "react";
 import OrderItem from "../Components/OrderItem";
 
-const Order = () => {
+const OrderEdit = () => {
     const nav = useNavigate()
     const params = useParams()
     const [descriptionStyle, setDescriptionStyle] = useState({background: "#92B76E"})
     const [orders, setOrders] = useState([])
     const [description, setDescription] = useState("Ожидает принятия в работу")
     let [order, setOrder] = useState({})
-    let [waiterName, setWaiterName] = useState("")
+    const [waiterId, setWaiterId] = useState(3)
+    const [message, setMessage] = useState()
 
     const fetchOrder = () => { 
         let token = JSON.parse(localStorage.getItem("token"))
         if(token != null || token != ""){
-                token = JSON.parse(localStorage.getItem("token")).auth_token
+            token = JSON.parse(localStorage.getItem("token")).auth_token
             fetch("http://localhost:8088/api/orders/" + params.id + "/",{
                 method: "GET",
                 headers: { "Authorization": "Token "+ token,
@@ -30,8 +31,6 @@ const Order = () => {
             })
             .then(response => response.json())
             .then(data => {
-                console.log(data)
-
                 if(data.detail == "Not found."){
                     nav("not found")
                     return
@@ -46,8 +45,10 @@ const Order = () => {
                     fetchDishesAndDrinks(data)
                 }
                 setOrder(data)
-            })  
-        }      
+                setComment(data.comment)
+                setTableNumber(data.table_number)
+            })   
+        }     
     } 
     
     const fetchDishes = (orderData) => {
@@ -111,143 +112,61 @@ const Order = () => {
         })   
     }
 
-
-    const fetchUser = () => {
-        if(JSON.parse(localStorage.getItem("token")) != null){
-            const token = JSON.parse(localStorage.getItem("token")).auth_token
-            fetch("http://localhost:8088/api/users/" + order.waiter + "/",{
-                method: "GET",
-                headers: { "Authorization": "Token "+ token,
-                'Content-Type': 'application/json'} 
+    const fetchUsers = () => {
+        const token = JSON.parse(localStorage.getItem("token")).auth_token
+        fetch("http://localhost:8088/api/users/",{
+            method: "GET",
+            headers: { "Authorization": "Token "+ token,
+            'Content-Type': 'application/json'} 
+        })
+        .then(response => response.json())
+        .then(data => {
+            const newWaiters = []
+            data.forEach(worker => {
+                if(worker.role == "W"){
+                    newWaiters.push(worker)
+                }
             })
-            .then(response => response.json())
-            .then(data => {
-                setWaiterName(data.first_name +" "+ data.last_name)
-            })   
+            setWaiters(newWaiters)
+        })  
+    }
+    
+    const patchOrder = () => {
+        if(JSON.parse(localStorage.getItem("token")) != null ){
+            const token = JSON.parse(localStorage.getItem("token")).auth_token
+            const requestOptions = {
+                method: "PATCH",
+                headers: { "Authorization": "Token "+ token,
+                'Content-Type': 'application/json'}, 
+                body: JSON.stringify({
+                    comment: comment,
+                    table_number: tableNumber,
+                    waiter: waiterId
+                })
+            }
+            fetch("http://127.0.0.1:8088/api/orders/" + order.id + "/", requestOptions)
+            .then(response => {
+                if(response.ok){
+                    console.log(response)
+                }
+                else{
+                    setMessage("Данные не верны")
+                    
+                }
+            })    
         }
     }
 
     useEffect(() => {
         fetchOrder()
+        fetchUsers()
     }, []) 
 
     useEffect(() => {
-        seeWaiter()
         changeDescription() 
         changeDescriptionColor()
     }, [order])
 
-    const seeWaiter = () => {
-        if(order.waiter == null){
-            setWaiterName("")
-        }      
-        else{
-            fetchUser()
-        }
-    }
-
-    const setOrderWorked = () => {
-        const token = JSON.parse(localStorage.getItem("token")).auth_token
-        const user = JSON.parse(localStorage.getItem("user"))
-        let newStatus = ""
-        if(user.role == "W"){
-            if(order.status == "NA"){
-                if(order.dishes == undefined){
-                    newStatus = "DDS" 
-                }
-                else if(order.drinks == undefined){
-                    newStatus = "DDR"
-                }
-                else{
-                    newStatus = "IP" 
-                }
-            }
-            else if(order.status == "IP"|| order.status == "DDS" || order.status == "DDR"){
-                newStatus = "DONE"
-            }
-            else{
-                nav("/board") //удаление с серва
-                return
-            }
-            fetch("http://localhost:8088/api/orders/" + params.id + "/",{
-                    method: "PATCH",
-                    headers: { "Authorization": "Token "+ token,
-                    'Content-Type': 'application/json'}, 
-                    body: JSON.stringify({
-                        waiter: user.id,
-                        status: newStatus
-                    }) 
-                })
-            nav("/board")
-        }
-
-        else if(user.role == "C"){
-            if(order.status == "IP"){
-                newStatus = "DDS"
-            }
-            else if(order.status == "DDS"){
-                newStatus = "DDS"
-            }
-            else{
-                newStatus = "DDS"
-            }
-            fetch("http://localhost:8088/api/orders/" + params.id + "/",{
-                    method: "PATCH",
-                    headers: { "Authorization": "Token "+ token,
-                    'Content-Type': 'application/json'}, 
-                    body: JSON.stringify({
-                        status: newStatus
-                    }) 
-                })
-            nav("/board")
-
-        }
-        else if(user.role == "B"){ 
-            if(order.status == "IP"){
-                newStatus = "DDR"
-            }
-            else if(order.status == "DDR"){
-                newStatus = "DDR"
-            }
-            else if(order.status == "DDS"){
-                newStatus = "DDR"
-
-            }
-            fetch("http://localhost:8088/api/orders/" + params.id + "/",{
-                    method: "PATCH",
-                    headers: { "Authorization": "Token "+ token,
-                    'Content-Type': 'application/json'}, 
-                    body: JSON.stringify({
-                        status: newStatus
-                    }) 
-                })
-            nav("/board")
-        }
-        else if(user.role == "A"){
-            if(order.status == "NA"){
-                newStatus = "IP"
-            }
-            else if(order.status == "IP"){
-                newStatus = "DDS"
-            }
-            else if(order.status == "DDS"){
-                newStatus = "DDR"
-            }
-            else if(order.status == "DDR"){
-                newStatus = "DDS"
-            }
-            fetch("http://localhost:8088/api/orders/" + params.id + "/",{
-                    method: "PATCH",
-                    headers: { "Authorization": "Token "+ token,
-                    'Content-Type': 'application/json'}, 
-                    body: JSON.stringify({
-                        status: newStatus,
-                        waiter: 3
-                    }) 
-                })
-            nav("/board")
-        }
-    }
 
     const changeDescription = () => {
         if(order.status == "NA"){
@@ -270,19 +189,9 @@ const Order = () => {
         }
     }
 
-    const adminEditButton = () => {
-        const user = JSON.parse(localStorage.getItem("user"))
-        if(user != null && user.role == "A"){
-            return (
-                <div className="order__edit">
-                    <button onClick={() => nav("/order_edit/" + order.id)}>Редактировать заказ</button>
-                </div>
-            )
-        }
-        else{
-            return <div></div>
-        }
-    }
+    const [comment, setComment] = useState("")
+    const [tableNumber, setTableNumber] = useState("")
+    const [waiters, setWaiters] = useState([])
 
     return (
         <Wrapper> 
@@ -295,7 +204,7 @@ const Order = () => {
                                         <Link onClick={() => nav(-1)}><img src={AroowIco} className="arrow__icon"></img></Link>
                                     </div>
                                     <div className="back__info">
-                                        Назад к Таблице
+                                        Отмена редактирования
                                     </div>
                                 </div>
                                 <div className="order__info__flex">
@@ -305,12 +214,22 @@ const Order = () => {
                                                 {order.id}
                                             </div>
                                             <div className="table__info">
-                                                номер стола <span className="table__number">{order.table_number}</span>
+                                                номер стола <span className="table__number"><input value={tableNumber}onChange={e => {
+                                                if(e.target.value.slice(-1).match(/[0-9]/)|| e.target.value == ""){
+                                                    setTableNumber(e.target.value)
+                                                }
+                                                }} maxLength={3} >
+                                                </input>
+                                                </span>
                                             </div>
                                         </div>
                                         <div className="role__info__flex">
                                             <div className="waiter__info">
-                                                {order.waiter==null? "":"Официант:"}<br/> {waiterName}
+                                                <select onChange={e => setWaiterId(e.target.value)}>
+                                                    {waiters.map(waiter => 
+                                                        <option key={waiter.id} value={waiter.id}>{waiter.id}.{waiter.first_name} {waiter.last_name}</option>    
+                                                    )}
+                                                </select>
                                             </div>
                                             <div style={descriptionStyle} className="order__status">
                                                 {description}
@@ -320,18 +239,17 @@ const Order = () => {
                                     <div className="order__application">
                                         <div className="application__title">{order.comment == "" ? "" : "Примечание:"}</div>
                                         <div className="application__info">
-                                            {order.comment == "" ? "" : order.comment}
+                                            <textarea onChange={e => setComment(e.target.value)} value={comment}></textarea>
                                         </div>
                                     </div>
                                     <div className="order__done__button">
-                                        <button onClick={setOrderWorked}>Заказ Отработан</button>
+                                        <button onClick={patchOrder}>Принять изменения</button>
                                     </div>
                                     <div className="orders__list__grid">
                                         {orders.map(el => 
-                                                <OrderItem key={el.id + el.name} name={el.name} imgSource={el.image}></OrderItem>
+                                                <OrderItem deleteButton={true} key={el.id + el.name} name={el.name} imgSource={el.image}></OrderItem>
                                         )}
-                                    </div>   
-                                    {adminEditButton()}    
+                                    </div>       
                                 </div>
                             </div>
                     </Content>
@@ -341,4 +259,4 @@ const Order = () => {
     );
 }
 
-export default Order;
+export default OrderEdit;

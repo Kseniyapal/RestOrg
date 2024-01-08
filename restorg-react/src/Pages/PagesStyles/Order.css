@@ -1,6 +1,6 @@
 .order__page__bg{
     width: 100%;
-    height: 100vh;
+    min-height: 100vh;
     background: #272727;
     color: white;
     color: #FFF;
@@ -49,8 +49,9 @@
     display: flex;
     flex-direction: column;
     border-left: #FFF solid 1px;
-    height: 80vh;
-    padding: 0 5% 5% 5%;
+    height: auto;
+    min-height: 80vh;
+    padding: 0 5%;
 }
 
 
@@ -135,6 +136,10 @@
     font-weight: 500;
 }
 
+.application__info{
+    word-wrap: break-word;
+}
+
 .table__info{
     width:40vh;
 }
@@ -153,4 +158,48 @@
     border: none;
 }
 
+.order__edit button{
+    width: 30vh;
+    height: 4vh;
+    border-radius: 10px;
+    color: #000;
+    font-size: 2vh;
+    font-weight: 200;
+    border: none;
+}
 
+.order__edit {
+    padding: 2vh;
+    margin: 2% auto;
+}
+
+.application__info textarea{
+    width: 70vh;
+    height: 30vh;
+    background-color: #272727;
+    border: 0.3vh solid #1a1a1a;
+    text-align: center;
+    font-size: 24px;
+    font-weight: 200; 
+    color: #FFF;
+    text-decoration: none;
+}
+
+.table__number input{
+    width: 8vh;
+    height: 5vh;
+    font-size: 4vh;
+    background-color: #272727;
+    border: 0.3vh solid #1a1a1a;
+    color: #fff;
+    font-weight: 700;
+}
+.waiter__info select{
+    width: 38vh;
+    height: 4vh;
+    font-size: 3vh;
+    background-color: #272727;
+    border: 0.3vh solid #000;
+    color: #FFF;
+    font-weight: 200;
+}

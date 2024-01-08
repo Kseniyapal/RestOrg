@@ -15,7 +15,7 @@ import PriceAmount from "../Components/PriceAmount";
 const Menu = () => {
     const params = useParams()
     const [purchases, setPurchases] = useState(() => {
-        if (localStorage.getItem("purchases") == ""){
+        if (localStorage.getItem("purchases") == null || localStorage.getItem("purchases") == ""){
             return []
         }
         const saved = localStorage.getItem("purchases")
@@ -61,7 +61,6 @@ const Menu = () => {
         if(purchases.filter(el => el.id == purchase.id && el.type == purchase.type).length == 0){
             setPurchases([...purchases, purchase])
         }
-        console.log(localStorage.getItem("purchases"))
     }
 
     const countAmountOfPrice = () => {
@@ -97,7 +96,6 @@ const Menu = () => {
 
     const menuDIsh = () => {
         if(params.drinks == "drinks"){
-            console.log(1312321)
             return <div></div>
         }
         else{
@@ -173,8 +171,7 @@ const Menu = () => {
                                 <button onClick={() => {
                                     nav("/payment")
                                 }} disabled={orderButton}>Оформить заказ</button>                                     
-                                <PriceAmount className="order__price" amount={priceAmount}></PriceAmount>
-                                
+                                <PriceAmount className="order__price" amount={priceAmount}></PriceAmount>          
                             </div>
                         </div>
                     </Container>

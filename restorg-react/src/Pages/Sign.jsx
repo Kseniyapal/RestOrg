@@ -4,8 +4,7 @@ import Header from "../Components/Header";
 import Footer from "../Components/Footer";
 import Content from "../Components/Content";
 import Wrapper from "../Components/Wrapper";
-import WindowC from "../Components/UI/WindowC";
-import AcceptButton from "../Components/UI/Buttons/AcceptButton"
+import AcceptButton from "../Components/UI/Buttons/AcceptButton";
 import UserField from "../Components/UI/Fields/UserField";
 import "./PagesStyles/Sign.css";
 import { useNavigate } from "react-router";
@@ -24,9 +23,9 @@ const Sign = () => {
         })
         .then(response => response.json())
         .then(data => {
-            console.log(data)
             localStorage.setItem("user", JSON.stringify(data.filter(el => el.email == email)[0]))
-            nav("/")  
+            const user = JSON.parse(localStorage.getItem("user"))
+            nav("/profile/" + user.id) 
         })
 
     }
@@ -49,7 +48,7 @@ const Sign = () => {
             }
         })
         .then(data => {
-            if(JSON.parse(localStorage.getItem("token")) != ""){
+            if(JSON.parse(localStorage.getItem("token")) != "" && JSON.parse(localStorage.getItem("token")) != null){
                 //если токен есть - разлогиниваем пользователя
                 const token = JSON.parse(localStorage.getItem("token")).auth_token
                 fetch("http://localhost:8088/api/auth/token/logout/", {
@@ -66,7 +65,6 @@ const Sign = () => {
         })
         .catch(err =>{
             setErrorMessage(err.message)
-            console.log(err.message)
         })
              
     }

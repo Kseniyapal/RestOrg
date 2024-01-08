@@ -25,6 +25,11 @@
     align-items: center;
 }
 
+.payment__additionat__column{
+    width: 40vh;
+}
+
+
 .back__button a{
     width: 6vh;
     height: 6vh;
@@ -32,15 +37,14 @@
 
 .payment__table{
     margin-left: 3vh;
-    font-size: 20px;
+    font-size: 2.5vh;
     width: 23vh;
     border: none;
     font-weight: 300;
 }
 
-
 .payment__pricelist__flex{
-    width: 35%;
+    width: 35vh;
     min-height: 86vh;
     background: #D9D9D9;
     padding: 3vh;
@@ -48,7 +52,7 @@
 
 .payment__purchase{
     color: black;
-    font-size: 30px;
+    font-size: 3vh;
     font-weight: 200;
     margin-bottom: 3vh;
 }
@@ -72,3 +76,4 @@
     font-weight: 200;
     margin: 0 0 10px 10px;
 }
+

@@ -26,7 +26,7 @@
 
 .register__window {
     width: 50%;
-
+    min-width: 400px;
     display: flex;
     flex-direction: column;
 
@@ -46,15 +46,15 @@
 
 .register__button{
     display: block;
-    width: 35vh;
-    height: 4vh;
+    width: 70%;
+    height: 40px;
     border-radius: 10px;
     align-items: center;
     justify-content: space-between;
     color: #000;
     text-align: center;
     font-family: Inter;
-    font-size: 3vh;
+    font-size: 26px;
     font-weight: 200;
     border: #ffffff;
     background-color: #ffffff;
@@ -68,6 +68,16 @@
     flex-direction: column;
     align-items: center; 
     justify-content: center;
+}
+
+.register__toWorkers{
+    margin-top: 15px;
+}
+
+.register__toWorkers a{
+    font-size: 20px;
+    color: #000;
+    text-decoration: none;
 }
 
 .register__name__flex {
@@ -95,11 +105,6 @@
     padding-top: 5%;
     color: #FFF;
     font-weight: 300;
-}
-
-.register__bg a {
-    text-decoration: none;
-    font-size: 3vh;
 }
 
 .register__bg a:active {

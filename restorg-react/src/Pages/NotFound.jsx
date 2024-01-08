@@ -1,7 +1,6 @@
 import React from "react";
 import "./PagesStyles/NotFound.css";
 import Header from "../Components/Header";
-import bigLogo from "../Styles/image/bigLogo.png"
 
 const NotFound = () => {
     return (

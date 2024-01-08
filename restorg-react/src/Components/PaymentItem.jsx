@@ -6,11 +6,13 @@ import MinusIco from "../Styles/icons/minus_square.svg"
 const PaymentItem = ({...props}) => {
 
     const [count, setCount] = useState(props.count)
+    const [selfPrice, setSelfPrice] = useState(props.price * props.count)
 
     const increment = () => {
         setCount(count + 1)
         props.purchase = {...props.purchase, count : count + 1}
         props.change(props.purchase)
+        setSelfPrice((count + 1) * props.price )
     }
 
     const decrement = () => {
@@ -21,6 +23,7 @@ const PaymentItem = ({...props}) => {
             setCount(count - 1)
             props.purchase = {...props.purchase, count : count - 1}
             props.change(props.purchase)
+            setSelfPrice((count - 1) * props.price )
         }
     }
 
@@ -33,7 +36,7 @@ const PaymentItem = ({...props}) => {
                     <div className="payment__item__count">{props.count}</div>
                     <button className="payment__item__minus"><img src={PlusIco} onClick={()=>increment()}></img></button>
                 </div>
-                <div className="payment__item__price">{props.price} ₽</div>
+                <div className="payment__item__price">{selfPrice} ₽</div>
             </div>
         </div>              
     )

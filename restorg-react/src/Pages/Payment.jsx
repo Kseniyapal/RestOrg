@@ -67,7 +67,7 @@ const Payment = () => {
         postOrder()
         localStorage.setItem("purchases", JSON.stringify([]))
         const user = JSON.parse(localStorage.getItem("user"))
-        if(user != ""){
+        if(user != null || user != ""){
             nav("/board")
         }
         else{
@@ -78,8 +78,6 @@ const Payment = () => {
     useEffect(() => {
         localStorage.setItem("purchases", JSON.stringify(purchases))
         countAmountOfPrice()
-        console.log(localStorage.getItem("purchases"))
-
         setOrderButtonActive(purchases)
     }, [purchases])
 
@@ -89,14 +87,12 @@ const Payment = () => {
         const purchases = JSON.parse(localStorage.getItem("purchases"))
         const dishesList = []
         const drinksList = []
-        console.log(JSON.parse(localStorage.getItem("purchases")))
         purchases.forEach(el => {
             if(el.type == "dish"){
                 let count = el.count
                 while(count > 0){
                     count -= 1
                     dishesList.push(el.id)
-                    console.log(dishesList)
                 }         
             }
             else{
@@ -104,14 +100,15 @@ const Payment = () => {
                 while(count > 0){
                     count -= 1
                     drinksList.push(el.id)
-                }   
+                }       
             }
         })
-        if(user != "" && user.role == "W"){
+        console.log(user)
+        if(user != null && user != "" && user.role == "W"){
             waiter = user.id
         }
         if(tableNumber == ""){
-            tableNumber=1
+            tableNumber = 1
         }
         const requestOptions = {
             method: "POST",
@@ -128,7 +125,6 @@ const Payment = () => {
             })
         }
         fetch("http://127.0.0.1:8088/api/orders/", requestOptions)
-            .then(data => console.log(data))
     }
 
     const addCountToAdditionalMessage = () => {
@@ -160,7 +156,7 @@ const Payment = () => {
                             <div className="payment__additionat__column">
                                 <img  src={bigLogo} className="payment__logo"></img>
                                 <div className="payment__additiopnal__label">Примечание к заказу:</div>
-                                <textarea onChange={e => setAdditionalMessage(e.target.value)} maxLength={450} className="payment__additiopnal"></textarea>
+                                <textarea onChange={e => setAdditionalMessage(e.target.value)} maxLength={250} className="payment__additiopnal"></textarea>
                             </div>
                             <div className="payment__pricelist__flex">
                                 <div className="payment__purchase">Ваш Заказ:</div>
@@ -179,16 +175,11 @@ const Payment = () => {
                                     }}>Оплатить</button>
                                 </div>
                             </div>
-                        </div>
-                        
-
+                        </div>       
                     </Container>
                 </div>
             </Content>
-
         </Wrapper>
-        
-        
     );
 }
 

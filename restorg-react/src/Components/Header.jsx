@@ -12,7 +12,6 @@ const Header = () => {
 
     const logOut = () => {
         const token = JSON.parse(localStorage.getItem("token")).auth_token
-        console.log(token)
         fetch("http://localhost:8088/api/auth/token/logout/", {
             method: "POST",
             headers: { "Authorization": "Token " + token,
@@ -27,7 +26,7 @@ const Header = () => {
 
     const mouseEnter = () => {
         const user = JSON.parse(localStorage.getItem("user"))
-        if(user.id == undefined){
+        if(user == null || user.id == undefined){
             setmenuImgStyle({display: "none"})
             setMenuItems([
                 {className:"menu__item__noRole", text:"войти как работник", click: () => nav("/sign")}])
@@ -35,18 +34,36 @@ const Header = () => {
         else if(user.role == "A"){
             const email = JSON.parse(localStorage.getItem("user")).email 
             setmenuImgStyle({display: "none"})
-            setMenuItems([{className:"menu__label__admin", text:email},
+            setMenuItems([
+            {className:"menu__item__adminn", text:"профиль", click: () => {
+                nav("/profile/" + user.id)
+                window.location.reload(true)
+            }},
             {className:"menu__item__adminn", text:"к заказам", click: () => nav("/board")},
             {className:"menu__item__adminn", text:"регистрация работника", click: () => nav("/register")},
+            {className:"menu__item__adminn", text:"список работников", click: () => nav("/workers")},
             {className:"menu__item__adminn", text:"добавить блюдо", click: () => nav("/register_dish")},
-            {className:"menu__item__adminn", text:"выйти", click: logOut}])
+            {className:"menu__item__adminn", text:"выйти", click: () => {
+                logOut()
+                window.location.reload(true)
+            }}
+            ])
         }
         else {
             const email = JSON.parse(localStorage.getItem("user")).email 
             setmenuImgStyle({display: "none"})
-            setMenuItems([{className:"menu__label", text:email},
+            setMenuItems([
+                {className:"menu__item", text:"профиль", click: () => {
+                    nav("/profile/" + user.id)
+                    window.location.reload(true)
+            }},
             {className:"menu__item", text:"к заказам", click: () => nav("/board")},
-            {className:"menu__item", text:"выйти", click: logOut}])
+            {className:"menu__item", text:"список работников", click: () => nav("/workers")},
+            {className:"menu__item", text:"выйти", click: () => {
+                logOut()
+                window.location.reload(true)
+            }}
+            ])
         }
     }
 

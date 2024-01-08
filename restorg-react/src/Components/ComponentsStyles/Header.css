@@ -26,7 +26,7 @@
 
 .menu__item, .menu__label{
     position: relative;
-    top: 8.5vh;
+    top: 10.5vh;
     font-size: 2vh;
     width: 30vh;
     height: 4vh;
@@ -41,7 +41,7 @@
 
 .menu__label__admin, .menu__item__adminn{
     position: relative;
-    top: 12.5vh;
+    top: 14.5vh;
     font-size: 2vh;
     width: 30vh;
     height: 4vh;

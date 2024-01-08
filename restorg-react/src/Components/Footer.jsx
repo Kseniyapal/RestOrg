@@ -14,7 +14,7 @@ const Footer = () => {
                     <div className="footer__list2">
                         <ul>
                             <div className="list__description">Если возникла проблема с сервисом:</div>
-                            <li><a  className="aFooter" href="https://github.com/D0kshin/front-RestORG">GitHub</a></li>
+                            <li><a  className="aFooter" href="https://github.com/D0kshin/restorg-react">GitHub</a></li>
                             <li><a href="https://www.google.com/">Support</a></li>
                         </ul>
                     </div>

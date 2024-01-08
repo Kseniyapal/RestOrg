@@ -26,6 +26,7 @@
 }
 
 .payment__item__numbers__flex{
+    border-bottom:  1px dashed #000;
     display: flex;
     justify-content: space-between;
 }
@@ -46,8 +47,8 @@
 }
 
 .payment__additionat__column textarea{
-    width: 500px;
-    height: 250px;
+    width: 55vh;
+    height: 25vh;
     resize: none;
     font-size: 20px;
     padding: 1vh;

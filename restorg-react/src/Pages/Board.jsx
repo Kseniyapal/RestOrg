@@ -12,23 +12,24 @@ const Board = () => {
     let [DoneDishes, setDoneDishes] = useState([])
 
     const fetchOrders = () => {
-        const token = JSON.parse(localStorage.getItem("token")).auth_token
-        fetch("http://localhost:8088/api/orders/",{
-            method: "GET",
-            headers: { "Authorization": "Token "+ token,
-            'Content-Type': 'application/json'} 
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log(data)
-            if(data.detail == undefined){
-                splitDishes(data)
-            }
-            else{
-                return
-            }
-        })
-
+            if(JSON.parse(localStorage.getItem("token")) != null){
+            const token = JSON.parse(localStorage.getItem("token")).auth_token
+            fetch("http://localhost:8088/api/orders/",{
+                method: "GET",
+                headers: { "Authorization": "Token "+ token,
+                'Content-Type': 'application/json'} 
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+                if(data.detail == undefined){
+                    splitDishes(data)
+                }
+                else{
+                    return
+                }
+            })
+        }
     }  
 
 
