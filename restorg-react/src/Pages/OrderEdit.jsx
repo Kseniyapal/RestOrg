@@ -159,6 +159,7 @@ const OrderEdit = () => {
             console.log("comment " + comment)
             console.log("table_number " + tableNumber)
             console.log("waiterId " + waiterId)
+                
             fetch("http://localhost:8088/api/orders/" + params.id + "/",{
                 method: "PATCH",
                 headers: { "Authorization": "Token "+ token,
