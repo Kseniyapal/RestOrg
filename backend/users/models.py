@@ -1,3 +1,5 @@
+"""Models for users"""
+
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
@@ -15,6 +17,7 @@ ROLE_CHOICES = (
 
 
 class User(AbstractUser):
+    """User class"""
 
     email = models.EmailField(
         verbose_name='Электронная почта',
@@ -50,6 +53,7 @@ class User(AbstractUser):
         super().save(*args, **kwargs)
 
     class Meta:
+        """Meta"""
 
         verbose_name = 'Пользователь'
         verbose_name_plural = 'Пользователи'

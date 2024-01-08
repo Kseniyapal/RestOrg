@@ -1,3 +1,5 @@
+"""File for load users"""
+
 import json
 
 from django.core.management.base import BaseCommand
@@ -16,14 +18,13 @@ class Command(BaseCommand):
 
         for user in data['users']:
             item_user = User.objects.create(
-                username = user['username'],
-                first_name = user['first_name'],
-                last_name = user['last_name'],
-                role = user['role'],
-                email = user['email'],
-                password = user['password']
+                username=user['username'],
+                first_name=user['first_name'],
+                last_name=user['last_name'],
+                role=user['role'],
+                email=user['email'],
+                password=user['password']
             )
             item_user.set_password(user['password'])
             item_user.save()
-
         self.stdout.write(self.style.SUCCESS('Users loaded successfully'))

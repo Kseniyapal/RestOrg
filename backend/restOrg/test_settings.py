@@ -1,18 +1,14 @@
-import os
-from pathlib import Path
-import sys
+"""Test settings"""
 
-#BASE_DIR = Path(__file__).resolve().parent.parent
+import os
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
-
-SECRET_KEY = 'django-insecure-9#3(b=_w)+-ikznr-ju!x5)#+n%mtm2a(gp=a$2rk3$jazm#7l'
-
+SECRET_KEY = 'django-insecure-9#3(b=_w)+-ikznr-ju!x5)#+n%m \
+tm2a(gp=a$2rk3$jazm#7l'
 
 DEBUG = True
 
-#ALLOWED_HOSTS = ['backend', 'localhost', '127.0.0.1', '[::1]']
 ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
@@ -33,11 +29,9 @@ INSTALLED_APPS = [
     'corsheaders'
 ]
 
-#CORS_ORIGIN_ALLOW_ALL = False
-
 CORS_ALLOWED_ORIGINS = [
-"http://localhost:8088",
-"http://localhost:3000"
+    "http://localhost:8088",
+    "http://localhost:3000"
 ]
 
 CORS_ORIGIN_WHITELIST = [
@@ -45,24 +39,24 @@ CORS_ORIGIN_WHITELIST = [
 ]
 
 CORS_ALLOW_METHODS = [
-'DELETE',
-'GET',
-'OPTIONS',
-'PATCH',
-'POST',
-'PUT',
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',
+    'POST',
+    'PUT',
 ]
 
 CORS_ALLOW_HEADERS = [
-'accept',
-'accept-encoding',
-'authorization',
-'content-type',
-'dnt',
-'origin',
-'user-agent',
-'x-csrftoken',
-'x-requested-with',
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
 ]
 
 MIDDLEWARE = [
@@ -97,8 +91,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'restOrg.wsgi.application'
 
-
-DATABASES = {  
+DATABASES = {
     "default": {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
@@ -120,8 +113,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
-
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
@@ -137,8 +128,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'users.User'
 
 REST_FRAMEWORK = {
-
-
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
     ],
@@ -157,7 +146,6 @@ DJOSER = {
 }
 
 STATIC_URL = '/static/'
-#STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 MEDIA_URL = '/media/'

@@ -1,8 +1,10 @@
-from djoser.serializers import UserCreateSerializer 
-from orders.models import MenuItemDish, MenuItemDrink, Order
-from rest_framework.serializers import ModelSerializer, PrimaryKeyRelatedField, ImageField
-from users.models import User
+"""Serializers"""
+
 import base64
+from orders.models import MenuItemDish, MenuItemDrink, Order
+from rest_framework.serializers import ModelSerializer, \
+    PrimaryKeyRelatedField, ImageField
+from users.models import User
 from django.core.files.base import ContentFile
 
 
@@ -19,41 +21,46 @@ class Base64ImageField(ImageField):
 
         return super().to_internal_value(data)
 
+
 class MenuItemDrinkSerializer(ModelSerializer):
-    """Сериализер для """
+    """Сериализер для напитков"""
 
     class Meta:
+        """Class Meta"""
         model = MenuItemDrink
         fields = ['id', 'name', 'image', 'volume', 'price']
 
 
 class MenuItemDishSerializer(ModelSerializer):
-    """Сериализер для """
+    """Сериализер для блюд"""
 
     class Meta:
+        """Class Meta"""
         model = MenuItemDish
         fields = ['id', 'name', 'image', 'weight', 'price']
 
 
 class UserGetSerializer(ModelSerializer):
     """Сериализатор получения пользователя"""
+
     class Meta:
+        """Class Meta"""
         model = User
-        #fields = '__all__'
         exclude = ['password']
-    
+
 
 class OrderSerializer(ModelSerializer):
-    """Сериализер для """
-    waiter = PrimaryKeyRelatedField(allow_null=True, required = False, queryset=User.objects.all())
+    """Сериализер для заказов"""
+    waiter = PrimaryKeyRelatedField(allow_null=True,
+                                    required=False,
+                                    queryset=User.objects.all())
     menu_dishes = PrimaryKeyRelatedField(many=True,
                                          queryset=MenuItemDish.objects.all())
     menu_drinks = PrimaryKeyRelatedField(many=True,
                                          queryset=MenuItemDrink.objects.all())
 
     class Meta:
+        """Class Meta"""
         model = Order
-        fields = ['id', 'number','waiter', 'menu_dishes', 'menu_drinks', 'status', 'comment']
-
-
-
+        fields = ['id', 'number', 'waiter', 'menu_dishes', 'menu_drinks',
+                  'status', 'comment']

@@ -1,8 +1,11 @@
+"""Filters"""
+
 import django_filters
 from orders.models import Order
 
 
 class OrderFilter(django_filters.FilterSet):
+    """Filter fot orders"""
     waiter_id = django_filters.NumberFilter(
         field_name='waiter__id', label='Waiter ID')
     menu_dishes_empty = django_filters.BooleanFilter(
@@ -15,6 +18,7 @@ class OrderFilter(django_filters.FilterSet):
         label='Menu Drinks Empty')
 
     class Meta:
+        """Class Meta"""
         model = Order
         fields = ['status',
                   'waiter_id',
