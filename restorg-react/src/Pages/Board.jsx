@@ -12,7 +12,7 @@ const Board = () => {
     let [DoneDishes, setDoneDishes] = useState([])
 
     const fetchOrders = () => {
-            if(JSON.parse(localStorage.getItem("token")) != null){
+        if(JSON.parse(localStorage.getItem("token")) != null){
             const token = JSON.parse(localStorage.getItem("token")).auth_token
             fetch("http://localhost:8088/api/orders/",{
                 method: "GET",
@@ -21,7 +21,6 @@ const Board = () => {
             })
             .then(response => response.json())
             .then(data => {
-                console.log(data)
                 if(data.detail == undefined){
                     splitDishes(data)
                 }

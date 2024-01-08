@@ -26,11 +26,11 @@ const Main = () => {
                         <img  src={bigLogo} className="main__logo"></img>
         
                         <WindowC>   
-                            <AcceptButton href='/menu' className="AcceptButton" >Заказ Блюд</AcceptButton>
-                            <AcceptButton href='/menu/drinks' className="AcceptButton">Заказ На Баре</AcceptButton>                      
+                            <AcceptButton to='/menu' className="AcceptButton" >Заказ Блюд</AcceptButton>
+                            <AcceptButton to='/menu/drinks' className="AcceptButton">Заказ На Баре</AcceptButton>                      
                         </WindowC>
                     
-                        <AcceptButtonMini href='/sign' className='AcceptButtonMini'>
+                        <AcceptButtonMini to='/sign' className='AcceptButtonMini'>
                             <img src={userLogo} className="buttonImg"></img>
                             Войти как<br/> работник
                         </AcceptButtonMini>

@@ -4,6 +4,7 @@ import "./ComponentsStyles/Header.css";
 import logo from "../Styles/icons/logo.png";
 import menuIco from "../Styles/icons/menu.svg";
 import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
 
 const Header = () => {
     const nav = useNavigate()
@@ -77,7 +78,7 @@ const Header = () => {
             <Container>
                 <div className="header__flex">
                     <div className="header__nav__flex">
-                        <div className="header__main"><a href="/">На главную</a></div>
+                        <div className="header__main"><Link to="/">На главную</Link></div>
                         {/* <div className="header__about"><a href="/#about">о сервисе</a></div> */}
                     </div>
                     <div className="header__logo">

@@ -103,7 +103,6 @@ const Payment = () => {
                 }       
             }
         })
-        console.log(user)
         if(user != null && user != "" && user.role == "W"){
             waiter = user.id
         }
@@ -117,9 +116,9 @@ const Payment = () => {
                 waiter: waiter,
                 number: 1,
                 menu_dishes: dishesList,
-                menu_drinks: drinksList,
+                menu_drinks: drinksList,    
                 status: "NA",
-                comment: addCountToAdditionalMessage(),
+                comment: additionalMessage,
                 number: tableNumber
                 
             })
@@ -146,7 +145,7 @@ const Payment = () => {
                     <Container>
                         <div className="order__back__flex">
                             <div className="back__button">
-                                <Link onClick={() => nav(-1)}><img src={AroowIco} className="arrow__icon"></img></Link>
+                                <Link to="/menu"><img src={AroowIco} className="arrow__icon"></img></Link>
                             </div>
                             <div className="back__info">
                                 Назад к Меню
@@ -156,14 +155,14 @@ const Payment = () => {
                             <div className="payment__additionat__column">
                                 <img  src={bigLogo} className="payment__logo"></img>
                                 <div className="payment__additiopnal__label">Примечание к заказу:</div>
-                                <textarea onChange={e => setAdditionalMessage(e.target.value)} maxLength={250} className="payment__additiopnal"></textarea>
+                                <textarea onChange={e => setAdditionalMessage(e.target.value)} maxLength={3000} className="payment__additiopnal"></textarea>
                             </div>
                             <div className="payment__pricelist__flex">
                                 <div className="payment__purchase">Ваш Заказ:</div>
                                 {purchases.map(purchase => 
                                     <PaymentItem purchase={purchase} name={purchase.name} price={purchase.price} count={purchase.count} key={purchase.id + purchase.type} change={changePurchaseById} delete={deletePurchase}></PaymentItem>
                                 )}
-                                <input value={tableNumber} onChange={e => {
+                                <input maxLength={3} value={tableNumber} onChange={e => {
                                     if(e.target.value.slice(-1).match(/[0-9]/)|| e.target.value == ""){
                                         setTableNumber(e.target.value)
                                     }

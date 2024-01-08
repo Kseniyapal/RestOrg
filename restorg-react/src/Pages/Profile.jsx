@@ -17,8 +17,9 @@ const Register = () => {
         ])
 
     const fetchUser = () => {
-        let token = JSON.parse(localStorage.getItem("token")).auth_token
-        if(token != null || token != undefined){
+        let token = JSON.parse(localStorage.getItem("token"))
+        if(token != null && token != undefined && token != ""){
+            token = JSON.parse(localStorage.getItem("token")).auth_token
             fetch("http://localhost:8088/api/users/" + params.id + "/",{
                 method: "GET",
                 headers: { "Authorization": "Token "+ token,
@@ -28,6 +29,7 @@ const Register = () => {
             .then(data => {
                 if(data.detail != "Not found."){
                     setUser(data)
+                    setAdminButtons()
                 }
                 else{
                     nav("/notFound")
@@ -67,43 +69,47 @@ const Register = () => {
 
     useEffect(() => {
         fetchUser()
-        setAdminButtons()
     }, [])
 
-    return (
-        <Wrapper>
-            <Header/>
-            <Content>
-                <div className="profile__bg">
-                    <Container>
-                        <div className="profile__info__flex">
-                            <div className="profile__info__role">
-                                {user.role}
+    if(user.role != undefined){
+        return (
+            <Wrapper>
+                <Header/>
+                <Content>
+                    <div className="profile__bg">
+                        <Container>
+                            <div className="profile__info__flex">
+                                <div className="profile__info__role">
+                                    {user.role}
+                                </div>
+                                <div className="profile__info__text">
+                                    <div className="profile__field">Имя: {user.first_name}</div>
+                                    <hr/>
+                                    <div className="profile__field">Фамилия: {user.last_name}</div>
+                                    <hr/>
+                                    <div className="profile__field">Почта: {user.email}</div>
+                                    <hr/>
+                                    <div className="profile__field">Номер: {user.id}</div>
+                                    <hr/>
+                                    <div className="profile__field">Роль: {userRole()}</div>
+                                    <hr/>
+                                </div>
                             </div>
-                            <div className="profile__info__text">
-                                <div className="profile__field">Имя: {user.first_name}</div>
-                                <hr/>
-                                <div className="profile__field">Фамилия: {user.last_name}</div>
-                                <hr/>
-                                <div className="profile__field">Почта: {user.email}</div>
-                                <hr/>
-                                <div className="profile__field">Номер: {user.id}</div>
-                                <hr/>
-                                <div className="profile__field">Роль: {userRole()}</div>
-                                <hr/>
+                            <div className="profile__buttons">
+                                {buttons.map(el => 
+                                        <button onClick={el.click} key={el.text}>{el.text}</button>
+                                    )}
                             </div>
-                        </div>
-                        <div className="profile__buttons">
-                            {buttons.map(el => 
-                                    <button onClick={el.click} key={el.text}>{el.text}</button>
-                                )}
-                        </div>
-                    </Container>
-                </div>
-            </Content>
-            <Footer/>
-        </Wrapper>   
-    );
+                        </Container>
+                    </div>
+                </Content>
+                <Footer/>
+            </Wrapper>   
+        );
+    }
+    else{
+        return <div></div>
+    }
 }
 
 export default Register;

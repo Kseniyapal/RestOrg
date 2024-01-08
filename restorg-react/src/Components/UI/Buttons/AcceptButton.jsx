@@ -1,10 +1,11 @@
 import React, { Children } from "react";
 import "../../ComponentsStyles/AcceptButton.css"
+import { Link } from "react-router-dom";
 
 const AcceptButton = ({children, ...props}) => {
     return (
     
-            <a {...props}>{children}</a>
+            <Link {...props}>{children}</Link>
     
     )
 }

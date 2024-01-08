@@ -89,7 +89,7 @@ const Dish = () => {
                         <div className="dish__flex__column">
                             <div className="order__back__flex">
                                 <div className="back__button">
-                                <Link onClick={() => nav(-1)}><img src={AroowIco} className="arrow__icon"></img></Link>
+                                <Link to="/menu"><img src={AroowIco} className="arrow__icon"></img></Link>
                                 </div>
                                 <div className="back__info">
                                     Назад к Меню

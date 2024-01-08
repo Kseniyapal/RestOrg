@@ -21,8 +21,8 @@ const Order = () => {
 
     const fetchOrder = () => { 
         let token = JSON.parse(localStorage.getItem("token"))
-        if(token != null || token != ""){
-                token = JSON.parse(localStorage.getItem("token")).auth_token
+        if(token != null && token != undefined && token != ""){
+            token = JSON.parse(localStorage.getItem("token")).auth_token
             fetch("http://localhost:8088/api/orders/" + params.id + "/",{
                 method: "GET",
                 headers: { "Authorization": "Token "+ token,
@@ -30,8 +30,6 @@ const Order = () => {
             })
             .then(response => response.json())
             .then(data => {
-                console.log(data)
-
                 if(data.detail == "Not found."){
                     nav("not found")
                     return
@@ -46,8 +44,12 @@ const Order = () => {
                     fetchDishesAndDrinks(data)
                 }
                 setOrder(data)
+                console.log(data)
             })  
-        }      
+        }   
+        else{
+            nav("/notFound")
+        }   
     } 
     
     const fetchDishes = (orderData) => {
@@ -292,7 +294,7 @@ const Order = () => {
                             <div className="order__flex__column">
                                 <div className="order__back__flex">
                                     <div className="back__button">
-                                        <Link onClick={() => nav(-1)}><img src={AroowIco} className="arrow__icon"></img></Link>
+                                        <Link to="/board"><img src={AroowIco} className="arrow__icon"></img></Link>
                                     </div>
                                     <div className="back__info">
                                         Назад к Таблице
