@@ -18,6 +18,7 @@ services:
       - static:/static/
       - media:/app/media/
 
+
   gateway:
     image: kseniyapal/restorg_nginx
     env_file: .env

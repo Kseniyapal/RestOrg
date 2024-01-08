@@ -12,8 +12,8 @@ SECRET_KEY = 'django-insecure-9#3(b=_w)+-ikznr-ju!x5)#+n%mtm2a(gp=a$2rk3$jazm#7l
 
 DEBUG = True
 
-#ALLOWED_HOSTS = ['backend', 'localhost', '127.0.0.1', '[::1]']
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['backend', 'localhost', '127.0.0.1', '[::1]']
+#ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -99,12 +99,12 @@ WSGI_APPLICATION = 'restOrg.wsgi.application'
 
 
 DATABASES = {
-     'default': {
+'default': {
         "ENGINE": "django.db.backends.postgresql",
         "NAME": os.getenv("POSTGRES_DB", "django"),
-        "USER": os.getenv("POSTGRES_USER", "postgres"),
-        "PASSWORD": os.getenv("POSTGRES_PASSWORD", "tvorogovo284"),
-        "HOST": os.getenv("DB_HOST", "localhost"),
+        "USER": os.getenv("POSTGRES_USER", "django"),
+        "PASSWORD": os.getenv("POSTGRES_PASSWORD", ""),
+        "HOST": os.getenv("DB_HOST", "db"),
         "PORT": os.getenv("DB_PORT", 5432)
      }
     
