@@ -115,7 +115,25 @@
  - Страница регистрации пользователей
  - Страница добавления пунктов меню
 
+## Docker
+ ### Образы
+ - docker pull d0kshin/restorg_react
+ - docker pull kseniyapal/restorg_backend
+ - docker pull kseniyapal/restorg_nginx
 
+ ### Как запустить?
+ - Загрузить себе образы командами выше
+ - В терминале в директории проекта прописать команду docker compose up
+ - Выполнить ряд следующих команд:
+
+       docker compose -f docker-compose.yml exec backend python manage.py migrate
+
+       docker compose -f docker-compose.yml exec backend python manage.py load_users
+       
+       docker compose -f docker-compose.yml exec backend python manage.py load_dishes
+       
+       docker compose -f docker-compose.yml exec backend python manage.py load_drinks
+ - Перейти в браузере на http://localhost:3000/
  
 ## Authors
 
