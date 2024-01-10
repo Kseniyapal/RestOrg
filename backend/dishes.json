@@ -15,7 +15,7 @@
 },
 {
   "id": 3,
-  "name":"Салат с водорослями чука",
+  "name":"Салат с водорослями чука и авокадо",
   "image" : "http://127.0.0.1:8000/media/images/vp5a5f38no6sbepmfvbaxt9flzofhnf0.jpg",
   "weight" : "150г",
   "price" : "99руб."
@@ -233,7 +233,7 @@
 {
   "id": 34,
   "name":"Картофельное пюре",
-  "image" : "http://127.0.0.1:8000/media/images/9adeca29-c8bf-91fb-878c-1d68f9a7a2af.png",
+  "image" : "http://127.0.0.1:8000/media/images/pure.png",
   "weight" : "140г",
   "price" : "137руб."
 },

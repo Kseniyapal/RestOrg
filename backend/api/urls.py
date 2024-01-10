@@ -6,7 +6,7 @@ from rest_framework import routers
 from .views import (MenuItemDishViewSet, MenuItemDrinkViewSet, OrderViewSet,
                     UserViewSet)
 
-APP_NAME = 'api'
+app_name = 'api'
 
 router = routers.DefaultRouter()
 router.register('orders', OrderViewSet, basename='orders')

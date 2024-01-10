@@ -61,7 +61,7 @@ class Order(models.Model):
     )
     comment = models.CharField(
         'Комментарий',
-        max_length=255,
+        max_length=10000,
         blank=True
     )
     menu_dishes = models.ManyToManyField(MenuItemDish)
