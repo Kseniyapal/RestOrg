@@ -17,9 +17,8 @@ const Register = () => {
         ])
 
     const fetchUser = () => {
-        let token = JSON.parse(localStorage.getItem("token"))
-        if(token != null && token != undefined && token != ""){
-            token = JSON.parse(localStorage.getItem("token")).auth_token
+        const token = JSON.parse(localStorage.getItem("token"))?.auth_token
+        if(token){
             fetch("http://localhost:8088/api/users/" + params.id + "/",{
                 method: "GET",
                 headers: { "Authorization": "Token "+ token,

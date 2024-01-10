@@ -15,9 +15,8 @@ const Workers = () => {
     const [bartenders, setBartenders] = useState([])
 
     const RequestUsers = () => {
-        let token = JSON.parse(localStorage.getItem("token"))
-        if(token != null && token != undefined && token != ""){
-            token = JSON.parse(localStorage.getItem("token")).auth_token
+        const token = JSON.parse(localStorage.getItem("token"))?.auth_token
+        if(token){
             const requestOptions = {
                 method: "GET",
                 headers: { "Authorization": "Token "+ token,

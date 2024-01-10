@@ -18,8 +18,8 @@ const DishRegistration = () => {
     const [messageStyle, setMessageStyle] = useState({})
 
     const registerDish = () => {
-        if(JSON.parse(localStorage.getItem("token")) != null){
-            const token = JSON.parse(localStorage.getItem("token")).auth_token
+        const token = JSON.parse(localStorage.getItem("token"))?.auth_token
+        if(token){
             const requestOptions = {
                 method: "POST",
                 headers: { "Authorization": "Token "+ token,
@@ -50,8 +50,8 @@ const DishRegistration = () => {
     }
 
     const registerDrink = () => {
-        if(JSON.parse(localStorage.getItem("token")) != null){
-            const token = JSON.parse(localStorage.getItem("token")).auth_token
+        const token = JSON.parse(localStorage.getItem("token"))?.auth_token
+        if(token){
             const requestOptions = {
                 method: "POST",
                 headers: { "Authorization": "Token "+ token,

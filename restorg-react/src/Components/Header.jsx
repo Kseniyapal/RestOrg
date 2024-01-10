@@ -51,7 +51,6 @@ const Header = () => {
             ])
         }
         else {
-            const email = JSON.parse(localStorage.getItem("user")).email 
             setmenuImgStyle({display: "none"})
             setMenuItems([
                 {className:"menu__item", text:"профиль", click: () => {

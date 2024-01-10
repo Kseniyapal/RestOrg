@@ -11,7 +11,7 @@ const OrderItem = ({...props}) => {
     const deleteButton = () => {
         if(props.deleteButton){
             return (<div className="purchase__delete">
-                <button>Удалить</button>
+                <button onClick={() => props.deleteFunction(props.element)}>Удалить</button>
             </div>
             )
         }

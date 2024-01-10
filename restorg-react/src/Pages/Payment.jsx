@@ -118,7 +118,7 @@ const Payment = () => {
                 menu_dishes: dishesList,
                 menu_drinks: drinksList,    
                 status: "NA",
-                comment: additionalMessage,
+                comment: addCountToAdditionalMessage(),
                 number: tableNumber
                 
             })
@@ -155,8 +155,8 @@ const Payment = () => {
                             <div className="payment__additionat__column">
                                 <img  src={bigLogo} className="payment__logo"></img>
                                 <div className="payment__additiopnal__label">Примечание к заказу:</div>
-                                <textarea onChange={e => setAdditionalMessage(e.target.value)} maxLength={3000} className="payment__additiopnal"></textarea>
-                            </div>
+                                <textarea onChange={e => setAdditionalMessage(e.target.value)} maxLength={250} className="payment__additiopnal"></textarea>
+                             </div>
                             <div className="payment__pricelist__flex">
                                 <div className="payment__purchase">Ваш Заказ:</div>
                                 {purchases.map(purchase => 

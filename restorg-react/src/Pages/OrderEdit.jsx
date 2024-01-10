@@ -19,12 +19,18 @@ const OrderEdit = () => {
     const [order, setOrder] = useState({})
     const [waiterId, setWaiterId] = useState(3)
     const [message, setMessage] = useState("")
+    const [comment, setComment] = useState("")
+    const [tableNumber, setTableNumber] = useState("")
+    const [waiters, setWaiters] = useState([])
+    const [dishes, setDishes] = useState([])
+    const [drinks, setDrinks] = useState([])
+
+    let newDishes = []
+    let newDrinks = []
 
     const fetchOrder = () => { 
-        let token = JSON.parse(localStorage.getItem("token"))
-        console.log(token)
-        if(token != null && token != undefined && token != "" ){
-            token = JSON.parse(localStorage.getItem("token")).auth_token
+        const token = JSON.parse(localStorage.getItem("token"))?.auth_token
+        if(token){
             fetch("http://localhost:8088/api/orders/" + params.id + "/",{
                 method: "GET",
                 headers: { "Authorization": "Token "+ token,
@@ -33,24 +39,19 @@ const OrderEdit = () => {
             .then(response => response.json())
             .then(data => {
                 if(data.detail == "Not found."){
-                    nav("notFound")
+                    nav("/notFound")
                     return
                 }
                 else if(JSON.parse(localStorage.getItem("user")).role != "A"){
-                    nav("notFound")
+                    nav("/notFound")
                     return
                 }
 
-                if(data.drinks == undefined){
-                    fetchDishes(data)
-                }
-                else if(data.dishes == undefined){
-                    fetchDrinks(data)
-                }
-                else {
-                    fetchDishesAndDrinks(data)
-                }
+
+                fetchDishesAndDrinks(data)
+
                 setOrder(data)
+                console.log(data)
                 setComment(data.comment)
                 setTableNumber(data.table_number)
                 if(data.waiter == null){
@@ -71,7 +72,6 @@ const OrderEdit = () => {
         fetch("http://localhost:8088/api/dishes/")
         .then(response => response.json())
         .then(data => {
-            const newDishes = []
             orderData.dishes.forEach(dishId => {
                 data.forEach(dish => {
                     if(dish.id == dishId){
@@ -87,7 +87,6 @@ const OrderEdit = () => {
         fetch("http://localhost:8088/api/drinks/")
         .then(response => response.json())
         .then(data => {
-            const newDrinks = []
             orderData.drinks.forEach(drinkId => {
                 data.forEach(drink => {
                     if(drink.id == drinkId){
@@ -103,7 +102,6 @@ const OrderEdit = () => {
         fetch("http://localhost:8088/api/dishes/")
         .then(response => response.json())
         .then(data => {
-            const newDishes = []
             orderData.dishes.forEach(dishId => {
                 data.forEach(dish => {
                     if(dish.id == dishId){
@@ -115,7 +113,6 @@ const OrderEdit = () => {
             fetch("http://localhost:8088/api/drinks/")
             .then(response => response.json())
             .then(data => {
-                const newDrinks = []
                 orderData.drinks.forEach(drinkId => {
                     data.forEach(drink => {
                         if(drink.id == drinkId){
@@ -124,14 +121,15 @@ const OrderEdit = () => {
                     })
                 });
                 setOrders([...orders, ...newDrinks, ...newDishes])
+                setDishes(newDishes)
+                setDrinks(newDrinks)
             })  
         })   
     }
 
     const fetchUsers = () => {
-        let token = JSON.parse(localStorage.getItem("token"))
-        if(token != null && token != undefined && token != ""){
-            token = JSON.parse(localStorage.getItem("token")).auth_token
+        const token = JSON.parse(localStorage.getItem("token"))?.auth_token
+        if(token){
             fetch("http://localhost:8088/api/users/",{
                 method: "GET",
                 headers: { "Authorization": "Token "+ token,
@@ -153,33 +151,40 @@ const OrderEdit = () => {
         }
     }
     
-    const patchOrder = () => {
-        if(JSON.parse(localStorage.getItem("token")) != null ){
-            const token = JSON.parse(localStorage.getItem("token")).auth_token
-            console.log("comment " + comment)
-            console.log("table_number " + tableNumber)
-            console.log("waiterId " + waiterId)
-                
-            fetch("http://localhost:8088/api/orders/" + params.id + "/",{
-                method: "PATCH",
-                headers: { "Authorization": "Token "+ token,
-                'Content-Type': 'application/json'}, 
-                body: JSON.stringify({
-                    comment: comment
-                })
-            })
-            .then(response => {
-                if(response.ok){
-                    console.log(response)
-                    nav("/order/" + order.id + "/")
-                }
-                else{
-                    setMessage("Данные не верны")
-                    
-                }
-            })    
-        }
-    }
+    const patchOrder = () => { 
+        const token = JSON.parse(localStorage.getItem("token"))?.auth_token; 
+        if (token) { 
+            const dishesId = dishes.map(el => el.id)
+            const drinksId = drinks.map(el => el.id)
+
+            const requestBody = { 
+                waiter: Number.parseInt(waiterId), 
+                comment: comment, 
+                number: tableNumber, 
+                menu_dishes: dishesId,
+                menu_drinks: drinksId
+            }; 
+     
+            fetch("http://localhost:8088/api/orders/" + params.id + "/", { 
+            method: "PATCH", 
+            headers: { 
+                "Authorization": "Token " + token, 
+                'Content-Type': 'application/json' 
+            }, 
+            body: JSON.stringify(requestBody) 
+            }) 
+            .then(response => { 
+                if (response.ok) { 
+                    nav("/order/" + params.id + "/"); 
+                } else { 
+                    setMessage("Данные не верны"); 
+                } 
+            }) 
+            .catch(error => { 
+                console.error('Error editing order:', error); 
+            }); 
+        } 
+    };
 
     useEffect(() => {
         fetchOrder()
@@ -213,9 +218,23 @@ const OrderEdit = () => {
         }
     }
 
-    const [comment, setComment] = useState("")
-    const [tableNumber, setTableNumber] = useState("")
-    const [waiters, setWaiters] = useState([])
+    const deleteItem = (dish) => {
+        if(orders.length > 1){
+        if(dish.weight == undefined){
+            newDrinks = drinks
+            newDrinks = newDrinks.filter(el => el.id != dish.id)
+            setOrders([...newDrinks, ...dishes])
+            setDrinks(newDrinks)
+        }
+        else{
+            newDishes = dishes
+            newDishes = newDishes.filter(el => el.id != dish.id)
+            setOrders([...newDishes, ...drinks])
+            setDishes(newDishes)
+        }
+    }
+        
+    }
 
     return (
         <Wrapper> 
@@ -271,7 +290,7 @@ const OrderEdit = () => {
                                     </div>
                                     <div className="orders__list__grid">
                                         {orders.map(el => 
-                                                <OrderItem deleteButton={true} key={el.id + el.name} name={el.name} imgSource={el.image}></OrderItem>
+                                                <OrderItem element={el} deleteFunction={deleteItem} deleteButton={true} key={el.id + el.name} name={el.name} imgSource={el.image}></OrderItem>
                                         )}
                                     </div>       
                                 </div>

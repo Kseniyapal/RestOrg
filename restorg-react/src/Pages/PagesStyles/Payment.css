@@ -2,6 +2,7 @@
     min-height: 100vh;
     background: #272727;
     color: #FFF;
+    z-index: -2;
 }
 
  .payment__logo{
@@ -26,13 +27,23 @@
 }
 
 .payment__additionat__column{
-    width: 40vh;
+    min-width: 40vh;
+    height: 100%;
 }
 
 
 .back__button a{
     width: 6vh;
     height: 6vh;
+}
+
+.payment__roll img{
+    position: absolute;
+    right: 67.65vh;
+    bottom: 0vh;
+    width: 30vh;
+    height: 30vh;
+    z-index: 0;
 }
 
 .payment__table{
@@ -45,7 +56,7 @@
 
 .payment__pricelist__flex{
     width: 35vh;
-    min-height: 86vh;
+    min-height: 87vh;
     background: #D9D9D9;
     padding: 3vh;
 }
