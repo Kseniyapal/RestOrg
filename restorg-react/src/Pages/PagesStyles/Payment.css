@@ -1,0 +1,90 @@
+.payment__bg{
+    min-height: 100vh;
+    background: #272727;
+    color: #FFF;
+    z-index: -2;
+}
+
+ .payment__logo{
+    width: 20vh;
+    height: 20vh;
+    position: relative;
+    bottom: 10vh;
+    align-self: center;
+}
+
+
+.back__info {
+    font-size: 4vh;
+}
+
+.payment__flex{
+    width: 100vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.payment__additionat__column{
+    min-width: 40vh;
+    height: 100%;
+}
+
+
+.back__button a{
+    width: 6vh;
+    height: 6vh;
+}
+
+.payment__roll img{
+    position: absolute;
+    right: 67.65vh;
+    bottom: 0vh;
+    width: 30vh;
+    height: 30vh;
+    z-index: 0;
+}
+
+.payment__table{
+    margin-left: 3vh;
+    font-size: 2.5vh;
+    width: 23vh;
+    border: none;
+    font-weight: 300;
+}
+
+.payment__pricelist__flex{
+    width: 35vh;
+    min-height: 87vh;
+    background: #D9D9D9;
+    padding: 3vh;
+}
+
+.payment__purchase{
+    color: black;
+    font-size: 3vh;
+    font-weight: 200;
+    margin-bottom: 3vh;
+}
+
+.payment__button button{
+    width: 100%;
+    height: 5vh;
+    font-size: 3vh;
+    font-weight: 200;
+    border: none;
+    border-radius: 5vh;
+    margin-top: 1vh;
+}
+
+.payment__flex .order__price{
+    color:black;
+}
+
+.payment__additiopnal__label{
+    font-size: 30px;
+    font-weight: 200;
+    margin: 0 0 10px 10px;
+}
+

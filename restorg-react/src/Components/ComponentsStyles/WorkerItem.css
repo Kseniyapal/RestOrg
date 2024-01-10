@@ -1,0 +1,74 @@
+.worker button{
+    display: block;
+    height: 50px;
+    width: 100%;
+    background-color: #d4d4d4;
+    border: none;
+}
+
+.workers__bg{
+    background-color: #d4d4d4;
+    min-height: 80vh;
+}
+
+.worker__name{
+    margin-right: 20px;
+}
+
+.worker{
+    margin-left: 15px;
+}
+
+.workers__label{
+    padding: 20px;
+}
+
+.worker button:hover{
+    background-color: #cacaca;
+    border: none;
+}
+
+.worker__info__flex{
+    justify-content: space-between;
+    display: flex;
+    font-size: 20px;
+    font-weight: 200;
+    text-align: left;
+}
+
+.workers__list__flex{
+    padding-bottom: 15px;
+}
+
+.worker button:disabled{
+    color: black;
+}
+
+.worker button:disabled:hover{
+    background-color: #d4d4d4;
+    cursor: default;
+}
+
+.profile__buttons{
+    margin-top: 200px;
+    padding-bottom: 15px;
+}
+
+.profile__buttons button{
+    display: block;
+    width: 100%;
+    margin-top: 15px;
+    height: 40px;
+    font-size: 20px;
+    font-weight: 200;
+    border: none;
+    background-color: #cacaca;
+}
+
+.profile__buttons button:hover{
+    background-color: #b2b2b2;
+}
+
+
+
+

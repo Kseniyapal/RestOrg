@@ -1,0 +1,24 @@
+.workers__bg{
+    background-color: #d4d4d4;
+}     
+
+.workers__list__flex{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+}
+
+.workers__label{
+    text-align: center;
+    font-size: 30px;
+    font-weight: 200;
+    color: #525252;
+    margin-bottom: 10px;
+}
+
+.workers__role__label{
+    font-size: 25px;
+    font-weight: 300;
+    color: #525252;
+    margin-bottom: 10px;
+}
