@@ -23,6 +23,7 @@ const Order = () => {
         let token = JSON.parse(localStorage.getItem("token"))
         if(token != null && token != undefined && token != ""){
             token = JSON.parse(localStorage.getItem("token")).auth_token
+            const user = JSON.parse(localStorage.getItem("user"))
             fetch("http://localhost:8088/api/orders/" + params.id + "/",{
                 method: "GET",
                 headers: { "Authorization": "Token "+ token,
@@ -30,21 +31,27 @@ const Order = () => {
             })
             .then(response => response.json())
             .then(data => {
-                if(data.detail == "Not found."){
-                    nav("not found")
+                
+                if(data.detail == "Not found." || data.detail == "У вас нет прав для просмотра этого заказа."){
+                    nav("/notFound")
                     return
+                }
+                if(user.role == "W" && (data.status == "IP" || data.status == "DDS" || data.status == "DDR" || data.waiter != user.id)){
+                    nav("/notFound")
                 }
                 if(data.drinks == undefined){
                     fetchDishes(data)
+                    
                 }
                 else if(data.dishes == undefined){
+
                     fetchDrinks(data)
+                    
                 }
                 else {
                     fetchDishesAndDrinks(data)
                 }
                 setOrder(data)
-                console.log(data)
             })  
         }   
         else{
@@ -113,7 +120,6 @@ const Order = () => {
         })   
     }
 
-
     const fetchUser = () => {
         if(JSON.parse(localStorage.getItem("token")) != null){
             const token = JSON.parse(localStorage.getItem("token")).auth_token
@@ -165,7 +171,7 @@ const Order = () => {
                 }
             }
             else if(order.status == "IP"|| order.status == "DDS" || order.status == "DDR"){
-                newStatus = "DONE"
+                nav("/notFound")
             }
             else{
                 nav("/board") //удаление с серва

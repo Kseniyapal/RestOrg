@@ -23,7 +23,6 @@ const Board = () => {
             .then(data => {
                 if(data.detail == undefined){
                     splitDishes(data)
-                    console.log(data)
                 }
                 else{
                     return

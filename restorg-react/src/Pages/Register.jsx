@@ -23,6 +23,7 @@ const Register = () => {
     const registerUser = () => {
         if(JSON.parse(localStorage.getItem("token")) != null ){
             const token = JSON.parse(localStorage.getItem("token")).auth_token
+            const user = JSON.parse(localStorage.getItem("user"))
             const requestOptions = {
                 method: "POST",
                 headers: { "Authorization": "Token "+ token,
@@ -50,12 +51,28 @@ const Register = () => {
                     setMessageStyle({color: "#92B76E"})
                 }
                 else{
-                    setMessage("Данные не верны")
-                    setMessageStyle({color: "#cc7575"})
+                    if(user.role != "A"){
+                        setMessage("У вас нет прав на это действие")
+                        setMessageStyle({color: "#cc7575"})
+                    }
+                    else{
+                        setMessage("Данные не верны")
+                        setMessageStyle({color: "#cc7575"})
+                    }
                 }
             })    
         }
     }
+
+    useEffect(() => {
+        const token = JSON.parse(localStorage.getItem("token"))?.auth_token
+        if(token){
+
+        }
+        else{
+            nav("/notFound")
+        }
+    },[])
 
     return (
         <Wrapper>

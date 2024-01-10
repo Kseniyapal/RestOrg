@@ -26,7 +26,8 @@ const Register = () => {
             })
             .then(response => response.json())
             .then(data => {
-                if(data.detail != "Not found."){
+                console.log(data.detail)
+                if(data.detail == undefined){
                     setUser(data)
                     setAdminButtons()
                 }

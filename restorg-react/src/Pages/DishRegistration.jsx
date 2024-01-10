@@ -5,6 +5,8 @@ import Footer from "../Components/Footer";
 import Content from "../Components/Content";
 import Wrapper from "../Components/Wrapper";
 import UserField from "../Components/UI/Fields/UserField";
+import { useEffect } from "react";
+import { useNavigate } from "react-router";
 import "./PagesStyles/Register.css";
 
 
@@ -16,10 +18,12 @@ const DishRegistration = () => {
     const [image, setImage] = useState("")
     const [message, setMessage] = useState("")
     const [messageStyle, setMessageStyle] = useState({})
+    const nav = useNavigate()
 
     const registerDish = () => {
         const token = JSON.parse(localStorage.getItem("token"))?.auth_token
         if(token){
+            const user = JSON.parse(localStorage.getItem("user"))
             const requestOptions = {
                 method: "POST",
                 headers: { "Authorization": "Token "+ token,
@@ -42,8 +46,14 @@ const DishRegistration = () => {
                     setMessageStyle({color: "#92B76E"})
                 }
                 else{
-                    setMessage("Данные не верны")
-                    setMessageStyle({color: "#cc7575"})
+                    if(user.role != "A"){
+                        setMessage("У вас нет прав на это действие")
+                        setMessageStyle({color: "#cc7575"})
+                    }
+                    else{
+                        setMessage("Данные не верны")
+                        setMessageStyle({color: "#cc7575"})
+                    }
                 }
             })
         }
@@ -89,6 +99,16 @@ const DishRegistration = () => {
             registerDrink()
         }
     }
+
+    useEffect(() => {
+        const token = JSON.parse(localStorage.getItem("token"))?.auth_token
+        if(token){
+
+        }
+        else{
+            nav("/notFound")
+        }
+    },[])
     
     return (
         <Wrapper>
